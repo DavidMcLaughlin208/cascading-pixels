@@ -8,8 +8,14 @@ var drag;
 var speedX;
 var speedY;
 var gameLoop;
+var lastX;
+var lastY;
 
 var reset = function(){
+	lastX = 10;
+	lastY = 10;
+	ctx.beginPath();
+	ctx.moveTo(10,10);
 	gravity = .04;
 	force = 2;
 	drag = .001
@@ -61,11 +67,22 @@ var draw = function(){
 		ball.y = 0;
 		speedY *= -.75;
 	}
-
+	ctx.beginPath();
+	ctx.fillStyle = "black";
+	ctx.moveTo(lastX, lastY);
 	ctx.lineTo(ball.x, ball.y);
-	ctx.stroke()
-	
-	ctx.fillRect(ball.x, ball.y, 10, 10);
+	ctx.stroke();
+	lastX = ball.x;
+	lastY = ball.y;
+	// ctx.arc(ball.x,ball.y,10,0*Math.PI,2*Math.PI)
+	// ctx.stroke();
+	// ctx.fillRect(ball.x, ball.y, 10, 10);
+
+}
+
+function fadeOut() {
+  ctx.fillStyle = "rgba(214,214,214,0.1)";
+  ctx.fillRect(0, 0, mycanvas.width, mycanvas.height);
 }
 
 var start = function(){
@@ -74,8 +91,12 @@ var start = function(){
 	ctx.fillStyle = 'lightgrey';
 	ctx.fillRect(0,0,width,height);
 	ctx.fillStyle = 'black';
+
 	ctx.beginPath();
-	ctx.lineTo(ball.x, ball.y);
-	ctx.stroke()
+	ctx.moveTo(10,10);
+
+	// ctx.lineTo(ball.x, ball.y);
+	// ctx.stroke()
+	fadeLoop = setInterval(fadeOut, 20);
 	gameLoop = setInterval(draw, 5);
 }
