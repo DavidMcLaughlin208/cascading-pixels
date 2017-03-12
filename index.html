@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Canvas Practice</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -9,21 +10,19 @@
 <form action="/" method="get">
 
 <label>Gravity</label>
-<input id="gravity" type="text" value="5" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-</input>
+<input type="range" name="points" id="gravity" value="50" min="1" max="100"><br>
 
 <label>Initial Force</label>
-<input id="force" type="text" value="30" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-</input>
+<input type="range" name="points" id="force" value="50" min="10" max="100"><br>
 
-<label>Initial Force</label>
-<input id="Air Resistance" type="text" value="40" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-</input>
+<label>Drag</label>
+<input type="range" name="points" id="drag" value="50" min="0" max="100"><br>
 
-<input type="submit" value="Start">
+<input class="start" type="submit" value="Start">
 
 </form>
 
 <script src="application.js"></script>
+<script src="bindings.js"></script>
 </body>
 </html>
