@@ -1,10 +1,15 @@
 var mycanvas = document.getElementById('mycanvas');
 var ctx = mycanvas.getContext('2d');
 var ball = {x:10,y:10}
-var gravity = 5;
-var force = 30;
+var gravity = .04;
+var force = 2;
+
+var speedX = 0;
+var speedY = 0;
+
 var width = 900;
 var height = 500;
+
 var gravityModifier = 15;
 var gravityMin = .05;
 var gravityMax = 20;
@@ -17,47 +22,53 @@ ctx.fillRect(0,0,width,height);
 ctx.fillStyle = 'black';
 
 var draw = function(){
-	ctx.lineTo(ball.x, ball.y);
-	ctx.stroke()
+	
+
+	if(force != 0){
+		speedX += force;
+		force = 0;
+	}
+
+
+
+	if(speedX > 0){
+		speedX -= .001;
+	} else {
+		speedX += .001;
+	}
+	
+	speedX += force;
+	speedY += gravity;
+
+	ball.x += speedX;
+	ball.y += speedY;
+
 
 	if(ball.x > width){
 		ball.x = width;
-		force *= -1;
+		speedX *= -1;
 	}
 	if(ball.x < 0){
 		ball.x = 0
-		force *= -1;
+		speedX *= -1;
 	}
-	if(ball.y > height - gravity/2){
+	if(ball.y > height){
 		ball.y = height;
-		gravity *= -.6;
+		speedY *= -.75;
 	}
-	if(ball.y < 0 + gravity/2){
+	if(ball.y < 0){
 		ball.y = 0;
-		gravity *= -.6;
+		speedY *= -.75;
 	}
 
-	force -= force/forceModifier;
-	// console.log(force);
-
-	if(force > 0){
-		force -= .5;
-	} else {
-		force += .5;
-	}
-	ball.x += force;
-
-	console.log(gravity)
-
-	// gravity += 1
-	gravity += Math.abs(gravity/gravityModifier) + .1;
-	
-
-	ball.y += gravity;
+	ctx.lineTo(ball.x, ball.y);
+	ctx.stroke()
 	
 	// ctx.fillRect(ball.x*ballSize, ball.y*ballSize, ballSize, ballSize);
 }
 
 ctx.beginPath();
-gameloop = setInterval(draw, 40);
+ctx.lineTo(ball.x, ball.y);
+ctx.stroke()
+gameloop = setInterval(draw, 5);
 
