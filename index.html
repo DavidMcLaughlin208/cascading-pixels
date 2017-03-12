@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas Practice</title>
+</head>
+<body>
+
+<canvas id="mycanvas" width="900" height="500"></canvas>
+<form action="/" method="get">
+
+<label>Gravity</label>
+<input id="gravity" type="text" value="5" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+</input>
+
+<label>Initial Force</label>
+<input id="force" type="text" value="30" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+</input>
+
+<label>Initial Force</label>
+<input id="Air Resistance" type="text" value="40" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+</input>
+
+<input type="submit" value="Start">
+
+</form>
+
+<script src="application.js"></script>
+</body>
+</html>
