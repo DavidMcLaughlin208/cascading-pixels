@@ -1,6 +1,8 @@
 var mycanvas = document.getElementById('mycanvas');
 var ctx = mycanvas.getContext('2d');
 var ball = {x:10,y:10}
+var width = 900;
+var height = 500;
 
 var gravity;
 var force;
@@ -8,6 +10,8 @@ var drag;
 var speedX;
 var speedY;
 var gameLoop;
+var fadeLoop;
+var fade;
 var lastX;
 var lastY;
 
@@ -24,15 +28,12 @@ var reset = function(){
 }
 
 
-var width = 900;
-var height = 500;
 
 ctx.fillStyle = 'lightgrey';
 ctx.fillRect(0,0,width,height);
 ctx.fillStyle = 'black';
 
 var draw = function(){
-
 	if(force != 0){
 		speedX += force;
 		force = 0;
@@ -49,7 +50,6 @@ var draw = function(){
 
 	ball.x += speedX;
 	ball.y += speedY;
-
 
 	if(ball.x > width){
 		ball.x = width;
@@ -74,10 +74,6 @@ var draw = function(){
 	ctx.stroke();
 	lastX = ball.x;
 	lastY = ball.y;
-	// ctx.arc(ball.x,ball.y,10,0*Math.PI,2*Math.PI)
-	// ctx.stroke();
-	// ctx.fillRect(ball.x, ball.y, 10, 10);
-
 }
 
 function fadeOut() {
@@ -95,8 +91,6 @@ var start = function(){
 	ctx.beginPath();
 	ctx.moveTo(10,10);
 
-	// ctx.lineTo(ball.x, ball.y);
-	// ctx.stroke()
-	fadeLoop = setInterval(fadeOut, 20);
+	fadeLoop = setInterval(fadeOut, fade);
 	gameLoop = setInterval(draw, 5);
 }
