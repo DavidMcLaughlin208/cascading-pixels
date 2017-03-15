@@ -33,6 +33,14 @@ $(document).ready(function(){
 		balls = [];
 	})
 
+	$(".quick-add").on("click", function(event){
+		event.preventDefault();
+		var times = parseInt($(this).attr("balls"));
+		var spread = $("#spread").val();
+		for(var i = 0; i < times;i++){
+			setTimeout(function(){balls.push(new Ball(force))}, spread*i);
+		}
+	})
 
 })
 
