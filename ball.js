@@ -1,4 +1,4 @@
-var Ball = function(x,y){
+var Ball = function(force,x,y){
   this.x = x || 10,
   this.y = y || 10,
   this.gravity = gravity * Math.random();
@@ -9,10 +9,13 @@ var Ball = function(x,y){
   this.lastX = this.x;
   this.lastY = this.y;
 
+
   this.draw = function(){
     if(Math.abs(this.speedX) < .2 && Math.abs(this.y - cv.height) < 1 && Math.abs(this.speedY) < 1){
       this.die();
     }
+
+    this.gravity = gravity * Math.random();
 
     if(this.force != 0){
       this.speedX += this.force;

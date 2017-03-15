@@ -1,23 +1,36 @@
 $(document).ready(function(){
 	reset();
+	clearInterval(gameLoop);
+	clearInterval(fadeLoop);
 
-	$(".start").on("click", function(event){
-		event.preventDefault();
-		reset();
-		clearInterval(gameLoop);
-		clearInterval(fadeLoop);
+	getSliderValues();
+	start();
 
-		getSliderValues();
-		start();
-	});
+	// $(".start").on("click", function(event){
+	// 	event.preventDefault();
+	// 	reset();
+	// 	clearInterval(gameLoop);
+	// 	clearInterval(fadeLoop);
+
+	// 	getSliderValues();
+	// 	start();
+	// });
 
 	$(".add-ball").on("click", function(event){
 		event.preventDefault();
-		clearInterval(fadeLoop);
-		getSliderValues();
-		fadeLoop = setInterval(fadeOut, fade);
+		updateSettings();
+		balls.push(new Ball(force));
+	})
 
-		balls.push(new Ball);
+	$(".update-settings").on("click", function(event){
+		event.preventDefault();
+		updateSettings();
+	})
+
+	$(".clear").on('click', function(event){
+		event.preventDefault();
+		reset();
+		balls = [];
 	})
 
 
@@ -32,6 +45,11 @@ var getSliderValues = function(){
 	drag *= dragModifier/15;
 	force *= forceModifier/25;
 	gravity *= gravityModifier/25;
+}
 
-
+var updateSettings = function(){
+	clearInterval(fadeLoop);
+	reset();
+	getSliderValues();
+	fadeLoop = setInterval(fadeOut, fade);
 }
