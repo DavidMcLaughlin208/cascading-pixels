@@ -35,11 +35,34 @@ $(document).ready(function(){
 
 	$(".quick-add").on("click", function(event){
 		event.preventDefault();
+		updateSettings();
 		var times = parseInt($(this).attr("balls"));
 		var spread = $("#spread").val();
 		for(var i = 0; i < times;i++){
 			setTimeout(function(){balls.push(new Ball(force))}, spread*i);
 		}
+	})
+
+	$(".infinite").on("click", function(event){
+		event.preventDefault();
+		updateSettings();
+		clearInterval(infiniteLoop);
+		var spread = $("#spread").val();
+		infiniteLoop = setInterval(addBall, spread);
+	})
+
+	$(".stop-infinite").on("click", function(event){
+		event.preventDefault();
+		clearInterval(infiniteLoop);
+	})
+
+	$("#mycanvas").on("click", function(e){
+		var rect = this.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+
+    applyImpulse(x, y);
+
 	})
 
 })
@@ -60,4 +83,9 @@ var updateSettings = function(){
 	reset();
 	getSliderValues();
 	fadeLoop = setInterval(fadeOut, fade);
+}
+
+var addBall = function(){
+	updateSettings();
+	balls.push(new Ball(force));
 }

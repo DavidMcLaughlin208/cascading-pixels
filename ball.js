@@ -4,6 +4,8 @@ var Ball = function(force,x,y){
   this.gravity = gravity * Math.random();
   this.speedX = 0;
   this.speedY = 0;
+  this.impulseX = 0;
+  this.impulseY = 0;
   this.drag = 0;
   this.force = force + Math.random() * .05;
   this.lastX = this.x;
@@ -20,6 +22,16 @@ var Ball = function(force,x,y){
     if(this.force != 0){
       this.speedX += this.force;
       this.force = 0;
+    }
+
+    if(this.impulseX != 0){
+      this.speedX += this.impulseX;
+      this.impulseX = 0
+    }
+
+    if(this.impulseY != 0){
+      this.speedY += this.impulseY;
+      this.impulseY = 0
     }
 
     if(this.speedX > 0){

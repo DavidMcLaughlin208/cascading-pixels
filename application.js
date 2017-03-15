@@ -3,6 +3,7 @@ var gameLoop;
 var fadeLoop;
 var fade;
 var balls = [];
+var infiniteLoop;
 
 var reset = function(){
 	cv.ctx.beginPath();
