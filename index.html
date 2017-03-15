@@ -3,26 +3,51 @@
 <head>
 	<title>Canvas Practice</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="application.css">
 </head>
 <body>
+<div class="content">
+  <div class="canvas-holder">
+    <canvas id="mycanvas" width="900" height="500"></canvas>
+  </div>
+  <div class="settings-holder">
+    <form action="/" method="get">
 
-<canvas id="mycanvas" width="900" height="500"></canvas>
-<form action="/" method="get">
+    <label>Gravity</label>
+    <input type="range" name="points" id="gravity" value="50" min="1" max="100"><br>
 
-<label>Gravity</label>
-<input type="range" name="points" id="gravity" value="50" min="1" max="100"><br>
+    <label>Initial Force</label>
+    <input type="range" name="points" id="force" value="50" min="10" max="100"><br>
 
-<label>Initial Force</label>
-<input type="range" name="points" id="force" value="50" min="10" max="100"><br>
+    <label>Drag</label>
+    <input type="range" name="points" id="drag" value="50" min="0" max="100"><br>
 
-<label>Drag</label>
-<input type="range" name="points" id="drag" value="50" min="0" max="100"><br>
+    <label>Fade</label>
+    <input type="range" name="points" id="fade" value="5" min="1" max="200"><br>
 
-<input class="start" type="submit" value="Start">
+    <input class="add-ball" type="submit" value="Add Ball">
+    <input class="update-settings" type="submit" value="Update Settings">
+    <input class="clear" type="submit" value="Clear">
+    </form>
+    <button balls="5" class="quick-add">5</button>
+    <button balls="10" class="quick-add">10</button>
+    <button balls="15" class="quick-add">15</button>
+    <button balls="20" class="quick-add">20</button>
+    <label>Spread</label>
+    <input type="range" name="points" id="spread" value="50" min="1" max="200"><br>
+    <button class="infinite">Infinite</button>
+    <button class="stop-infinite">Stop Inifinite</button>
+    <br>
+    <br>
+    <button class="center-gravity">Center Gravity</button>
+    <button class="center-gravity-off">Normal Gravity</button>
+  </div>
+</div>
 
-</form>
-
-<script src="application.js"></script>
 <script src="bindings.js"></script>
+<script src="gravityCenter.js"></script>
+<script src="ball.js"></script>
+<script src="canvas.js"></script>
+<script src="application.js"></script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+html, body{
+  width: 100%;
+}
+*{overflow: auto;}
+
+.content{
+  width:75%;
+  margin: auto;
+}
+
+.canvas-holder, .settings-holder{
+  height: 100%;
+  width: 100%;
+/*  display: inline-block;
+  vertical-align: top;*/
+}
