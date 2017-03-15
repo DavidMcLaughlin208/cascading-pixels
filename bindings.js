@@ -62,7 +62,17 @@ $(document).ready(function(){
     var y = e.clientY - rect.top;
 
     applyImpulse(x, y);
+	})
 
+	$(".center-gravity").on("click", function(event){
+		event.preventDefault();
+		centerGravity = true;
+		gravity = 0;
+	})
+
+	$(".center-gravity-off").on("click", function(event){
+		event.preventDefault();
+		centerGravity = false;
 	})
 
 })

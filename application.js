@@ -4,6 +4,7 @@ var fadeLoop;
 var fade;
 var balls = [];
 var infiniteLoop;
+var centerGravity = false;
 
 var reset = function(){
 	cv.ctx.beginPath();
@@ -20,9 +21,12 @@ cv.ctx.fillRect(0,0,cv.width,cv.height);
 cv.ctx.fillStyle = 'black';
 
 var draw = function(){
-	gravity = .04;
-	gravityModifier = $("#gravity").val();
-	gravity *= gravityModifier/25;
+	if(centerGravity){
+	}else{
+		gravity = .04;
+		gravityModifier = $("#gravity").val();
+		gravity *= gravityModifier/25;
+	}
 	for(var i in balls){
 		balls[i].draw();
 	}
@@ -36,7 +40,7 @@ function fadeOut() {
 var start = function(){
 	cv.ctx.clearRect(0, 0, cv.width, cv.height);
 	cv.ctx.fillStyle = 'lightgrey';
-	cv.ctx.fillRect(0,0,cv.width,cv.height);
+	cv.ctx.fillRect(0, 0, cv.width, cv.height);
 	cv.ctx.fillStyle = 'black';
 
 	cv.ctx.beginPath();

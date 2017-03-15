@@ -18,12 +18,13 @@ var Ball = function(force,x,y){
     }
 
     this.gravity = gravity * Math.random();
-
+    //Initial Force
     if(this.force != 0){
       this.speedX += this.force;
       this.force = 0;
     }
 
+    //Mouse Click Impulse
     if(this.impulseX != 0){
       this.speedX += this.impulseX;
       this.impulseX = 0
@@ -34,18 +35,29 @@ var Ball = function(force,x,y){
       this.impulseY = 0
     }
 
+    //Reduce horizontal speed
     if(this.speedX > 0){
       this.speedX -= this.drag;
     } else {
       this.speedX += this.drag;
     }
 
-    this.speedX += this.force;
-    this.speedY += this.gravity;
+    //Apply Gravity
+    if(centerGravity){
+      var x = Math.floor(cv.width/2) - this.x
+      var y = Math.floor(cv.height/2) - this.y
+      var distance = Math.floor(Math.sqrt( x*x + y*y ));
+      this.speedX += x/(distance*10)
+      this.speedY += y/(distance*10)
+    }else{
+      this.speedY += this.gravity;
+    }
 
+    //Apply speeds to coordinates
     this.x += this.speedX;
     this.y += this.speedY;
 
+    //Bounce Off Walls
     if(this.x > cv.width){
       this.x = cv.width;
       this.speedX *= -1;
@@ -64,6 +76,7 @@ var Ball = function(force,x,y){
       this.speedY *= -.75;
       this.speedX *= 0.9;
     }
+
     cv.ctx.beginPath();
     cv.ctx.fillStyle = "black";
     cv.ctx.moveTo(this.lastX, this.lastY);
