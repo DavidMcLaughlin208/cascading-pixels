@@ -5,20 +5,26 @@ var fade;
 var balls = [];
 var infiniteLoop;
 var centerGravity = false;
+var startX = 10;
+var startY = 10;
+var thickness = 1;
+
+cv.ctx.canvas.width = cv.width;
+cv.ctx.canvas.height = cv.height;
+cv.ctx.lineWidth = 5;
+cv.ctx.fillStyle = 'lightgrey';
+cv.ctx.fillRect(0,0,cv.width,cv.height);
+cv.ctx.fillStyle = 'black';
 
 var reset = function(){
 	cv.ctx.beginPath();
 	cv.ctx.moveTo(10,10);
 	gravity = .04;
-	force = 2;
+	forceX = 2;
+	forceY = 2;
 	drag = .001;
+	thickness = 1;
 }
-
-
-
-cv.ctx.fillStyle = 'lightgrey';
-cv.ctx.fillRect(0,0,cv.width,cv.height);
-cv.ctx.fillStyle = 'black';
 
 var draw = function(){
 	if(centerGravity){
@@ -48,4 +54,13 @@ var start = function(){
 
 	fadeLoop = setInterval(fadeOut, fade);
 	gameLoop = setInterval(draw, 5);
+}
+
+
+function rgb2hex(rgb){
+ rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+ return (rgb && rgb.length === 4) ? "#" +
+  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
 }

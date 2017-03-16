@@ -1,13 +1,14 @@
-var Ball = function(force,x,y){
-  this.x = x || 10,
-  this.y = y || 10,
+var Ball = function(forceX, forceY){
+  this.x = startX,
+  this.y = startY,
   this.gravity = gravity * Math.random();
   this.speedX = 0;
   this.speedY = 0;
   this.impulseX = 0;
   this.impulseY = 0;
   this.drag = 0;
-  this.force = force + Math.random() * .05;
+  this.forceX = forceX + Math.random() * .05;
+  this.forceY = forceY + Math.random() * .05;
   this.lastX = this.x;
   this.lastY = this.y;
 
@@ -17,11 +18,21 @@ var Ball = function(force,x,y){
       this.die();
     }
 
+    var speed = Math.sqrt(this.speedX**2 + this.speedY**2);
+    if(speed > 100){
+      this.die();
+    }
+
     this.gravity = gravity * Math.random();
     //Initial Force
-    if(this.force != 0){
-      this.speedX += this.force;
-      this.force = 0;
+    if(this.forceX != 0){
+      this.speedX += this.forceX;
+      this.forceX = 0;
+    }
+
+    if(this.forceY != 0){
+      this.speedY += this.forceY;
+      this.forceY = 0;
     }
 
     //Mouse Click Impulse
@@ -77,10 +88,19 @@ var Ball = function(force,x,y){
       this.speedX *= 0.9;
     }
 
+    var speed = Math.sqrt(this.speedX**2 + this.speedY**2);
+    var colorFactor = Math.min(speed, 10) / 10;
+    var r = parseInt(Math.max(255*colorFactor, 1));
+    var b  = 255 - r;
+    var style = "rgb(" + r + ", 0," + b + ")";
+    cv.ctx.strokeStyle = rgb2hex(style)
+
+
     cv.ctx.beginPath();
-    cv.ctx.fillStyle = "black";
+    // console.log(cv.ctx.strokeStyle)
     cv.ctx.moveTo(this.lastX, this.lastY);
     cv.ctx.lineTo(this.x, this.y);
+    cv.ctx.lineWidth = thickness;
     cv.ctx.stroke();
     this.lastX = this.x;
     this.lastY = this.y;
