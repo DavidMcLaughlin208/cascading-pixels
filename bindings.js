@@ -6,20 +6,10 @@ $(document).ready(function(){
 	getSliderValues();
 	start();
 
-	// $(".start").on("click", function(event){
-	// 	event.preventDefault();
-	// 	reset();
-	// 	clearInterval(gameLoop);
-	// 	clearInterval(fadeLoop);
-
-	// 	getSliderValues();
-	// 	start();
-	// });
-
 	$(".add-ball").on("click", function(event){
 		event.preventDefault();
 		updateSettings();
-		balls.push(new Ball(force));
+		addBall();
 	})
 
 	$(".update-settings").on("click", function(event){
@@ -39,7 +29,7 @@ $(document).ready(function(){
 		var times = parseInt($(this).attr("balls"));
 		var spread = $("#spread").val();
 		for(var i = 0; i < times;i++){
-			setTimeout(function(){balls.push(new Ball(force))}, spread*i);
+			setTimeout(function(){balls.push(new Ball(forceX, forceY))}, spread*i);
 		}
 	})
 
@@ -60,19 +50,26 @@ $(document).ready(function(){
 		var rect = this.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
-
-    applyImpulse(x, y);
+		if(placingGravs === true){
+			centersOfGravity.push(new gravityCenter(x,y))
+		}else{
+	    startX = x;
+	    startY = y;
+	    // applyImpulse(x, y);
+	  }
 	})
 
 	$(".center-gravity").on("click", function(event){
 		event.preventDefault();
 		centerGravity = true;
-		gravity = 0;
+		placingGravs = !placingGravs;
+		// gravity = 0;
 	})
 
 	$(".center-gravity-off").on("click", function(event){
 		event.preventDefault();
 		centerGravity = false;
+		centersOfGravity = [];
 	})
 
 })
@@ -80,12 +77,21 @@ $(document).ready(function(){
 var getSliderValues = function(){
 	gravityModifier = $("#gravity").val();
 	dragModifier = $("#drag").val();
-	forceModifier = $("#force").val();
+	forceXModifier = $("#forceX").val();
+	forceYModifier = $("#forceY").val();
+	thicknessModifier = $("#thickness").val();
+
 	fade = $("#fade").val();
+	dampX = 1 - ($("#dampX").val() * .01);
+	dampY = -1 - ($("#dampY").val() * -.01);
+	variation = $("#variation").val() * .01;
 
 	drag *= dragModifier/15;
-	force *= forceModifier/25;
+	forceX *= forceXModifier/25;
+	forceY *= forceYModifier/25;
 	gravity *= gravityModifier/25;
+	thickness *= thicknessModifier;
+
 }
 
 var updateSettings = function(){
@@ -97,5 +103,10 @@ var updateSettings = function(){
 
 var addBall = function(){
 	updateSettings();
-	balls.push(new Ball(force));
+	balls.push(new Ball(forceX, forceY));
 }
+
+// var addGravityBall = function(){
+// 	updateSettings();
+// 	balls.push(new Ball(2, cv.width/2, cv.height/2-200))
+// }

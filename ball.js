@@ -1,13 +1,14 @@
-var Ball = function(force,x,y){
-  this.x = x || 10,
-  this.y = y || 10,
+var Ball = function(forceX, forceY){
+  this.x = startX,
+  this.y = startY,
   this.gravity = gravity * Math.random();
   this.speedX = 0;
   this.speedY = 0;
   this.impulseX = 0;
   this.impulseY = 0;
   this.drag = 0;
-  this.force = force + Math.random() * .05;
+  this.forceX = forceX + Math.random() * .05;
+  this.forceY = forceY + Math.random() * .05;
   this.lastX = this.x;
   this.lastY = this.y;
 
@@ -17,11 +18,21 @@ var Ball = function(force,x,y){
       this.die();
     }
 
+    var speed = Math.sqrt(this.speedX**2 + this.speedY**2);
+    if(speed > 20){
+      this.die();
+    }
+
     this.gravity = gravity * Math.random();
     //Initial Force
-    if(this.force != 0){
-      this.speedX += this.force;
-      this.force = 0;
+    if(this.forceX != 0){
+      this.speedX += this.forceX;
+      this.forceX = 0;
+    }
+
+    if(this.forceY != 0){
+      this.speedY += this.forceY;
+      this.forceY = 0;
     }
 
     //Mouse Click Impulse
@@ -44,12 +55,16 @@ var Ball = function(force,x,y){
 
     //Apply Gravity
     if(centerGravity){
-      var x = Math.floor(cv.width/2) - this.x
-      var y = Math.floor(cv.height/2) - this.y
-      var distance = Math.floor(Math.sqrt( x*x + y*y ));
-      this.speedX += x/(distance*10)
-      this.speedY += y/(distance*10)
-    }else{
+      for(var i in centersOfGravity){
+        var x = Math.floor(centersOfGravity[i].x) - this.x
+        var y = Math.floor(centersOfGravity[i].y) - this.y
+        var distance = Math.max(Math.floor(Math.sqrt( x*x + y*y )), 1);
+        if(distance < 1000 * centersOfGravity[i].strength){
+          this.speedX += x/(distance*30) * centersOfGravity[i].strength
+          this.speedY += y/(distance*30) * centersOfGravity[i].strength
+        }
+      }
+    } else {
       this.speedY += this.gravity;
     }
 
@@ -68,19 +83,24 @@ var Ball = function(force,x,y){
     }
     if(this.y >= cv.height){
       this.y = cv.height;
-      this.speedY *= -.75;
-      this.speedX *= 0.9;
+      this.speedY *= dampY;
+      this.speedX *= dampX;
     }
     if(this.y <= 0){
       this.y = 0;
-      this.speedY *= -.75;
-      this.speedX *= 0.9;
+      this.speedY *= dampY;
+      this.speedX *= dampX;
     }
 
+    // Color based on speed
+    var colorFactor = Math.min(speed, 8) / 8;
+    cv.ctx.strokeStyle = mixColor(minColor, maxColor, colorFactor);
+
+    // Draw path
     cv.ctx.beginPath();
-    cv.ctx.fillStyle = "black";
     cv.ctx.moveTo(this.lastX, this.lastY);
     cv.ctx.lineTo(this.x, this.y);
+    cv.ctx.lineWidth = thickness;
     cv.ctx.stroke();
     this.lastX = this.x;
     this.lastY = this.y;

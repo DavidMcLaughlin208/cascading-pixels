@@ -1,7 +1,7 @@
 html, body{
   width: 100%;
 }
-*{overflow: auto;}
+/**{overflow: auto;}*/
 
 .content{
   width:75%;

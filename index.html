@@ -8,7 +8,7 @@
 <body>
 <div class="content">
   <div class="canvas-holder">
-    <canvas id="mycanvas" width="900" height="500"></canvas>
+    <canvas id="mycanvas"></canvas>
   </div>
   <div class="settings-holder">
     <form action="/" method="get">
@@ -16,14 +16,29 @@
     <label>Gravity</label>
     <input type="range" name="points" id="gravity" value="50" min="1" max="100"><br>
 
-    <label>Initial Force</label>
-    <input type="range" name="points" id="force" value="50" min="10" max="100"><br>
+    <label>Horizontal Force</label>
+    <input type="range" name="points" id="forceX" value="10" min="-100" max="100"><br>
+
+    <label>Vertical Force</label>
+    <input type="range" name="points" id="forceY" value="0" min="-100" max="100"><br>
 
     <label>Drag</label>
     <input type="range" name="points" id="drag" value="50" min="0" max="100"><br>
 
     <label>Fade</label>
     <input type="range" name="points" id="fade" value="5" min="1" max="200"><br>
+
+    <label>Thickness</label>
+    <input type="range" name="points" id="thickness" value="1" min="1" max="20"><br>
+
+    <label>Horizontal Damping</label>
+    <input type="range" name="points" id="dampX" value="1" min="10" max="100"><br>
+
+    <label>Vertical Damping</label>
+    <input type="range" name="points" id="dampY" value="1" min="25" max="100"><br>
+
+    <!-- <label>Variation</label>
+    <input type="range" name="points" id="variation" value="50" min="0" max="100"><br>-->
 
     <input class="add-ball" type="submit" value="Add Ball">
     <input class="update-settings" type="submit" value="Update Settings">
@@ -45,6 +60,7 @@
 </div>
 
 <script src="bindings.js"></script>
+<script src="colorBlend.js"></script>
 <script src="gravityCenter.js"></script>
 <script src="ball.js"></script>
 <script src="canvas.js"></script>
