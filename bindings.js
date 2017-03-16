@@ -60,26 +60,27 @@ $(document).ready(function(){
 		var rect = this.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
-    startX = x;
-    startY = y;
-    // applyImpulse(x, y);
+		if(placingGravs === true){
+			centersOfGravity.push(new gravityCenter(x,y))
+		}else{
+	    startX = x;
+	    startY = y;
+	    // applyImpulse(x, y);
+	  }
 	})
 
 	$(".center-gravity").on("click", function(event){
 		event.preventDefault();
 		centerGravity = true;
-		gravity = 0;
+		placingGravs = !placingGravs;
+		// gravity = 0;
 	})
 
 	$(".center-gravity-off").on("click", function(event){
 		event.preventDefault();
 		centerGravity = false;
+		centersOfGravity = [];
 	})
-
-	// $(".add-gravity-ball").on("click", function(event){
-	// 	event.preventDefault();
-	// 	addGravityBall();
-	// })
 
 })
 
@@ -88,14 +89,19 @@ var getSliderValues = function(){
 	dragModifier = $("#drag").val();
 	forceXModifier = $("#forceX").val();
 	forceYModifier = $("#forceY").val();
-	fade = $("#fade").val();
 	thicknessModifier = $("#thickness").val();
+
+	fade = $("#fade").val();
+	dampX = 1 - ($("#dampX").val() * .01);
+	dampY = -1 - ($("#dampY").val() * -.01);
+	variation = $("#variation").val() * .01;
 
 	drag *= dragModifier/15;
 	forceX *= forceXModifier/25;
 	forceY *= forceYModifier/25;
 	gravity *= gravityModifier/25;
 	thickness *= thicknessModifier;
+
 }
 
 var updateSettings = function(){

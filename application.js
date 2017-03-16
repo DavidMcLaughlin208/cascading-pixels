@@ -8,6 +8,11 @@ var centerGravity = false;
 var startX = 10;
 var startY = 10;
 var thickness = 1;
+var dampX = .75;
+var dampY = -.9;
+var variation = 0.5;
+var centersOfGravity = [];
+var placingGravs = false;
 
 cv.ctx.canvas.width = cv.width;
 cv.ctx.canvas.height = cv.height;
@@ -35,6 +40,9 @@ var draw = function(){
 	}
 	for(var i in balls){
 		balls[i].draw();
+	}
+	for(var i in centersOfGravity){
+		centersOfGravity[i].draw();
 	}
 }
 

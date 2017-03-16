@@ -19,7 +19,7 @@ var Ball = function(forceX, forceY){
     }
 
     var speed = Math.sqrt(this.speedX**2 + this.speedY**2);
-    if(speed > 100){
+    if(speed > 20){
       this.die();
     }
 
@@ -55,12 +55,14 @@ var Ball = function(forceX, forceY){
 
     //Apply Gravity
     if(centerGravity){
-      var x = Math.floor(cv.width/2) - this.x
-      var y = Math.floor(cv.height/2) - this.y
-      var distance = Math.floor(Math.sqrt( x*x + y*y ));
-      this.speedX += x/(distance*10)
-      this.speedY += y/(distance*10)
-    }else{
+      for(var i in centersOfGravity){
+        var x = Math.floor(centersOfGravity[i].x) - this.x
+        var y = Math.floor(centersOfGravity[i].y) - this.y
+        var distance = Math.floor(Math.sqrt( x*x + y*y ));
+        this.speedX += x/(distance*10)
+        this.speedY += y/(distance*10)
+      }
+    } else {
       this.speedY += this.gravity;
     }
 
@@ -79,13 +81,13 @@ var Ball = function(forceX, forceY){
     }
     if(this.y >= cv.height){
       this.y = cv.height;
-      this.speedY *= -.75;
-      this.speedX *= 0.9;
+      this.speedY *= dampY;
+      this.speedX *= dampX;
     }
     if(this.y <= 0){
       this.y = 0;
-      this.speedY *= -.75;
-      this.speedX *= 0.9;
+      this.speedY *= dampY;
+      this.speedX *= dampX;
     }
 
     var speed = Math.sqrt(this.speedX**2 + this.speedY**2);
