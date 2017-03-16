@@ -59,8 +59,8 @@ var Ball = function(forceX, forceY){
         var x = Math.floor(centersOfGravity[i].x) - this.x
         var y = Math.floor(centersOfGravity[i].y) - this.y
         var distance = Math.floor(Math.sqrt( x*x + y*y ));
-        this.speedX += x/(distance*10)
-        this.speedY += y/(distance*10)
+        this.speedX += (x/(distance*10)) * centersOfGravity[i].strength
+        this.speedY += y/(distance*10) * centersOfGravity[i].strength
       }
     } else {
       this.speedY += this.gravity;
@@ -90,12 +90,11 @@ var Ball = function(forceX, forceY){
       this.speedX *= dampX;
     }
 
-    var speed = Math.sqrt(this.speedX**2 + this.speedY**2);
+    // Color based on speed
     var colorFactor = Math.min(speed, 10) / 10;
-    var r = parseInt(Math.max(255*colorFactor, 1));
-    var b  = 255 - r;
-    var style = "rgb(" + r + ", 0," + b + ")";
-    cv.ctx.strokeStyle = rgb2hex(style)
+    cv.ctx.strokeStyle = mixColor(minColor, maxColor, colorFactor);
+
+
 
 
     cv.ctx.beginPath();

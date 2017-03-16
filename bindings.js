@@ -6,16 +6,6 @@ $(document).ready(function(){
 	getSliderValues();
 	start();
 
-	// $(".start").on("click", function(event){
-	// 	event.preventDefault();
-	// 	reset();
-	// 	clearInterval(gameLoop);
-	// 	clearInterval(fadeLoop);
-
-	// 	getSliderValues();
-	// 	start();
-	// });
-
 	$(".add-ball").on("click", function(event){
 		event.preventDefault();
 		updateSettings();

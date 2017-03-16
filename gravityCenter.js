@@ -16,10 +16,14 @@
 var gravityCenter = function(x,y, strength){
   this.x = x || cv.width/2;
   this.y = y || cv.height/2;
-  this.strength = strength || 0.5;
+  this.strength = strength || Math.random() * 0.5;
 
   this.draw = function(){
-    cv.ctx.fillStyle = "black";
-    cv.ctx.fillRect(this.x, this.y, 10, 10);
+    // cv.ctx.fillRect(this.x, this.y, 50*this.strength, 50*this.strength);
+    cv.ctx.beginPath();
+    cv.ctx.arc(this.x, this.y, 50*this.strength, 0, 2 * Math.PI, false);
+    cv.ctx.fillStyle = 'black';
+    cv.ctx.fill();
+    cv.ctx.closePath();
   }
 }
