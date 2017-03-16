@@ -40,11 +40,11 @@ var draw = function(){
 		gravityModifier = $("#gravity").val();
 		gravity *= gravityModifier/25;
 	}
-	for(var i in balls){
-		balls[i].draw();
-	}
 	for(var i in centersOfGravity){
 		centersOfGravity[i].draw();
+	}
+	for(var i in balls){
+		balls[i].draw();
 	}
 }
 

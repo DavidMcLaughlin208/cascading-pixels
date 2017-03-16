@@ -58,9 +58,11 @@ var Ball = function(forceX, forceY){
       for(var i in centersOfGravity){
         var x = Math.floor(centersOfGravity[i].x) - this.x
         var y = Math.floor(centersOfGravity[i].y) - this.y
-        var distance = Math.floor(Math.sqrt( x*x + y*y ));
-        this.speedX += (x/(distance*10)) * centersOfGravity[i].strength
-        this.speedY += y/(distance*10) * centersOfGravity[i].strength
+        var distance = Math.max(Math.floor(Math.sqrt( x*x + y*y )), 1);
+        if(distance < 1000 * centersOfGravity[i].strength){
+          this.speedX += x/(distance*30) * centersOfGravity[i].strength
+          this.speedY += y/(distance*30) * centersOfGravity[i].strength
+        }
       }
     } else {
       this.speedY += this.gravity;
@@ -91,14 +93,11 @@ var Ball = function(forceX, forceY){
     }
 
     // Color based on speed
-    var colorFactor = Math.min(speed, 10) / 10;
+    var colorFactor = Math.min(speed, 8) / 8;
     cv.ctx.strokeStyle = mixColor(minColor, maxColor, colorFactor);
 
-
-
-
+    // Draw path
     cv.ctx.beginPath();
-    // console.log(cv.ctx.strokeStyle)
     cv.ctx.moveTo(this.lastX, this.lastY);
     cv.ctx.lineTo(this.x, this.y);
     cv.ctx.lineWidth = thickness;
