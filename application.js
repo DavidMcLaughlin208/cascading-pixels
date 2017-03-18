@@ -15,6 +15,7 @@ var centersOfGravity = [];
 var placingGravs = false;
 var maxColor = "#ff0000";
 var minColor = "#0000ff";
+var backgroundColor = "rgba(214,214,214,0.1)";
 
 cv.ctx.canvas.width = cv.width;
 cv.ctx.canvas.height = cv.height;
@@ -49,7 +50,7 @@ var draw = function(){
 }
 
 function fadeOut() {
-  cv.ctx.fillStyle = "rgba(214,214,214,0.1)";
+  cv.ctx.fillStyle = backgroundColor;
   cv.ctx.fillRect(0, 0, cv.width, cv.height);
 }
 

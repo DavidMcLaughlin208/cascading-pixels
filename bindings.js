@@ -72,6 +72,12 @@ $(document).ready(function(){
 		centersOfGravity = [];
 	})
 
+	$(".set-background-color").on("click", function(event){
+		event.preventDefault();
+		console.log($('#background-color-picker').val());
+		backgroundColor = $('#background-color-picker').val();
+	})
+
 })
 
 var getSliderValues = function(){

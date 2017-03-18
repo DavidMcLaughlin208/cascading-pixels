@@ -60,8 +60,8 @@ var Ball = function(forceX, forceY){
         var y = Math.floor(centersOfGravity[i].y) - this.y
         var distance = Math.max(Math.floor(Math.sqrt( x*x + y*y )), 1);
         if(distance < 1000 * centersOfGravity[i].strength){
-          this.speedX += x/(distance*30) * centersOfGravity[i].strength
-          this.speedY += y/(distance*30) * centersOfGravity[i].strength
+          this.speedX += x/(distance*10) * centersOfGravity[i].strength
+          this.speedY += y/(distance*10) * centersOfGravity[i].strength
         }
       }
     } else {
