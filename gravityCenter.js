@@ -1,22 +1,7 @@
-// var applyImpulse = function(x,y){
-//   console.log(balls.length)
-//   for(var i in balls){
-//     x = x - balls[i].x
-//     y = y - balls[i].y
-
-//     var distance = Math.floor(Math.sqrt( x*x + y*y ));
-//     if(distance < 500){
-//       balls[i].impulseX = (-x*5)/distance;
-//       balls[i].impulseY = (-y*5)/distance;
-//     }
-//   }
-// }
-
-
 var gravityCenter = function(x,y, strength){
   this.x = x || cv.width/2;
   this.y = y || cv.height/2;
-  this.strength = strength || Math.random() * 0.5;
+  this.strength = strength || Math.max(Math.random() * 0.5, .15);
   this.color = 'black' //gravityColors();
   this.influenceColor = alphaGravityColors();
 
@@ -41,4 +26,10 @@ var gravityColors = function(){
 }
 var alphaGravityColors = function(){
   return "rgb(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ", 0.1)";
+}
+
+
+
+var moveableGravityCenter = function(x,y,strength){
+
 }
