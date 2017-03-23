@@ -2,6 +2,12 @@ $(document).ready(function(){
 	reset();
 	clearInterval(gameLoop);
 	clearInterval(fadeLoop);
+	var backgroundPicker = $("#background-color-picker").spectrum({
+														preferredFormat: "rgb",
+														showInput: true,
+														showButtons: false,
+														color: "#000000"
+													})
 
 	getSliderValues();
 	start();
@@ -74,8 +80,12 @@ $(document).ready(function(){
 
 	$(".set-background-color").on("click", function(event){
 		event.preventDefault();
-		console.log($('#background-color-picker').val());
-		backgroundColor = $('#background-color-picker').val();
+		console.log(backgroundPicker.val());
+		var backgroundChoice = backgroundPicker.val().split("");
+		backgroundChoice.splice(3,0,"a")
+		backgroundChoice.splice(-1,1,", 0.1)")
+		backgroundColor = backgroundChoice.join("");
+
 	})
 
 })

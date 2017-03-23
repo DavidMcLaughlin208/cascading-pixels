@@ -19,9 +19,9 @@ var Ball = function(forceX, forceY){
     }
 
     var speed = Math.sqrt(this.speedX**2 + this.speedY**2);
-    if(speed > 20){
-      this.die();
-    }
+    // if(speed > 20){
+    //   this.die();
+    // }
 
     this.gravity = gravity * Math.random();
     //Initial Force
@@ -48,9 +48,9 @@ var Ball = function(forceX, forceY){
 
     //Reduce horizontal speed
     if(this.speedX > 0){
-      this.speedX -= this.drag;
+      this.speedX -= drag;
     } else {
-      this.speedX += this.drag;
+      this.speedX += drag;
     }
 
     //Apply Gravity

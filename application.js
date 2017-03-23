@@ -41,11 +41,11 @@ var draw = function(){
 		gravityModifier = $("#gravity").val();
 		gravity *= gravityModifier/25;
 	}
-	for(var i in centersOfGravity){
-		centersOfGravity[i].draw();
-	}
 	for(var i in balls){
 		balls[i].draw();
+	}
+	for(var i in centersOfGravity){
+		centersOfGravity[i].draw();
 	}
 }
 
@@ -64,14 +64,5 @@ var start = function(){
 	cv.ctx.moveTo(10,10);
 
 	fadeLoop = setInterval(fadeOut, fade);
-	gameLoop = setInterval(draw, 5);
+	gameLoop = setInterval(draw, 1);
 }
-
-
-// function rgb2hex(rgb){
-//  rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
-//  return (rgb && rgb.length === 4) ? "#" +
-//   ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
-//   ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
-//   ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
-// }

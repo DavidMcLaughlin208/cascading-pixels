@@ -17,7 +17,7 @@ var gravityCenter = function(x,y, strength){
   this.x = x || cv.width/2;
   this.y = y || cv.height/2;
   this.strength = strength || Math.random() * 0.5;
-  this.color = gravityColors();
+  this.color = 'black' //gravityColors();
   this.influenceColor = alphaGravityColors();
 
   this.draw = function(){
