@@ -28,6 +28,7 @@ cv.ctx.fillStyle = 'black';
 var reset = function(){
 	cv.ctx.beginPath();
 	cv.ctx.moveTo(10,10);
+	cv.ctx.closePath();
 	if(!noGravity){gravity = .04};
 	forceX = 2;
 	forceY = 2;
@@ -75,6 +76,7 @@ var start = function(){
 
 	cv.ctx.beginPath();
 	cv.ctx.moveTo(10,10);
+	cv.ctx.closePath();
 
 	fadeLoop = setInterval(fadeOut, fade);
 	gameLoop = setInterval(draw, 1);
