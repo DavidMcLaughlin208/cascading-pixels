@@ -118,11 +118,11 @@ $(document).ready(function(){
 		if(gravity > 0){
 			noGravity = true;
 			gravity = 0;
-			$(this).html("Disable Gravity");
+			$(this).html("Enable Gravity");
 		}else{
 			noGravity = false;
 			updateSettings();
-			$(this).html("Enable Gravity");
+			$(this).html("Disable Gravity");
 		}
 	})
 
@@ -138,7 +138,7 @@ $(document).ready(function(){
 	// })
 
 	backgroundPicker.on("move.spectrum", function(e, color) {
-		backgroundColor = "rgba(" + color._r.toFixed() + ", " + color._g.toFixed() + ", " + color._b.toFixed() + ", 0.1)"
+		backgroundColor = ["rgba(", color._r.toFixed() + ", ", + color._g.toFixed() + ", ", + color._b.toFixed() + ", ", + "0.1", ")"]
 	})
 
 	ballMinPicker.on("move.spectrum", function(e, color) {
@@ -159,7 +159,7 @@ var getSliderValues = function(){
 	forceYModifier = $("#forceY").val();
 	thicknessModifier = $("#thickness").val();
 
-	fade = $("#fade").val();
+	fade = (Math.abs($("#fade").val()) * .01).toString();
 	dampX = 1 - ($("#dampX").val() * .01);
 	dampY = -1 - ($("#dampY").val() * -.01);
 	variation = $("#variation").val() * .01;

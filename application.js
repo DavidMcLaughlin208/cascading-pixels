@@ -16,7 +16,7 @@ var placingGravs = false;
 var showGravs = true;
 var maxColor = "#ff0000";
 var minColor = "#0000ff";
-var backgroundColor = "rgba(214,214,214,0.1)";
+var backgroundColor = ["rgba(", "214,", "214,", "214,", "0.1",")"] //"rgba(214,214,214,0.1)";
 
 cv.ctx.canvas.width = cv.width;
 cv.ctx.canvas.height = cv.height;
@@ -36,6 +36,8 @@ var reset = function(){
 }
 
 var draw = function(){
+	drawBackground();
+
 	if(noGravity){
 	}else{
 		gravity = .04;
@@ -52,9 +54,17 @@ var draw = function(){
 	}
 }
 
-function fadeOut() {
-  cv.ctx.fillStyle = backgroundColor;
+function drawBackground(){
+	backgroundColor[4] = fade;
+	cv.ctx.fillStyle = backgroundColor.join("");
+	console.log(backgroundColor);
   cv.ctx.fillRect(0, 0, cv.width, cv.height);
+}
+
+function fadeOut() {
+	// backgroundColor[4] = fade;
+ //  cv.ctx.fillStyle = backgroundColor.join("");
+ //  cv.ctx.fillRect(0, 0, cv.width, cv.height);
 }
 
 var start = function(){
