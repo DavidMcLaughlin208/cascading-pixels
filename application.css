@@ -2,15 +2,124 @@ html, body{
   width: 100%;
 }
 /**{overflow: auto;}*/
+/**{border: 1px solid black;}*/
 
 .content{
-  width:75%;
-  margin: auto;
+  width:100%;
+  /*margin: auto;*/
 }
 
 .canvas-holder, .settings-holder{
   height: 100%;
-  width: 100%;
+  width: 79%;
+  display:inline-block;
 /*  display: inline-block;
   vertical-align: top;*/
 }
+
+.sliders{
+  display: block;
+}
+
+.settings-holder{
+  display: inline-block;
+  width: 300px;
+  vertical-align: top;
+}
+
+.buttons-holder{
+  display:inline-block;
+  width: 300px;
+  vertical-align: top;
+  margin-top: 20px;
+}
+
+.slider-labels{
+  display: inline-block;
+  width: 135px;
+  text-align: right;
+}
+
+.ui-slider-handle, .ui-slider{
+  height: 10px;
+}
+
+
+.update-settings{
+  width: 100%;
+  display: block;
+  height: 40px;
+  border-radius: none;
+  color: white;
+  background-color: black;
+  border:none;
+  margin: 5px;
+  border: 2px solid transparent;
+}
+
+.update-settings:hover{
+  color: black;
+  background-color: white;
+  border: 2px solid black;
+}
+
+.update-settings:focus{
+  outline:none;
+    color: white;
+  background-color: black;
+}
+
+.quick-add{
+  width: 100px;
+  text-align: center;
+  border-radius:none;
+  border: none;
+  display: block;
+  margin-top: 2px;
+  height: 20px;
+}
+
+.quick-add:focus, .clear:focus, .infinite, .set-background-color{
+  outline: none;
+}
+
+.quick-add-holder{
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.quick-add-label{
+  display: block;
+  text-align: center;
+  width: 100px;
+}
+
+.clear, .infinite{
+  width: 100px;
+  text-align: center;
+  border-radius:none;
+  border: none;
+  display: block;
+  margin-top: 2px;
+  height: 20px;
+}
+
+.color-scheme-label{
+  display: block;
+}
+
+.picker{
+  display: block;
+}
+
+.set-background-color{
+  width: 100px;
+  text-align: center;
+  border-radius:none;
+  border: none;
+  margin-top: 2px;
+  height: 20px;
+}
+
+
+
