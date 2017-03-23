@@ -58,7 +58,6 @@ var draw = function(){
 function drawBackground(){
 	backgroundColor[4] = fade;
 	cv.ctx.fillStyle = backgroundColor.join("");
-	console.log(backgroundColor);
   cv.ctx.fillRect(0, 0, cv.width, cv.height);
 }
 

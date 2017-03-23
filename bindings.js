@@ -88,7 +88,6 @@ $(document).ready(function(){
 
 	$(".place-gravity-wells").on("click", function(event){
 		event.preventDefault();
-		console.log("GRAVS")
 		placingGravs = !placingGravs;
 		if($(this).html() === "Place Gravity Wells"){
 			$(this).html("Stop Placing Gravity Wells")
@@ -125,17 +124,6 @@ $(document).ready(function(){
 			$(this).html("Disable Gravity");
 		}
 	})
-
-
-
-	// $(".set-background-color").on("click", function(event){
-	// 	event.preventDefault();
-	// 	console.log(backgroundPicker.val());
-	// 	var backgroundChoice = backgroundPicker.val().split("");
-	// 	backgroundChoice.splice(3,0,"a")
-	// 	backgroundChoice.splice(-1,1,", 0.1)")
-	// 	backgroundColor = backgroundChoice.join("");
-	// })
 
 	backgroundPicker.on("move.spectrum", function(e, color) {
 		backgroundColor = ["rgba(", color._r.toFixed() + ", ", + color._g.toFixed() + ", ", + color._b.toFixed() + ", ", + "0.1", ")"]

@@ -92,10 +92,10 @@ var Ball = function(forceX, forceY){
     var color = mixColor(minColor, maxColor, colorFactor);
     cv.ctx.strokeStyle = color;
 
-    cv.ctx.beginPath();
-    cv.ctx.arc(this.x, this.y, thickness/2, 0, 2 * Math.PI, false);
-    cv.ctx.fillStyle = color;
-    cv.ctx.fill();
+    // cv.ctx.beginPath();
+    // cv.ctx.arc(this.x, this.y, thickness/2, 0, 2 * Math.PI, false);
+    // cv.ctx.fillStyle = color;
+    // cv.ctx.fill();
 
 
 
