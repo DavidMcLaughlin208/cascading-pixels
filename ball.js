@@ -19,9 +19,6 @@ var Ball = function(forceX, forceY){
     }
 
     var speed = Math.sqrt(this.speedX**2 + this.speedY**2);
-    // if(speed > 20){
-    //   this.die();
-    // }
 
     this.gravity = gravity * Math.random();
     //Initial Force
@@ -54,19 +51,17 @@ var Ball = function(forceX, forceY){
     }
 
     //Apply Gravity
-    if(centerGravity){
-      for(var i in centersOfGravity){
-        var x = Math.floor(centersOfGravity[i].x) - this.x
-        var y = Math.floor(centersOfGravity[i].y) - this.y
-        var distance = Math.max(Math.floor(Math.sqrt( x*x + y*y )), 1);
-        if(distance < 1000 * centersOfGravity[i].strength){
-          this.speedX += x/(distance*10) * centersOfGravity[i].strength
-          this.speedY += y/(distance*10) * centersOfGravity[i].strength
-        }
+    for(var i in centersOfGravity){
+      var x = Math.floor(centersOfGravity[i].x) - this.x
+      var y = Math.floor(centersOfGravity[i].y) - this.y
+      var distance = Math.max(Math.floor(Math.sqrt( x*x + y*y )), 1);
+      if(distance < 1000 * centersOfGravity[i].strength){
+        this.speedX += x/(distance*10) * centersOfGravity[i].strength
+        this.speedY += y/(distance*10) * centersOfGravity[i].strength
       }
-    } else {
-      this.speedY += this.gravity;
     }
+    this.speedY += this.gravity;
+
 
     //Apply speeds to coordinates
     this.x += this.speedX;

@@ -71,20 +71,26 @@
     <!-- <button class="stop-infinite">Stop Inifinite</button> -->
     <br>
     <br>
-    <button class="center-gravity">Center Gravity</button>
-    <button class="center-gravity-off">Normal Gravity</button>
+
+    <div class="gravity-settings">
+        <h3>Gravity Settings</h3>
+        <button class="gravity-buttons place-gravity-wells">Place Gravity Wells</button>
+        <button class="gravity-buttons clear-gravity-wells">Clear Gravity Wells</button>
+        <button class="gravity-buttons hide-gravs">Hide Gravity Wells</button>
+        <button class="gravity-buttons disable-gravity">Disable Gravity</button>
+    </div>
     <div class="color-schema">
-        <label class="color-scheme-label">Color Scheme</label>
+        <h4 class="color-scheme-label">Color Scheme</h4>
         <div>
-            <label>Background Color: </label>
+            <label class="color-picker-labels">Background Color: </label>
             <input type='text' name='color' value="black" class="picker" id="background-color-picker" />
         </div>
         <div>
-            <label>Ball Max Speed Color:</label>
+            <label class="color-picker-labels">Ball Max Speed Color:</label>
             <input type='text' name='color' value="black" class="picker" id="ball-max-color" />
         </div>
         <div>
-            <label>Ball Min Speed Color:</label>
+            <label class="color-picker-labels">Ball Min Speed Color:</label>
             <input type='text' name='color' value="black" class="picker" id="ball-min-color" />
         </div>
     </div>

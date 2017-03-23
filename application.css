@@ -2,7 +2,6 @@ html, body{
   width: 100%;
 }
 /**{overflow: auto;}*/
-/**{border: 1px solid black;}*/
 
 .content{
   width:100%;
@@ -70,12 +69,12 @@ html, body{
 }
 
 .quick-add{
-  width: 100px;
+  width: 200px;
   text-align: center;
   border-radius:none;
   border: none;
   display: block;
-  margin-top: 2px;
+  margin: 1px auto;
   height: 20px;
 }
 
@@ -85,7 +84,9 @@ html, body{
 
 .quick-add-holder{
   margin-top: 10px;
-  display: inline-block;
+  display: block;
+  margin: auto;
+  text-align: center;
 }
 
 .quick-add-label{
@@ -95,17 +96,29 @@ html, body{
 }
 
 .clear, .infinite{
-  width: 100px;
+  width: 200px;
   text-align: center;
   border-radius:none;
   border: none;
   display: block;
-  margin-top: 2px;
+  margin: 1px auto;
   height: 20px;
+}
+
+.color-schema{
+  margin: 10px auto;
+}
+
+.color-schema div{
+  margin: auto;
+  text-align: center;
 }
 
 .color-scheme-label{
   display: block;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
 }
 
 .picker{
@@ -121,5 +134,31 @@ html, body{
   height: 20px;
 }
 
+.color-picker-labels{
+  width: 150px;
+  display: inline-block;
+  text-align: right;
+}
+
+.gravity-settings{
+  margin: auto;
+  text-align: center;
+}
+
+.gravity-buttons{
+  width: 200px;
+  text-align: center;
+  border-radius:none;
+  border: none;
+  display: inline-block;
+  margin-top: 2px;
+  height: 25px;
+}
+
+.gravity-buttons:focus{
+  outline:none;
+}
 
 
+
+/**{border: 1px solid black;}*/

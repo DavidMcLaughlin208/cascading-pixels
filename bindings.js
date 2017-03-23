@@ -86,18 +86,47 @@ $(document).ready(function(){
 	  }
 	})
 
-	$(".center-gravity").on("click", function(event){
+	$(".place-gravity-wells").on("click", function(event){
 		event.preventDefault();
-		centerGravity = true;
+		console.log("GRAVS")
 		placingGravs = !placingGravs;
-		// gravity = 0;
+		if($(this).html() === "Place Gravity Wells"){
+			$(this).html("Stop Placing Gravity Wells")
+		} else {
+			$(this).html("Place Gravity Wells")
+		}
 	})
 
-	$(".center-gravity-off").on("click", function(event){
+	$(".clear-gravity-wells").on("click", function(event){
 		event.preventDefault();
-		centerGravity = false;
+		// centerGravity = false;
 		centersOfGravity = [];
 	})
+
+	$(".hide-gravs").on("click", function(event){
+		event.preventDefault();
+		showGravs = !showGravs
+		if($(this).html() === "Hide Gravity Wells"){
+			$(this).html("Show Gravity Wells")
+		}else{
+			$(this).html("Hide Gravity Wells")
+		}
+	})
+
+	$(".disable-gravity").on("click", function(event){
+		event.preventDefault();
+		if(gravity > 0){
+			noGravity = true;
+			gravity = 0;
+			$(this).html("Disable Gravity");
+		}else{
+			noGravity = false;
+			updateSettings();
+			$(this).html("Enable Gravity");
+		}
+	})
+
+
 
 	// $(".set-background-color").on("click", function(event){
 	// 	event.preventDefault();

@@ -4,7 +4,7 @@ var fadeLoop;
 var fade;
 var balls = [];
 var infiniteLoop;
-var centerGravity = false;
+var noGravity = false;
 var startX = 10;
 var startY = 10;
 var thickness = 1;
@@ -13,6 +13,7 @@ var dampY = -.9;
 var variation = 0.5;
 var centersOfGravity = [];
 var placingGravs = false;
+var showGravs = true;
 var maxColor = "#ff0000";
 var minColor = "#0000ff";
 var backgroundColor = "rgba(214,214,214,0.1)";
@@ -27,7 +28,7 @@ cv.ctx.fillStyle = 'black';
 var reset = function(){
 	cv.ctx.beginPath();
 	cv.ctx.moveTo(10,10);
-	gravity = .04;
+	if(!noGravity){gravity = .04};
 	forceX = 2;
 	forceY = 2;
 	drag = .001;
@@ -35,7 +36,7 @@ var reset = function(){
 }
 
 var draw = function(){
-	if(centerGravity){
+	if(noGravity){
 	}else{
 		gravity = .04;
 		gravityModifier = $("#gravity").val();
@@ -44,8 +45,10 @@ var draw = function(){
 	for(var i in balls){
 		balls[i].draw();
 	}
-	for(var i in centersOfGravity){
-		centersOfGravity[i].draw();
+	if(showGravs){
+		for(var i in centersOfGravity){
+			centersOfGravity[i].draw();
+		}
 	}
 }
 
