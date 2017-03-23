@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Canvas Practice</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="application.css">
+    <title>Canvas Practice</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="application.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css">
 </head>
 <body>
 <div class="content">
@@ -11,54 +12,90 @@
     <canvas id="mycanvas"></canvas>
   </div>
   <div class="settings-holder">
+  <div class="sliders">
     <form action="/" method="get">
-
-    <label>Gravity</label>
-    <input type="range" name="points" id="gravity" value="50" min="1" max="100"><br>
-
-    <label>Horizontal Force</label>
-    <input type="range" name="points" id="forceX" value="10" min="-100" max="100"><br>
-
-    <label>Vertical Force</label>
-    <input type="range" name="points" id="forceY" value="0" min="-100" max="100"><br>
-
-    <label>Drag</label>
-    <input type="range" name="points" id="drag" value="50" min="0" max="100"><br>
-
-    <label>Fade</label>
-    <input type="range" name="points" id="fade" value="5" min="1" max="200"><br>
-
-    <label>Thickness</label>
-    <input type="range" name="points" id="thickness" value="1" min="1" max="20"><br>
-
-    <label>Horizontal Damping</label>
-    <input type="range" name="points" id="dampX" value="1" min="10" max="100"><br>
-
-    <label>Vertical Damping</label>
-    <input type="range" name="points" id="dampY" value="1" min="25" max="100"><br>
+    <div>
+        <label class="slider-labels">Gravity</label>
+        <input type="range" name="points" id="gravity" value="50" min="1" max="100"><br>
+    </div>
+    <div>
+        <label class="slider-labels">Horizontal Force</label>
+        <input type="range" name="points" id="forceX" value="10" min="-100" max="100"><br>
+    </div>
+    <div>
+        <label class="slider-labels">Vertical Force</label>
+        <input type="range" name="points" id="forceY" value="0" min="-100" max="100"><br>
+    </div>
+    <div>
+        <label class="slider-labels">Drag</label>
+        <input type="range" name="points" id="drag" value="1" min="0" max="100"><br>
+    </div>
+    <div>
+        <label class="slider-labels">Fade</label>
+        <input type="range" name="points" id="fade" value="5" min="1" max="200"><br>
+    </div>
+    <div>
+        <label class="slider-labels">Thickness</label>
+        <input type="range" name="points" id="thickness" value="2" min="1" max="20"><br>
+    </div>
+    <div>
+        <label class="slider-labels">Horizontal Damping</label>
+        <input type="range" name="points" id="dampX" value="1" min="10" max="100"><br>
+    </div>
+    <div>
+        <label class="slider-labels">Vertical Damping</label>
+        <input type="range" name="points" id="dampY" value="1" min="25" max="100"><br>
+    </div>
+    <div>
+        <label class="slider-labels">Spread</label>
+        <input type="range" name="points" id="spread" value="50" min="1" max="200"><br>
+    </div>
 
     <!-- <label>Variation</label>
     <input type="range" name="points" id="variation" value="50" min="0" max="100"><br>-->
-
-    <input class="add-ball" type="submit" value="Add Ball">
-    <input class="update-settings" type="submit" value="Update Settings">
-    <input class="clear" type="submit" value="Clear">
     </form>
-    <button balls="5" class="quick-add">5</button>
-    <button balls="10" class="quick-add">10</button>
-    <button balls="15" class="quick-add">15</button>
-    <button balls="20" class="quick-add">20</button>
-    <label>Spread</label>
-    <input type="range" name="points" id="spread" value="50" min="1" max="200"><br>
-    <button class="infinite">Infinite</button>
-    <button class="stop-infinite">Stop Inifinite</button>
-    <br>
-    <br>
-    <button class="center-gravity">Center Gravity</button>
-    <button class="center-gravity-off">Normal Gravity</button>
+    </div>
+
+  <div class="buttons-holder">
+    <button class="update-settings">Update Settings</button>
+    <div class="quick-add-holder">
+        <h4 class="quick-add-label">Add Balls</h4>
+        <button balls="1" class="quick-add" >1</button>
+        <button balls="5" class="quick-add">5</button>
+        <button balls="10" class="quick-add">10</button>
+        <button balls="15" class="quick-add">15</button>
+        <button balls="20" class="quick-add">20</button>
+        <button class="infinite">Infinite Flow (off)</button>
+        <button class="clear">Clear All Balls</button>
+    </div>
+
+    <div class="gravity-settings">
+        <h3>Gravity Settings</h3>
+        <button class="gravity-buttons place-gravity-wells">Place Gravity Wells</button>
+        <button class="gravity-buttons clear-gravity-wells">Clear Gravity Wells</button>
+        <button class="gravity-buttons hide-gravs">Hide Gravity Wells</button>
+        <button class="gravity-buttons disable-gravity">Disable Gravity</button>
+    </div>
+    <div class="color-schema">
+        <h4 class="color-scheme-label">Color Scheme</h4>
+        <div>
+            <label class="color-picker-labels">Background Color: </label>
+            <input type='text' name='color' value="black" class="picker" id="background-color-picker" />
+        </div>
+        <div>
+            <label class="color-picker-labels">Ball Max Speed Color:</label>
+            <input type='text' name='color' value="black" class="picker" id="ball-max-color" />
+        </div>
+        <div>
+            <label class="color-picker-labels">Ball Min Speed Color:</label>
+            <input type='text' name='color' value="black" class="picker" id="ball-min-color" />
+        </div>
+    </div>
   </div>
 </div>
+</div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
 <script src="bindings.js"></script>
 <script src="colorBlend.js"></script>
 <script src="gravityCenter.js"></script>

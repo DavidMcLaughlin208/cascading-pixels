@@ -2,6 +2,27 @@ $(document).ready(function(){
 	reset();
 	clearInterval(gameLoop);
 	clearInterval(fadeLoop);
+	var infinite = false;
+	var backgroundPicker = $("#background-color-picker").spectrum({
+														preferredFormat: "rgb",
+														showInput: true,
+														showButtons: false,
+														color: "#000000"
+													})
+
+	var ballMaxPicker = $("#ball-max-color").spectrum({
+														preferredFormat: "hex",
+														showInput: true,
+														showButtons: false,
+														color: "#000000"
+													})
+
+	var ballMinPicker = $("#ball-min-color").spectrum({
+														preferredFormat: "hex",
+														showInput: true,
+														showButtons: false,
+														color: "#000000"
+													})
 
 	getSliderValues();
 	start();
@@ -35,16 +56,22 @@ $(document).ready(function(){
 
 	$(".infinite").on("click", function(event){
 		event.preventDefault();
+		infinite = !infinite;
 		updateSettings();
 		clearInterval(infiniteLoop);
-		var spread = $("#spread").val();
-		infiniteLoop = setInterval(addBall, spread);
+		if(infinite){
+			var spread = $("#spread").val();
+			infiniteLoop = setInterval(addBall, spread);
+			$(".infinite").html("Infinite Flow (on)")
+		} else {
+			$(".infinite").html("Infinite Flow (off)")
+		}
 	})
 
-	$(".stop-infinite").on("click", function(event){
-		event.preventDefault();
-		clearInterval(infiniteLoop);
-	})
+	// $(".stop-infinite").on("click", function(event){
+	// 	event.preventDefault();
+	// 	clearInterval(infiniteLoop);
+	// })
 
 	$("#mycanvas").on("click", function(e){
 		var rect = this.getBoundingClientRect();
@@ -59,18 +86,69 @@ $(document).ready(function(){
 	  }
 	})
 
-	$(".center-gravity").on("click", function(event){
+	$(".place-gravity-wells").on("click", function(event){
 		event.preventDefault();
-		centerGravity = true;
+		console.log("GRAVS")
 		placingGravs = !placingGravs;
-		// gravity = 0;
+		if($(this).html() === "Place Gravity Wells"){
+			$(this).html("Stop Placing Gravity Wells")
+		} else {
+			$(this).html("Place Gravity Wells")
+		}
 	})
 
-	$(".center-gravity-off").on("click", function(event){
+	$(".clear-gravity-wells").on("click", function(event){
 		event.preventDefault();
-		centerGravity = false;
+		// centerGravity = false;
 		centersOfGravity = [];
 	})
+
+	$(".hide-gravs").on("click", function(event){
+		event.preventDefault();
+		showGravs = !showGravs
+		if($(this).html() === "Hide Gravity Wells"){
+			$(this).html("Show Gravity Wells")
+		}else{
+			$(this).html("Hide Gravity Wells")
+		}
+	})
+
+	$(".disable-gravity").on("click", function(event){
+		event.preventDefault();
+		if(gravity > 0){
+			noGravity = true;
+			gravity = 0;
+			$(this).html("Disable Gravity");
+		}else{
+			noGravity = false;
+			updateSettings();
+			$(this).html("Enable Gravity");
+		}
+	})
+
+
+
+	// $(".set-background-color").on("click", function(event){
+	// 	event.preventDefault();
+	// 	console.log(backgroundPicker.val());
+	// 	var backgroundChoice = backgroundPicker.val().split("");
+	// 	backgroundChoice.splice(3,0,"a")
+	// 	backgroundChoice.splice(-1,1,", 0.1)")
+	// 	backgroundColor = backgroundChoice.join("");
+	// })
+
+	backgroundPicker.on("move.spectrum", function(e, color) {
+		backgroundColor = "rgba(" + color._r.toFixed() + ", " + color._g.toFixed() + ", " + color._b.toFixed() + ", 0.1)"
+	})
+
+	ballMinPicker.on("move.spectrum", function(e, color) {
+		minColor = "#" + color.toHex()
+	})
+
+	ballMaxPicker.on("move.spectrum", function(e, color) {
+		maxColor = "#" + color.toHex()
+	})
+
 
 })
 
