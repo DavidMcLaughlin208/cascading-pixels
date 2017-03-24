@@ -68,11 +68,6 @@ $(document).ready(function(){
 		}
 	})
 
-	// $(".stop-infinite").on("click", function(event){
-	// 	event.preventDefault();
-	// 	clearInterval(infiniteLoop);
-	// })
-
 	$("#mycanvas").on("click", function(e){
 		var rect = this.getBoundingClientRect();
     var x = e.clientX - rect.left;
@@ -125,6 +120,10 @@ $(document).ready(function(){
 		}
 	})
 
+	$(".border-toggle").change(function(){
+		borderOn = !borderOn;
+	})
+
 	backgroundPicker.on("move.spectrum", function(e, color) {
 		var backgroundChoice = color.toRgbString().split("");
 		backgroundChoice.splice(3,0,"a")
@@ -175,8 +174,3 @@ var addBall = function(){
 	updateSettings();
 	balls.push(new Ball(forceX, forceY));
 }
-
-// var addGravityBall = function(){
-// 	updateSettings();
-// 	balls.push(new Ball(2, cv.width/2, cv.height/2-200))
-// }

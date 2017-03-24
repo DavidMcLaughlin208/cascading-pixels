@@ -16,7 +16,8 @@ var placingGravs = false;
 var showGravs = true;
 var maxColor = "#ff0000";
 var minColor = "#0000ff";
-var backgroundColor = ["rgba(", "214,", "214,", "214,", "0.1",")"] //"rgba(214,214,214,0.1)";
+var backgroundColor = "rgba(214,214,214,0.1)"; // ["rgba(", "214,", "214,", "214,", "0.1",")"] 
+var borderOn = true;
 
 cv.ctx.canvas.width = cv.width;
 cv.ctx.canvas.height = cv.height;
