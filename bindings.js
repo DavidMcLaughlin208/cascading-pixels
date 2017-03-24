@@ -27,6 +27,7 @@ $(document).ready(function(){
 	getSliderValues();
 	start();
 
+
 	$(".add-ball").on("click", function(event){
 		event.preventDefault();
 		updateSettings();
@@ -68,17 +69,61 @@ $(document).ready(function(){
 		}
 	})
 
-	$("#mycanvas").on("click", function(e){
+	$("#uicanvas").on("click", function(e){
 		var rect = this.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
 		if(placingGravs === true){
-			centersOfGravity.push(new gravityCenter(x,y))
+			var strength = ($(".gravity-well-strength").val() * .05);
+			centersOfGravity.push(new gravityCenter(x,y, strength))
 		}else{
 	    startX = x;
 	    startY = y;
 	    // applyImpulse(x, y);
 	  }
+	})
+
+	$("#uicanvas").on("mouseenter", function(e){
+		console.log("mouseenter")
+		if(placingGravs){
+			var rect = this.getBoundingClientRect();
+	    var x = e.clientX - rect.left;
+	    var y = e.clientY - rect.top;
+	    var strength = ($(".gravity-well-strength").val() * .05);
+			unplacedGrav = new UnplacedGrav(x,y, strength);
+			unplacedGrav.draw()
+			drawUnplacedGrav = true;
+		}
+	})
+	$("#uicanvas").on("mousemove", function(e){
+		console.log("mousemove")
+		if(placingGravs){
+			var rect = this.getBoundingClientRect();
+	    var x = e.clientX - rect.left;
+	    var y = e.clientY - rect.top;
+	    var strength = ($(".gravity-well-strength").val() * .05);
+			unplacedGrav.x = x;
+			unplacedGrav.y = y;
+			unplacedGrav.strength = strength;
+		}		
+	})
+
+	$("#uicanvas").on("mouseleave", function(e){
+
+		drawUnplacedGrav = false;
+		unplacedGrav = null;
+	})
+
+
+
+	// Not Working Yet
+	$(window).on("scroll", function(event){
+		// event.preventDefault()
+		console.log("SCROLLING")
+		if(placingGravs){
+			var currentVal = $(".gravity-well-strength").val();
+			$(".gravity-well-strength").val(currentVal + 1)
+		}
 	})
 
 	$(".place-gravity-wells").on("click", function(event){
