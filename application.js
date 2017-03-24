@@ -37,7 +37,7 @@ var reset = function(){
 }
 
 var draw = function(){
-	drawBackground();
+	// drawBackground();
 
 	if(noGravity){
 	}else{
@@ -63,8 +63,8 @@ function drawBackground(){
 
 function fadeOut() {
 	// backgroundColor[4] = fade;
- //  cv.ctx.fillStyle = backgroundColor.join("");
- //  cv.ctx.fillRect(0, 0, cv.width, cv.height);
+  cv.ctx.fillStyle = backgroundColor//.join("");
+  cv.ctx.fillRect(0, 0, cv.width, cv.height);
 }
 
 var start = function(){

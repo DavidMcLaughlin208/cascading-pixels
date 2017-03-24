@@ -126,7 +126,11 @@ $(document).ready(function(){
 	})
 
 	backgroundPicker.on("move.spectrum", function(e, color) {
-		backgroundColor = ["rgba(", color._r.toFixed() + ", ", + color._g.toFixed() + ", ", + color._b.toFixed() + ", ", + "0.1", ")"]
+		var backgroundChoice = color.toRgbString().split("");
+		backgroundChoice.splice(3,0,"a")
+		backgroundChoice.splice(-1,1,", 0.1)")
+		backgroundColor = backgroundChoice.join("");
+		// backgroundColor = ["rgba(", color._r.toFixed() + ", ", + color._g.toFixed() + ", ", + color._b.toFixed() + ", ", + "0.1", ")"]
 	})
 
 	ballMinPicker.on("move.spectrum", function(e, color) {
@@ -147,7 +151,7 @@ var getSliderValues = function(){
 	forceYModifier = $("#forceY").val();
 	thicknessModifier = $("#thickness").val();
 
-	fade = (Math.abs($("#fade").val()) * .01).toString();
+	fade = $("#fade").val()  //(Math.abs($("#fade").val()) * .01).toString();
 	dampX = 1 - ($("#dampX").val() * .01);
 	dampY = -1 - ($("#dampY").val() * -.01);
 	variation = $("#variation").val() * .01;
