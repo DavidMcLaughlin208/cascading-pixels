@@ -14,3 +14,7 @@ Endless patterns can be formed and mesmerizing art can be created.
 
 ![image](/images/gravitymasses.png)
 
+![image](/images/lightbluenodes.png)
+
+
+

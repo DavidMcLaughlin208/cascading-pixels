@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 	getSliderValues();
 	start();
-	var infinite = false;
+	var infinite = true;
 	var spread = $("#spread").val();
 	infiniteLoop = setInterval(addBall, spread);
 
