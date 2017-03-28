@@ -10,6 +10,8 @@ Endless patterns can be formed and mesmerizing art can be created.
 
 ![image](/images/star.png)
 
+![image](/images/heatmap.png)
+
 ![image](/images/cascading.png)
 
 ![image](/images/gravitymasses.png)
