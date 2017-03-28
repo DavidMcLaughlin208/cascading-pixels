@@ -2,7 +2,7 @@ $(document).ready(function(){
 	reset();
 	clearInterval(gameLoop);
 	clearInterval(fadeLoop);
-	var infinite = false;
+
 	var backgroundPicker = $("#background-color-picker").spectrum({
 														preferredFormat: "rgb",
 														showInput: true,
@@ -26,6 +26,9 @@ $(document).ready(function(){
 
 	getSliderValues();
 	start();
+	var infinite = false;
+	var spread = $("#spread").val();
+	infiniteLoop = setInterval(addBall, spread);
 
 
 	$(".add-ball").on("click", function(event){
@@ -84,7 +87,6 @@ $(document).ready(function(){
 	})
 
 	$("#uicanvas").on("mouseenter", function(e){
-		console.log("mouseenter")
 		if(placingGravs){
 			var rect = this.getBoundingClientRect();
 	    var x = e.clientX - rect.left;
@@ -96,7 +98,6 @@ $(document).ready(function(){
 		}
 	})
 	$("#uicanvas").on("mousemove", function(e){
-		console.log("mousemove")
 		if(placingGravs){
 			var rect = this.getBoundingClientRect();
 	    var x = e.clientX - rect.left;
@@ -109,7 +110,6 @@ $(document).ready(function(){
 	})
 
 	$("#uicanvas").on("mouseleave", function(e){
-
 		drawUnplacedGrav = false;
 		unplacedGrav = null;
 	})
@@ -138,7 +138,6 @@ $(document).ready(function(){
 
 	$(".clear-gravity-wells").on("click", function(event){
 		event.preventDefault();
-		// centerGravity = false;
 		centersOfGravity = [];
 	})
 

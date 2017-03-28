@@ -51,7 +51,7 @@ var reset = function(){
 
 var draw = function(){
 	// drawBackground();
-
+	// console.log(balls.length)
 	if(noGravity){
 	}else{
 		gravity = .04;
