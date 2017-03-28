@@ -18,5 +18,9 @@ Endless patterns can be formed and mesmerizing art can be created.
 
 ![image](/images/deeprednodes.png)
 
+![image](/images/lava.png)
+
+
+
 
 
