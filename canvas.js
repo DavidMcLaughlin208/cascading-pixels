@@ -1,15 +1,18 @@
+var canvasWidth = $(document).width() * .77
+var canvasHeight = $(document).height() * .85
+
 var cv = {
   mycanvas: document.getElementById('mycanvas'),
   ctx: document.getElementById('mycanvas').getContext('2d'),
-  width: 1500,
-  height: 800
+  width: canvasWidth,
+  height: canvasHeight
 }
 
 var ui = {
   mycanvas: document.getElementById('uicanvas'),
   ctx: document.getElementById('uicanvas').getContext('2d'),
-  width: 1500,
-  height: 800
+  width: canvasWidth,
+  height: canvasHeight
 }
 
 
