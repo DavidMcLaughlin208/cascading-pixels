@@ -6,7 +6,7 @@ The aim is to provide the user with a wide array of settings and functionality t
 
 Endless patterns can be formed and mesmerizing art can be created.
 
-![image](/images/deeprednodes.png)
+![image](/images/lightbluenodes.png)
 
 ![image](/images/star.png)
 
@@ -14,7 +14,7 @@ Endless patterns can be formed and mesmerizing art can be created.
 
 ![image](/images/gravitymasses.png)
 
-![image](/images/lightbluenodes.png)
+![image](/images/deeprednodes.png)
 
 
 
