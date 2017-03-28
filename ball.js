@@ -68,28 +68,42 @@ var Ball = function(forceX, forceY){
     this.y += this.speedY;
 
     //Bounce Off Walls
-    if(this.x > cv.width){
-      this.x = cv.width;
-      this.speedX *= -1;
-    }
-    if(this.x < 0){
-      this.x = 0
-      this.speedX *= -1;
-    }
-    if(this.y >= cv.height){
-      this.y = cv.height;
-      this.speedY *= dampY;
-      this.speedX *= dampX;
-    }
-    if(this.y <= 0){
-      this.y = 0;
-      this.speedY *= dampY;
-      this.speedX *= dampX;
+    if(borderOn){
+      if(this.x > cv.width){
+        this.x = cv.width;
+        this.speedX *= -1;
+      }
+      if(this.x < 0){
+        this.x = 0
+        this.speedX *= -1;
+      }
+      if(this.y >= cv.height){
+        this.y = cv.height;
+        this.speedY *= dampY;
+        this.speedX *= dampX;
+      }
+      if(this.y <= 0){
+        this.y = 0;
+        this.speedY *= dampY;
+        this.speedX *= dampX;
+      }
+    } else {
+      if(this.x > cv.width*2 || this.x < -(cv.width*2) || this.y >= cv.height*2 || this.y < (-cv.height*2)){
+        this.die()
+      }
     }
 
     // Color based on speed
     var colorFactor = Math.min(speed, 8) / 8;
-    cv.ctx.strokeStyle = mixColor(minColor, maxColor, colorFactor);
+    var color = mixColor(minColor, maxColor, colorFactor);
+    cv.ctx.strokeStyle = color;
+
+    cv.ctx.beginPath();
+    cv.ctx.arc(this.x, this.y, thickness/2, 0, 2 * Math.PI, false);
+    cv.ctx.fillStyle = color;
+    cv.ctx.fill();
+
+
 
     // Draw path
     cv.ctx.beginPath();
@@ -97,6 +111,9 @@ var Ball = function(forceX, forceY){
     cv.ctx.lineTo(this.x, this.y);
     cv.ctx.lineWidth = thickness;
     cv.ctx.stroke();
+    cv.ctx.closePath();
+
+
     this.lastX = this.x;
     this.lastY = this.y;
   };

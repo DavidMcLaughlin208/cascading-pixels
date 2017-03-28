@@ -16,7 +16,12 @@ var placingGravs = false;
 var showGravs = true;
 var maxColor = "#ff0000";
 var minColor = "#0000ff";
-var backgroundColor = "rgba(214,214,214,0.1)";
+var backgroundColor = "rgba(214,214,214,0.1)"; // ["rgba(", "214,", "214,", "214,", "0.1",")"] 
+var borderOn = true;
+
+var	unplacedGrav;
+var	drawUnplacedGrav = false;
+
 
 cv.ctx.canvas.width = cv.width;
 cv.ctx.canvas.height = cv.height;
@@ -25,9 +30,18 @@ cv.ctx.fillStyle = 'lightgrey';
 cv.ctx.fillRect(0,0,cv.width,cv.height);
 cv.ctx.fillStyle = 'black';
 
+ui.mycanvas.width = ui.width;
+ui.mycanvas.height = ui.height;
+ui.ctx.fillStyle = 'lightgrey';
+ui.ctx.fillRect(0,0,ui.width,ui.height);
+
+
+
+
 var reset = function(){
 	cv.ctx.beginPath();
 	cv.ctx.moveTo(10,10);
+	cv.ctx.closePath();
 	if(!noGravity){gravity = .04};
 	forceX = 2;
 	forceY = 2;
@@ -36,6 +50,8 @@ var reset = function(){
 }
 
 var draw = function(){
+	// drawBackground();
+	// console.log(balls.length)
 	if(noGravity){
 	}else{
 		gravity = .04;
@@ -50,10 +66,21 @@ var draw = function(){
 			centersOfGravity[i].draw();
 		}
 	}
+	ui.ctx.clearRect(0,0,ui.width, ui.height)
+	if(drawUnplacedGrav){
+		unplacedGrav.draw()
+	}
 }
 
+// function drawBackground(){
+// 	backgroundColor[4] = fade;
+// 	cv.ctx.fillStyle = backgroundColor.join("");
+//   cv.ctx.fillRect(0, 0, cv.width, cv.height);
+// }
+
 function fadeOut() {
-  cv.ctx.fillStyle = backgroundColor;
+	// backgroundColor[4] = fade;
+  cv.ctx.fillStyle = backgroundColor//.join("");
   cv.ctx.fillRect(0, 0, cv.width, cv.height);
 }
 
@@ -65,6 +92,12 @@ var start = function(){
 
 	cv.ctx.beginPath();
 	cv.ctx.moveTo(10,10);
+	cv.ctx.closePath();
+
+	ui.mycanvas.width = ui.width;
+	ui.mycanvas.height = ui.height;
+	ui.ctx.fillStyle = "rgba(0,0,0,.1)";
+	ui.ctx.fillRect(0,0,ui.width,ui.height);
 
 	fadeLoop = setInterval(fadeOut, fade);
 	gameLoop = setInterval(draw, 1);

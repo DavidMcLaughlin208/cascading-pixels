@@ -2,7 +2,7 @@ $(document).ready(function(){
 	reset();
 	clearInterval(gameLoop);
 	clearInterval(fadeLoop);
-	var infinite = false;
+
 	var backgroundPicker = $("#background-color-picker").spectrum({
 														preferredFormat: "rgb",
 														showInput: true,
@@ -26,6 +26,10 @@ $(document).ready(function(){
 
 	getSliderValues();
 	start();
+	var infinite = false;
+	var spread = $("#spread").val();
+	infiniteLoop = setInterval(addBall, spread);
+
 
 	$(".add-ball").on("click", function(event){
 		event.preventDefault();
@@ -68,17 +72,13 @@ $(document).ready(function(){
 		}
 	})
 
-	// $(".stop-infinite").on("click", function(event){
-	// 	event.preventDefault();
-	// 	clearInterval(infiniteLoop);
-	// })
-
-	$("#mycanvas").on("click", function(e){
+	$("#uicanvas").on("click", function(e){
 		var rect = this.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
 		if(placingGravs === true){
-			centersOfGravity.push(new gravityCenter(x,y))
+			var strength = ($(".gravity-well-strength").val() * .05);
+			centersOfGravity.push(new gravityCenter(x,y, strength))
 		}else{
 	    startX = x;
 	    startY = y;
@@ -86,9 +86,48 @@ $(document).ready(function(){
 	  }
 	})
 
+	$("#uicanvas").on("mouseenter", function(e){
+		if(placingGravs){
+			var rect = this.getBoundingClientRect();
+	    var x = e.clientX - rect.left;
+	    var y = e.clientY - rect.top;
+	    var strength = ($(".gravity-well-strength").val() * .05);
+			unplacedGrav = new UnplacedGrav(x,y, strength);
+			unplacedGrav.draw()
+			drawUnplacedGrav = true;
+		}
+	})
+	$("#uicanvas").on("mousemove", function(e){
+		if(placingGravs){
+			var rect = this.getBoundingClientRect();
+	    var x = e.clientX - rect.left;
+	    var y = e.clientY - rect.top;
+	    var strength = ($(".gravity-well-strength").val() * .05);
+			unplacedGrav.x = x;
+			unplacedGrav.y = y;
+			unplacedGrav.strength = strength;
+		}		
+	})
+
+	$("#uicanvas").on("mouseleave", function(e){
+		drawUnplacedGrav = false;
+		unplacedGrav = null;
+	})
+
+
+
+	// Not Working Yet
+	$(window).on("scroll", function(event){
+		// event.preventDefault()
+		console.log("SCROLLING")
+		if(placingGravs){
+			var currentVal = $(".gravity-well-strength").val();
+			$(".gravity-well-strength").val(currentVal + 1)
+		}
+	})
+
 	$(".place-gravity-wells").on("click", function(event){
 		event.preventDefault();
-		console.log("GRAVS")
 		placingGravs = !placingGravs;
 		if($(this).html() === "Place Gravity Wells"){
 			$(this).html("Stop Placing Gravity Wells")
@@ -99,7 +138,6 @@ $(document).ready(function(){
 
 	$(".clear-gravity-wells").on("click", function(event){
 		event.preventDefault();
-		// centerGravity = false;
 		centersOfGravity = [];
 	})
 
@@ -118,27 +156,24 @@ $(document).ready(function(){
 		if(gravity > 0){
 			noGravity = true;
 			gravity = 0;
-			$(this).html("Disable Gravity");
+			$(this).html("Enable Gravity");
 		}else{
 			noGravity = false;
 			updateSettings();
-			$(this).html("Enable Gravity");
+			$(this).html("Disable Gravity");
 		}
 	})
 
-
-
-	// $(".set-background-color").on("click", function(event){
-	// 	event.preventDefault();
-	// 	console.log(backgroundPicker.val());
-	// 	var backgroundChoice = backgroundPicker.val().split("");
-	// 	backgroundChoice.splice(3,0,"a")
-	// 	backgroundChoice.splice(-1,1,", 0.1)")
-	// 	backgroundColor = backgroundChoice.join("");
-	// })
+	$(".border-toggle").change(function(){
+		borderOn = !borderOn;
+	})
 
 	backgroundPicker.on("move.spectrum", function(e, color) {
-		backgroundColor = "rgba(" + color._r.toFixed() + ", " + color._g.toFixed() + ", " + color._b.toFixed() + ", 0.1)"
+		var backgroundChoice = color.toRgbString().split("");
+		backgroundChoice.splice(3,0,"a")
+		backgroundChoice.splice(-1,1,", 0.1)")
+		backgroundColor = backgroundChoice.join("");
+		// backgroundColor = ["rgba(", color._r.toFixed() + ", ", + color._g.toFixed() + ", ", + color._b.toFixed() + ", ", + "0.1", ")"]
 	})
 
 	ballMinPicker.on("move.spectrum", function(e, color) {
@@ -159,7 +194,7 @@ var getSliderValues = function(){
 	forceYModifier = $("#forceY").val();
 	thicknessModifier = $("#thickness").val();
 
-	fade = $("#fade").val();
+	fade = $("#fade").val()  //(Math.abs($("#fade").val()) * .01).toString();
 	dampX = 1 - ($("#dampX").val() * .01);
 	dampY = -1 - ($("#dampY").val() * -.01);
 	variation = $("#variation").val() * .01;
@@ -183,8 +218,3 @@ var addBall = function(){
 	updateSettings();
 	balls.push(new Ball(forceX, forceY));
 }
-
-// var addGravityBall = function(){
-// 	updateSettings();
-// 	balls.push(new Ball(2, cv.width/2, cv.height/2-200))
-// }
