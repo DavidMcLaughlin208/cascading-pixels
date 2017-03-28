@@ -1,5 +1,5 @@
-var canvasWidth = $(document).width() * .77
-var canvasHeight = $(document).height() * .85
+var canvasWidth = $(window).width() * .77
+var canvasHeight = $(window).height() * .85
 
 var cv = {
   mycanvas: document.getElementById('mycanvas'),
