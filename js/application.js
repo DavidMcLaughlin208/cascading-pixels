@@ -19,6 +19,7 @@ var maxColor = "#ff0000";
 var minColor = "#0000ff";
 var backgroundColor = "rgba(214,214,214,0.1)"; // ["rgba(", "214,", "214,", "214,", "0.1",")"] 
 var borderOn = true;
+var lifetime = 10000;
 
 var	uiElement;
 var	drawUiElement = false;

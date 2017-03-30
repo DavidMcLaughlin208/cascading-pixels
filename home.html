@@ -30,7 +30,7 @@
     </div>
     <div>
         <label class="slider-labels">Drag</label>
-        <input type="range" name="points" id="drag" value="1" min="0" max="100"><br>
+        <input type="range" name="points" id="drag" value="0" min="0" max="100"><br>
     </div>
     <div>
         <label class="slider-labels">Fade</label>
@@ -79,8 +79,10 @@
         <h3>Place clusters</h3>
         <button class="place-clusters">Place Clusters</button>
         <div>
-            <span>Cluster Size</span>
-            <input class="cluster-size" type="number" value="5" min="1" max="10">
+            <span>Size</span>
+            <input class="cluster-size" type="range" name="cluster-size" id="cluster-size" value="5" min="1" max="10"><br>
+            <span>Density</span>
+            <input class="cluster-density" type="range" name="cluster-density" id="cluster-density" value="5" min="1" max="8">
         </div>
     </div>
 

@@ -80,7 +80,8 @@ $(document).ready(function(){
 			var strength = ($(".gravity-well-strength").val() * .05);
 			centersOfGravity.push(new gravityCenter(x,y, strength))
 		} else if(placingClusters){
-			uiElement.execute();
+			var density = 10 - parseInt($(".cluster-density").val());
+			uiElement.execute(density);
 		}else{
 	    startX = x;
 	    startY = y;
