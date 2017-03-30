@@ -239,6 +239,7 @@ var getSliderValues = function(){
 	dampX = 1 - ($("#dampX").val() * .01);
 	dampY = -1 - ($("#dampY").val() * -.01);
 	variation = $("#variation").val() * .01;
+	lifetime = parseInt($("#lifetime").val());
 
 	drag *= dragModifier/15;
 	forceX *= forceXModifier/25;
@@ -257,8 +258,18 @@ var updateSettings = function(){
 
 var addBall = function(){
 	updateSettings();
-	balls.push(new Ball(forceX, forceY));
+	var ball = new Ball(forceX, forceY)
+	balls.push(ball);
+	// setTimeout(function(){
+	// 	killBall(ball)
+	// }, lifetime)
 }
+
+// var killBall = function(ball){
+// 	if(ball){
+// 		ball.die();
+// 	}
+// }
 
 
 var clearTools = function(){

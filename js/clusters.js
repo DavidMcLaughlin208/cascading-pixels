@@ -17,7 +17,11 @@ UnplacedCluster.prototype.execute = function(density){
   var lowerBound = this.y + (this.size * 5);
   for(var i = leftBound; i < rightBound; i += density){
     for(var j = upperBound; j < lowerBound; j += density){
-      balls.push(new Ball(0,0,i,j));
+      var ball = new Ball(0,0,i,j);
+      balls.push(ball);
+      // setTimeout(function(){
+      //   killBall(ball)
+      // }, lifetime)
     }
   }
 }

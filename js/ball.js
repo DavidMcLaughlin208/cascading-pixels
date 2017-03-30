@@ -15,7 +15,7 @@ var Ball = function(forceX, forceY, x, y){
 
 
   this.draw = function(){
-    if(Math.abs(this.speedX) < .2 && Math.abs(this.y - cv.height) < 1 && Math.abs(this.speedY) < 1){
+    if(Math.abs(this.speedX) < .1 && Math.abs(this.y - cv.height) < 1 && Math.abs(this.speedY) < 1){
       this.die();
     }
 
