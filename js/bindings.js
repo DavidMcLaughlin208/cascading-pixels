@@ -185,6 +185,24 @@ $(document).ready(function(){
 	})
 
 
+	$(window).on("resize", function(){
+		var canvasWidth = $(window).width() * .77
+		var canvasHeight = $(window).height() * .85
+		ui.width = canvasWidth;
+		ui.height = canvasHeight;
+
+		cv.width = canvasWidth;
+		cv.height = canvasHeight;
+
+
+		ui.mycanvas.width = ui.width;
+		ui.mycanvas.height = ui.height;
+
+		cv.mycanvas.width = ui.width;
+		cv.mycanvas.height = ui.height;
+	})
+
+
 })
 
 var getSliderValues = function(){

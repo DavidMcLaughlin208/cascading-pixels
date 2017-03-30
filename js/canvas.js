@@ -15,5 +15,3 @@ var ui = {
   height: canvasHeight
 }
 
-
-console.log(cv.ctx == ui.ctx);
