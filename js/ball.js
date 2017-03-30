@@ -1,6 +1,6 @@
-var Ball = function(forceX, forceY){
-  this.x = startX,
-  this.y = startY,
+var Ball = function(forceX, forceY, x, y){
+  this.x = x || startX;
+  this.y = y || startY;
   this.gravity = gravity * Math.random();
   this.speedX = 0;
   this.speedY = 0;
@@ -11,6 +11,7 @@ var Ball = function(forceX, forceY){
   this.forceY = forceY + Math.random() * .05;
   this.lastX = this.x;
   this.lastY = this.y;
+  this.lifetime = lifetime;
 
 
   this.draw = function(){
@@ -98,10 +99,11 @@ var Ball = function(forceX, forceY){
     var color = mixColor(minColor, maxColor, colorFactor);
     cv.ctx.strokeStyle = color;
 
-    cv.ctx.beginPath();
-    cv.ctx.arc(this.x, this.y, thickness/2, 0, 2 * Math.PI, false);
-    cv.ctx.fillStyle = color;
-    cv.ctx.fill();
+    // Circular front
+    // cv.ctx.beginPath();
+    // cv.ctx.arc(this.x, this.y, thickness/2, 0, 2 * Math.PI, false);
+    // cv.ctx.fillStyle = color;
+    // cv.ctx.fill();
 
 
 

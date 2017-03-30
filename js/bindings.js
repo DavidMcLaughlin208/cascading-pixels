@@ -79,6 +79,8 @@ $(document).ready(function(){
 		if(placingGravs === true){
 			var strength = ($(".gravity-well-strength").val() * .05);
 			centersOfGravity.push(new gravityCenter(x,y, strength))
+		} else if(placingClusters){
+			uiElement.execute();
 		}else{
 	    startX = x;
 	    startY = y;
@@ -97,7 +99,8 @@ $(document).ready(function(){
 			drawUiElement = true;
 		} else if(placingClusters) {
 			console.log('here')
-			var size = parseInt($("cluster-size").val());
+			var size = parseInt($(".cluster-size").val());
+			console.log(size)
 			uiElement = new UnplacedCluster(x,y,size);
 			uiElement.draw();
 			drawUiElement = true;

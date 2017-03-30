@@ -101,5 +101,5 @@ var start = function(){
 	ui.ctx.fillRect(0,0,ui.width,ui.height);
 
 	fadeLoop = setInterval(fadeOut, fade);
-	gameLoop = setInterval(draw, 1);
+	gameLoop = setInterval(draw, 5);
 }
