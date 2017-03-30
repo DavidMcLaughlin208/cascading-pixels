@@ -87,31 +87,44 @@ $(document).ready(function(){
 	})
 
 	$("#uicanvas").on("mouseenter", function(e){
+		var rect = this.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
 		if(placingGravs){
-			var rect = this.getBoundingClientRect();
-	    var x = e.clientX - rect.left;
-	    var y = e.clientY - rect.top;
 	    var strength = ($(".gravity-well-strength").val() * .05);
-			unplacedGrav = new UnplacedGrav(x,y, strength);
-			unplacedGrav.draw()
-			drawUnplacedGrav = true;
+			uiElement = new UnplacedGrav(x,y, strength);
+			uiElement.draw()
+			drawUiElement = true;
+		} else if(placingClusters) {
+			console.log('here')
+			var size = parseInt($("cluster-size").val());
+			uiElement = new UnplacedCluster(x,y,size);
+			uiElement.draw();
+			drawUiElement = true;
 		}
+		console.log(uiElement)
 	})
 	$("#uicanvas").on("mousemove", function(e){
+		var rect = this.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
 		if(placingGravs){
-			var rect = this.getBoundingClientRect();
-	    var x = e.clientX - rect.left;
-	    var y = e.clientY - rect.top;
 	    var strength = ($(".gravity-well-strength").val() * .05);
-			unplacedGrav.x = x;
-			unplacedGrav.y = y;
-			unplacedGrav.strength = strength;
-		}		
+			uiElement.x = x;
+			uiElement.y = y;
+			uiElement.strength = strength;
+		} else if(placingClusters) {
+			var size = (parseInt($(".cluster-size").val()));
+			uiElement.x = x;
+			uiElement.y = y;
+			uiElement.size = size;
+		}
 	})
 
 	$("#uicanvas").on("mouseleave", function(e){
-		drawUnplacedGrav = false;
-		unplacedGrav = null;
+		ui.ctx.clearRect(0,0,ui.width, ui.height)
+		drawUiElement = false;
+		uiElement = null;
 	})
 
 
@@ -128,12 +141,8 @@ $(document).ready(function(){
 
 	$(".place-gravity-wells").on("click", function(event){
 		event.preventDefault();
-		placingGravs = !placingGravs;
-		if($(this).html() === "Place Gravity Wells"){
-			$(this).html("Stop Placing Gravity Wells")
-		} else {
-			$(this).html("Place Gravity Wells")
-		}
+		clearTools();
+		placingGravs = true;
 	})
 
 	$(".clear-gravity-wells").on("click", function(event){
@@ -194,17 +203,23 @@ $(document).ready(function(){
 		cv.width = canvasWidth;
 		cv.height = canvasHeight;
 
-
 		ui.mycanvas.width = ui.width;
 		ui.mycanvas.height = ui.height;
 
-		cv.mycanvas.width = ui.width;
-		cv.mycanvas.height = ui.height;
+		cv.mycanvas.width = cv.width;
+		cv.mycanvas.height = cv.height;
 	})
 
 	$(".gravity-well-strength").on('input propertychange paste', function() {
   	if(parseInt($(this).val()) > 10){ $(this).val(10) }  
+  	if(parseInt($(this).val()) < 1){ $(this).val(1) }  
 	});
+
+	$(".place-clusters").on("click", function(event){
+		event.preventDefault();
+		clearTools();
+		placingClusters = true;
+	})
 
 
 })
@@ -239,4 +254,10 @@ var updateSettings = function(){
 var addBall = function(){
 	updateSettings();
 	balls.push(new Ball(forceX, forceY));
+}
+
+
+var clearTools = function(){
+	placingClusters = false;
+	placingGravs = false;
 }

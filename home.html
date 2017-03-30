@@ -75,6 +75,15 @@
         <button class="clear">Clear All Balls</button>
     </div>
 
+    <div class="cluster-holder">
+        <h3>Place clusters</h3>
+        <button class="place-clusters">Place Clusters</button>
+        <div>
+            <span>Cluster Size</span>
+            <input class="cluster-size" type="number" value="5" min="1" max="10">
+        </div>
+    </div>
+
     <div class="gravity-settings">
         <h3>Gravity Settings</h3>
         <button class="gravity-buttons place-gravity-wells">Place Gravity Wells</button><input class="gravity-well-strength" type="number" value="5" min="1" max="10">
@@ -107,6 +116,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
 <script src="js/bindings.js"></script>
+<script src="js/clusters.js"></script>
 <script src="js/colorBlend.js"></script>
 <script src="js/gravityCenter.js"></script>
 <script src="js/ball.js"></script>

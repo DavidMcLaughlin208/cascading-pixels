@@ -107,7 +107,7 @@ canvas {
   margin: 10px auto;
 }
 
-.clear, .infinite{
+.clear, .infinite, .place-clusters{
   width: 80%;
   text-align: center;
   border-radius:none;
@@ -168,12 +168,18 @@ canvas {
   height: 25px;
 }
 
-.gravity-buttons:focus{
+.gravity-buttons:focus, .place-clusters:focus{
   outline:none;
 }
 
 .instructions{
   margin-top: 20px;
+}
+
+.cluster-holder div{
+  margin: auto;
+  width: 100%;
+  text-align: center;
 }
 
 

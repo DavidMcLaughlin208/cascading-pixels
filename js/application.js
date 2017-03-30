@@ -14,13 +14,14 @@ var variation = 0.5;
 var centersOfGravity = [];
 var placingGravs = false;
 var showGravs = true;
+var placingClusters = false;
 var maxColor = "#ff0000";
 var minColor = "#0000ff";
 var backgroundColor = "rgba(214,214,214,0.1)"; // ["rgba(", "214,", "214,", "214,", "0.1",")"] 
 var borderOn = true;
 
-var	unplacedGrav;
-var	drawUnplacedGrav = false;
+var	uiElement;
+var	drawUiElement = false;
 
 
 cv.ctx.canvas.width = cv.width;
@@ -66,9 +67,9 @@ var draw = function(){
 			centersOfGravity[i].draw();
 		}
 	}
-	ui.ctx.clearRect(0,0,ui.width, ui.height)
-	if(drawUnplacedGrav){
-		unplacedGrav.draw()
+	if(drawUiElement){
+		ui.ctx.clearRect(0,0,ui.width, ui.height)
+		uiElement.draw()
 	}
 }
 
@@ -96,7 +97,7 @@ var start = function(){
 
 	ui.mycanvas.width = ui.width;
 	ui.mycanvas.height = ui.height;
-	ui.ctx.fillStyle = "rgba(0,0,0,.1)";
+	ui.ctx.fillStyle = "rgba(0,0,0,0)";
 	ui.ctx.fillRect(0,0,ui.width,ui.height);
 
 	fadeLoop = setInterval(fadeOut, fade);
