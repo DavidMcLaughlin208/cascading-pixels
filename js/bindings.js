@@ -202,6 +202,10 @@ $(document).ready(function(){
 		cv.mycanvas.height = ui.height;
 	})
 
+	$(".gravity-well-strength").on('input propertychange paste', function() {
+  	if(parseInt($(this).val()) > 10){ $(this).val(10) }  
+	});
+
 
 })
 
