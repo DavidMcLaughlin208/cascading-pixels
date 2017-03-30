@@ -1,4 +1,4 @@
-var Ball = function(forceX, forceY, x, y){
+var MoveableGravityCenter = function(x,y,strength){
   this.x = x || startX;
   this.y = y || startY;
   this.gravity = gravity * Math.random();
@@ -8,14 +8,10 @@ var Ball = function(forceX, forceY, x, y){
   this.forceY = forceY + Math.random() * .05;
   this.lastX = this.x;
   this.lastY = this.y;
-  // this.lifetime = lifetime;
+  this.strength = strength;
 }
 
-Ball.prototype.draw = function(){
-  if(Math.abs(this.speedX) < .1 && Math.abs(this.y - cv.height) < 1 && Math.abs(this.speedY) < 1){
-    this.die();
-  }
-
+MoveableGravityCenter.prototype.draw = function(){
   var speed = Math.sqrt(this.speedX**2 + this.speedY**2);
 
   this.gravity = gravity * Math.random();
@@ -31,24 +27,26 @@ Ball.prototype.draw = function(){
   }
 
   //Reduce horizontal speed
-  if(this.speedX > 0){
-    this.speedX -= drag;
-  } else {
-    this.speedX += drag;
-  }
+  // if(this.speedX > 0){
+  //   this.speedX -= drag;
+  // } else {
+  //   this.speedX += drag;
+  // }
 
   //Apply Gravity
   for(var i in centersOfGravity){
-    var x = Math.floor(centersOfGravity[i].x) - this.x
-    var y = Math.floor(centersOfGravity[i].y) - this.y
-    var distance = Math.max(Math.floor(Math.sqrt( x*x + y*y )), 1);
-    if(distance < 1000 * centersOfGravity[i].strength){
-      if(distance < 50 * centersOfGravity[i].strength && centersOfGravity[i].absorb){
-        centersOfGravity[i].strength += .001;
-        this.die();
-      }else{
-        this.speedX += x/(distance*10) * centersOfGravity[i].strength
-        this.speedY += y/(distance*10) * centersOfGravity[i].strength
+    if(centersOfGravity[i] !== this){
+      var x = Math.floor(centersOfGravity[i].x) - this.x
+      var y = Math.floor(centersOfGravity[i].y) - this.y
+      var distance = Math.max(Math.floor(Math.sqrt( x*x + y*y )), 1);
+      if(distance < 1000 * centersOfGravity[i].strength){
+        if(distance < 50 * centersOfGravity[i].strength && centersOfGravity[i].absorb){
+          centersOfGravity[i].strength += .001;
+          this.die();
+        }else{
+          this.speedX += x/(distance*10) * centersOfGravity[i].strength
+          this.speedY += y/(distance*10) * centersOfGravity[i].strength
+        }
       }
     }
   }
@@ -90,28 +88,24 @@ Ball.prototype.draw = function(){
   var color = mixColor(minColor, maxColor, colorFactor);
   cv.ctx.strokeStyle = color;
 
-  // Circular front - Looks good but is resource intensive
-  // cv.ctx.beginPath();
-  // cv.ctx.arc(this.x, this.y, thickness/2, 0, 2 * Math.PI, false);
-  // cv.ctx.fillStyle = color;
-  // cv.ctx.fill();
-
-
-
-  // Draw path
-  cv.ctx.beginPath();
-  cv.ctx.moveTo(this.lastX, this.lastY);
-  cv.ctx.lineTo(this.x, this.y);
-  cv.ctx.lineWidth = thickness;
-  cv.ctx.stroke();
-  cv.ctx.closePath();
+  gc.ctx.beginPath();
+  gc.ctx.arc(this.x, this.y, 1000*Math.abs(this.strength), 0, 2 * Math.PI, false);
+  gc.ctx.lineWidth = "1"
+  gc.ctx.strokeStyle = this.color;
+  gc.ctx.stroke();
+  gc.ctx.closePath();
+  
+  gc.ctx.beginPath();
+  gc.ctx.arc(this.x, this.y, 50*Math.abs(this.strength), 0, 2 * Math.PI, false);
+  gc.ctx.fillStyle = this.color;
+  gc.ctx.fill();
+  gc.ctx.closePath();
 
 
   this.lastX = this.x;
   this.lastY = this.y;
-};
-
-Ball.prototype.die = function(){
-  balls.splice(balls.indexOf(this), 1);
 }
 
+MoveableGravityCenter.prototype.die = function(){
+  centersOfGravity.splice(centersOfGravity.indexOf(this), 1);
+}

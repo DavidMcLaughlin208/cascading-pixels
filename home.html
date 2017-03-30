@@ -11,6 +11,7 @@
 <div class="content">
   <div class="canvas-holder">
     <canvas id="mycanvas"></canvas>
+    <canvas id="gravitycanvas"></canvas>
     <canvas id="uicanvas"></canvas>
   </div>
   <div class="settings-holder">
@@ -21,16 +22,16 @@
         <input type="range" name="points" id="gravity" value="50" min="1" max="100"><br>
     </div>
     <div>
-        <label class="slider-labels">Horizontal Force</label>
+        <label class="slider-labels">Horiz Force</label>
         <input type="range" name="points" id="forceX" value="10" min="-100" max="100"><br>
     </div>
     <div>
-        <label class="slider-labels">Vertical Force</label>
+        <label class="slider-labels">Vert Force</label>
         <input type="range" name="points" id="forceY" value="0" min="-100" max="100"><br>
     </div>
     <div>
         <label class="slider-labels">Drag</label>
-        <input type="range" name="points" id="drag" value="1" min="0" max="100"><br>
+        <input type="range" name="points" id="drag" value="0" min="0" max="100"><br>
     </div>
     <div>
         <label class="slider-labels">Fade</label>
@@ -41,19 +42,23 @@
         <input type="range" name="points" id="thickness" value="2" min="1" max="20"><br>
     </div>
     <div>
-        <label class="slider-labels">Horizontal Damping</label>
+        <label class="slider-labels">Horiz Damping</label>
         <input type="range" name="points" id="dampX" value="1" min="10" max="100"><br>
     </div>
     <div>
-        <label class="slider-labels">Vertical Damping</label>
+        <label class="slider-labels">Vert Damping</label>
         <input type="range" name="points" id="dampY" value="1" min="25" max="100"><br>
     </div>
+<!--     <div>
+        <label class="slider-labels">Lifetime</label>
+        <input type="range" name="lifetime" id="lifetime" value="100000" min="1000" max="100000"><br>
+    </div> -->
     <div>
         <label class="slider-labels">Spread</label>
         <input type="range" name="points" id="spread" value="50" min="1" max="200"><br>
     </div>
     <div>
-        <label class="slider-labels">Border Walls</label>
+        <label class="slider-labels">Borders</label>
         <input type="checkbox" checked="checked" class="border-toggle"><br>
     </div>
 
@@ -66,18 +71,33 @@
     <button class="update-settings">Update Settings</button>
     <div class="quick-add-holder">
         <h4 class="quick-add-label">Add Balls</h4>
-        <button balls="1" class="quick-add" >1</button>
+        <!-- <button balls="1" class="quick-add" >1</button>
         <button balls="5" class="quick-add">5</button>
         <button balls="10" class="quick-add">10</button>
         <button balls="15" class="quick-add">15</button>
-        <button balls="20" class="quick-add">20</button>
+        <button balls="20" class="quick-add">20</button> -->
         <button class="infinite">Infinite Flow (on)</button>
         <button class="clear">Clear All Balls</button>
     </div>
 
+    <div class="cluster-holder">
+        <h3>Place clusters</h3>
+        <button class="place-clusters">Place Clusters</button>
+        <div>
+            <span>Size</span>
+            <input class="cluster-size" type="range" name="cluster-size" id="cluster-size" value="5" min="1" max="10"><br>
+            <span>Density</span>
+            <input class="cluster-density" type="range" name="cluster-density" id="cluster-density" value="5" min="1" max="8">
+        </div>
+    </div>
+
     <div class="gravity-settings">
         <h3>Gravity Settings</h3>
-        <button class="gravity-buttons place-gravity-wells">Place Gravity Wells</button><input class="gravity-well-strength" type="number" value="5" min="1" max="10">
+        <button class="gravity-buttons place-gravity-wells">Place Gravity Wells</button>
+        <div>
+        <span>Size</span><input class="gravity-well-strength" type="range" value="5" min="1" max="10"></div>
+        <div><span>Static?</span><input type="checkbox" checked="checked" class="gravity-well-static"></div><br>
+       <!--  <div><span>Absorb Mass?</span><input type="checkbox" class="gravity-well-absorb"></div><br> -->
         <button class="gravity-buttons clear-gravity-wells">Clear Gravity Wells</button>
         <button class="gravity-buttons hide-gravs">Hide Gravity Wells</button>
         <button class="gravity-buttons disable-gravity">Disable Gravity</button>
@@ -101,14 +121,16 @@
 </div>
     <div class="instructions">
         <p>This is an interactive physics simulation using the JavaScript canvas. Feel free to adjust the controls on the right side of the screen for dynamic changes. Click buttons and make things happen.</p>
-        <p>View the source code on <a href="https://github.com/DavidMcLaughlin208/canvas-practice">Github</a></p>
+        <p>View the source code and image gallery on <a href="https://github.com/DavidMcLaughlin208/canvas-practice">Github</a></p>
     </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
 <script src="js/bindings.js"></script>
+<script src="js/clusters.js"></script>
 <script src="js/colorBlend.js"></script>
 <script src="js/gravityCenter.js"></script>
+<script src="js/moveableGravityCenter.js"></script>
 <script src="js/ball.js"></script>
 <script src="js/canvas.js"></script>
 <script src="js/application.js"></script>

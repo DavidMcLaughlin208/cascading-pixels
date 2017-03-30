@@ -25,6 +25,10 @@ canvas {
   display: block;
 }
 
+.sliders div{
+  white-space: nowrap;
+}
+
 .settings-holder{
   display: inline-block;
   width: 15%;
@@ -32,21 +36,22 @@ canvas {
 }
 
 .buttons-holder{
-  display:inline-block;
-  width: 300px;
+  display: inline-block;
+  width: 100%;
   vertical-align: top;
   margin-top: 20px;
 }
 
 .slider-labels{
   display: inline-block;
-  width: 135px;
+  width: 40%;
+  font-size: 12px;
   text-align: right;
 }
 
-.ui-slider-handle, .ui-slider{
+/*.ui-slider-handle, .ui-slider{
   height: 10px;
-}
+}*/
 
 
 .update-settings{
@@ -56,7 +61,7 @@ canvas {
   border-radius: none;
   color: white;
   background-color: black;
-  border:none;
+  border: none;
   margin: 5px;
   border: 2px solid transparent;
 }
@@ -74,7 +79,7 @@ canvas {
 }
 
 .quick-add{
-  width: 200px;
+  width: 80%;
   text-align: center;
   border-radius:none;
   border: none;
@@ -92,6 +97,7 @@ canvas {
   display: block;
   margin: auto;
   text-align: center;
+  width: 100%;
 }
 
 .quick-add-label{
@@ -101,8 +107,8 @@ canvas {
   margin: 10px auto;
 }
 
-.clear, .infinite{
-  width: 200px;
+.clear, .infinite, .place-clusters{
+  width: 80%;
   text-align: center;
   border-radius:none;
   border: none;
@@ -149,10 +155,11 @@ canvas {
 .gravity-settings{
   margin: auto;
   text-align: center;
+  width: 100%;
 }
 
 .gravity-buttons{
-  width: 200px;
+  width: 80%;
   text-align: center;
   border-radius:none;
   border: none;
@@ -161,12 +168,22 @@ canvas {
   height: 25px;
 }
 
-.gravity-buttons:focus{
+.gravity-buttons:focus, .place-clusters:focus{
   outline:none;
 }
 
 .instructions{
   margin-top: 20px;
+}
+
+.cluster-holder div{
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
+.cluster-holder{
+  text-align: center;
 }
 
 

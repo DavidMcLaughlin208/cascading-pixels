@@ -14,13 +14,14 @@ var variation = 0.5;
 var centersOfGravity = [];
 var placingGravs = false;
 var showGravs = true;
+var placingClusters = false;
 var maxColor = "#ff0000";
 var minColor = "#0000ff";
 var backgroundColor = "rgba(214,214,214,0.1)"; // ["rgba(", "214,", "214,", "214,", "0.1",")"] 
 var borderOn = true;
-
-var	unplacedGrav;
-var	drawUnplacedGrav = false;
+var lifetime;
+var	uiElement;
+var	drawUiElement = false;
 
 
 cv.ctx.canvas.width = cv.width;
@@ -35,7 +36,8 @@ ui.mycanvas.height = ui.height;
 ui.ctx.fillStyle = 'lightgrey';
 ui.ctx.fillRect(0,0,ui.width,ui.height);
 
-
+gc.mycanvas.width = gc.width;
+gc.mycanvas.height = gc.height;
 
 
 var reset = function(){
@@ -61,14 +63,17 @@ var draw = function(){
 	for(var i in balls){
 		balls[i].draw();
 	}
+
+	gc.ctx.clearRect(0, 0, gc.width, gc.height)
+
 	if(showGravs){
 		for(var i in centersOfGravity){
 			centersOfGravity[i].draw();
 		}
 	}
-	ui.ctx.clearRect(0,0,ui.width, ui.height)
-	if(drawUnplacedGrav){
-		unplacedGrav.draw()
+	if(drawUiElement){
+		ui.ctx.clearRect(0,0,ui.width, ui.height)
+		uiElement.draw()
 	}
 }
 
@@ -96,7 +101,7 @@ var start = function(){
 
 	ui.mycanvas.width = ui.width;
 	ui.mycanvas.height = ui.height;
-	ui.ctx.fillStyle = "rgba(0,0,0,.1)";
+	ui.ctx.fillStyle = "rgba(0,0,0,0)";
 	ui.ctx.fillRect(0,0,ui.width,ui.height);
 
 	fadeLoop = setInterval(fadeOut, fade);
