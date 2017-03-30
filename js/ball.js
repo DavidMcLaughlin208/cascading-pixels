@@ -4,14 +4,11 @@ var Ball = function(forceX, forceY, x, y){
   this.gravity = gravity * Math.random();
   this.speedX = 0;
   this.speedY = 0;
-  this.impulseX = 0;
-  this.impulseY = 0;
-  // this.drag = 0;
   this.forceX = forceX + Math.random() * .05;
   this.forceY = forceY + Math.random() * .05;
   this.lastX = this.x;
   this.lastY = this.y;
-  this.lifetime = lifetime;
+  // this.lifetime = lifetime;
 
 
   this.draw = function(){
@@ -33,17 +30,6 @@ var Ball = function(forceX, forceY, x, y){
       this.forceY = 0;
     }
 
-    //Mouse Click Impulse
-    if(this.impulseX != 0){
-      this.speedX += this.impulseX;
-      this.impulseX = 0
-    }
-
-    if(this.impulseY != 0){
-      this.speedY += this.impulseY;
-      this.impulseY = 0
-    }
-
     //Reduce horizontal speed
     if(this.speedX > 0){
       this.speedX -= drag;
@@ -57,8 +43,13 @@ var Ball = function(forceX, forceY, x, y){
       var y = Math.floor(centersOfGravity[i].y) - this.y
       var distance = Math.max(Math.floor(Math.sqrt( x*x + y*y )), 1);
       if(distance < 1000 * centersOfGravity[i].strength){
-        this.speedX += x/(distance*10) * centersOfGravity[i].strength
-        this.speedY += y/(distance*10) * centersOfGravity[i].strength
+        if(distance < 50 * centersOfGravity[i].strength && centersOfGravity[i].absorb){
+          centersOfGravity[i].strength += .005;
+          this.die();
+        }else{
+          this.speedX += x/(distance*10) * centersOfGravity[i].strength
+          this.speedY += y/(distance*10) * centersOfGravity[i].strength
+        }
       }
     }
     this.speedY += this.gravity;

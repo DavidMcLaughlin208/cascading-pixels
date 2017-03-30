@@ -78,7 +78,8 @@ $(document).ready(function(){
     var y = e.clientY - rect.top;
 		if(placingGravs === true){
 			var strength = ($(".gravity-well-strength").val() * .05);
-			centersOfGravity.push(new gravityCenter(x,y, strength))
+			var absorb = $(".gravity-well-absorb").is(":checked");
+			centersOfGravity.push(new gravityCenter(x,y, strength, absorb))
 		} else if(placingClusters){
 			var density = 10 - parseInt($(".cluster-density").val());
 			uiElement.execute(density);
