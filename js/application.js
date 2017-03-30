@@ -36,7 +36,8 @@ ui.mycanvas.height = ui.height;
 ui.ctx.fillStyle = 'lightgrey';
 ui.ctx.fillRect(0,0,ui.width,ui.height);
 
-
+gc.mycanvas.width = gc.width;
+gc.mycanvas.height = gc.height;
 
 
 var reset = function(){
@@ -62,6 +63,9 @@ var draw = function(){
 	for(var i in balls){
 		balls[i].draw();
 	}
+
+	gc.ctx.clearRect(0, 0, gc.width, gc.height)
+
 	if(showGravs){
 		for(var i in centersOfGravity){
 			centersOfGravity[i].draw();

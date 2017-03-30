@@ -7,25 +7,19 @@ var gravityCenter = function(x,y, strength, absorb){
 }
 
 gravityCenter.prototype.draw = function(){
-  cv.ctx.beginPath();
-  cv.ctx.arc(this.x, this.y, 1000*Math.abs(this.strength), 0, 2 * Math.PI, false);
-  cv.ctx.lineWidth = "1"
-  cv.ctx.strokeStyle = this.color;
-  cv.ctx.stroke();
-  cv.ctx.closePath();
-
-  cv.ctx.beginPath();
-  cv.ctx.arc(this.x, this.y, 50*Math.abs(this.strength), 0, 2 * Math.PI, false);
-  cv.ctx.fillStyle = this.color;
-  cv.ctx.fill();
-  cv.ctx.closePath();
+  gc.ctx.beginPath();
+  gc.ctx.arc(this.x, this.y, 1000*Math.abs(this.strength), 0, 2 * Math.PI, false);
+  gc.ctx.lineWidth = "1"
+  gc.ctx.strokeStyle = this.color;
+  gc.ctx.stroke();
+  gc.ctx.closePath();
+  
+  gc.ctx.beginPath();
+  gc.ctx.arc(this.x, this.y, 50*Math.abs(this.strength), 0, 2 * Math.PI, false);
+  gc.ctx.fillStyle = this.color;
+  gc.ctx.fill();
+  gc.ctx.closePath();
 }
-
-
-var moveableGravityCenter = function(x,y,strength){
-
-}
-
 
 var UnplacedGrav = function(x,y,strength){
   this.x = x,
