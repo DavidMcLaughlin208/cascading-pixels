@@ -1,7 +1,9 @@
 var gravityCenter = function(x,y, strength){
   this.x = x || cv.width/2;
   this.y = y || cv.height/2;
-  this.strength = strength || Math.max(Math.random() * 0.5, .15);
+  console.log(strength)
+  this.strength = Math.min(strength, 0.5)
+  console.log(this.strength)
   this.color = 'black' //gravityColors();
 
 }
@@ -45,10 +47,9 @@ var moveableGravityCenter = function(x,y,strength){
 var UnplacedGrav = function(x,y,strength){
   this.x = x,
   this.y = y;
-  this.strength = strength;
+  this.strength = Math.min(strength, 0.5);
   this.lastX = x;
   this.lastY = y;
-  this.lastStregnth = strength;
 }
 
 UnplacedGrav.prototype.draw = function(){
