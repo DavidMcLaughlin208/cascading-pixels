@@ -91,6 +91,8 @@ $(document).ready(function(){
 	    startX = x;
 	    startY = y;
 	    // applyImpulse(x, y);
+	  }else if(placingObstacles){
+
 	  }
 	})
 
@@ -272,7 +274,7 @@ var getSliderValues = function(){
 var updateSettings = function(){
 	clearInterval(fadeLoop);
 	reset();
-	getSliderValues();
+	// getSliderValues();
 	fadeLoop = setInterval(fadeOut, fade);
 }
 
@@ -280,16 +282,8 @@ var addBall = function(){
 	updateSettings();
 	var ball = new Ball(forceX, forceY)
 	balls.push(ball);
-	// setTimeout(function(){
-	// 	killBall(ball)
-	// }, lifetime)
 }
 
-// var killBall = function(ball){
-// 	if(ball){
-// 		ball.die();
-// 	}
-// }
 
 
 var clearTools = function(){
