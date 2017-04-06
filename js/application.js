@@ -15,6 +15,7 @@ var centersOfGravity = [];
 var placingGravs = false;
 var showGravs = true;
 var placingClusters = false;
+placingSpawn = true;
 var maxColor = "#ff0000";
 var minColor = "#0000ff";
 var backgroundColor = "rgba(214,214,214,0.1)"; // ["rgba(", "214,", "214,", "214,", "0.1",")"] 

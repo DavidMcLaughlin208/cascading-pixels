@@ -87,7 +87,7 @@ $(document).ready(function(){
 		} else if(placingClusters){
 			var density = 10 - parseInt($(".cluster-density").val());
 			uiElement.execute(density);
-		}else{
+		}else if(placingSpawn){
 	    startX = x;
 	    startY = y;
 	    // applyImpulse(x, y);
@@ -148,10 +148,13 @@ $(document).ready(function(){
 		}
 	})
 
-	$(".place-gravity-wells").on("click", function(event){
+	$("#gravity-settings").on("click", function(event){
 		event.preventDefault();
 		clearTools();
+		hideAllSettings();
+		$(".gravity-settings").addClass("visible")
 		placingGravs = true;
+
 	})
 
 	$(".clear-gravity-wells").on("click", function(event){
@@ -169,17 +172,19 @@ $(document).ready(function(){
 		}
 	})
 
-	$(".disable-gravity").on("click", function(event){
+	$(".disable-gravity").on("change", function(event){
 		event.preventDefault();
-		if(gravity > 0){
-			noGravity = true;
-			gravity = 0;
-			$(this).html("Enable Gravity");
-		}else{
-			noGravity = false;
-			updateSettings();
-			$(this).html("Disable Gravity");
-		}
+		gravity = 0;
+		noGravity = !noGravity;
+		// if(gravity > 0){
+		// 	noGravity = true;
+		// 	gravity = 0;
+		// 	$(this).html("Enable Gravity");
+		// }else{
+		// 	noGravity = false;
+		// 	updateSettings();
+		// 	$(this).html("Disable Gravity");
+		// }
 	})
 
 	$(".border-toggle").change(function(){
@@ -207,15 +212,37 @@ $(document).ready(function(){
 		resizeCanvas();
 	})
 
-	$(".gravity-well-strength").on('input propertychange paste', function() {
-  	if(parseInt($(this).val()) > 10){ $(this).val(10) }  
-  	if(parseInt($(this).val()) < 1 ){ $(this).val(1) }  
-	});
+	// $(".gravity-well-strength").on('input propertychange paste', function() {
+ //  	if(parseInt($(this).val()) > 10){ $(this).val(10) }  
+ //  	if(parseInt($(this).val()) < 1 ){ $(this).val(1) }  
+	// });
 
-	$(".place-clusters").on("click", function(event){
+	$("#cluster-holder").on("click", function(event){
 		event.preventDefault();
 		clearTools();
+		hideAllSettings();
+		$(".cluster-holder").addClass("visible")
 		placingClusters = true;
+	})
+
+	$(".tool").on("click", function(){
+		$(".tool").removeClass("active-tool")
+		$(this).addClass("active-tool")
+	})
+
+	$("#spawn-settings").on("click", function(event){
+		event.preventDefault();
+		clearTools();
+		hideAllSettings();
+		$(".spawn-settings").addClass("visible")
+		placingSpawn = true;
+	})
+
+	$("#color-schema").on("click", function(){
+		event.preventDefault();
+		clearTools();
+		hideAllSettings();
+		$(".color-schema").addClass("visible")
 	})
 
 
@@ -266,6 +293,11 @@ var addBall = function(){
 
 
 var clearTools = function(){
+	placingSpawn = false;
 	placingClusters = false;
 	placingGravs = false;
+}
+
+var hideAllSettings = function(){
+	$(".settings").removeClass("visible")
 }
