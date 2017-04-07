@@ -247,6 +247,12 @@ $(document).ready(function(){
 		$(".color-schema").addClass("visible")
 	})
 
+	$(".preset-launch").on("click", function(){
+		clearCanvas();
+		var preset = $(".preset-select").val();
+		console.log(preset)
+	})
+
 
 })
 
