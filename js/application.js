@@ -46,13 +46,13 @@ gc.mycanvas.width = gc.width;
 gc.mycanvas.height = gc.height;
 
 
-var reset = function(){
-	cv.ctx.beginPath();
-	cv.ctx.moveTo(10,10);
-	cv.ctx.closePath();
-	if(!noGravity){gravity = .04};
-	thickness = 1;
-}
+// var reset = function(){
+// 	cv.ctx.beginPath();
+// 	cv.ctx.moveTo(10,10);
+// 	cv.ctx.closePath();
+// 	if(!noGravity){gravity = .04};
+// 	thickness = 1;
+// }
 
 var draw = function(){
 	// drawBackground();
