@@ -83,21 +83,16 @@ MoveableGravityCenter.prototype.draw = function(){
     }
   }
 
-  // Color based on speed
-  var colorFactor = Math.min(speed, 8) / 8;
-  var color = mixColor(minColor, maxColor, colorFactor);
-  cv.ctx.strokeStyle = color;
-
   gc.ctx.beginPath();
   gc.ctx.arc(this.x, this.y, 1000*Math.abs(this.strength), 0, 2 * Math.PI, false);
   gc.ctx.lineWidth = "1"
-  gc.ctx.strokeStyle = this.color;
+  gc.ctx.strokeStyle = 'black';
   gc.ctx.stroke();
   gc.ctx.closePath();
   
   gc.ctx.beginPath();
   gc.ctx.arc(this.x, this.y, 50*Math.abs(this.strength), 0, 2 * Math.PI, false);
-  gc.ctx.fillStyle = this.color;
+  gc.ctx.fillStyle = 'black';
   gc.ctx.fill();
   gc.ctx.closePath();
 

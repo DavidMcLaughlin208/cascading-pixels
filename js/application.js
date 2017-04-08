@@ -2,6 +2,8 @@ var gravity;
 var gameLoop;
 var fadeLoop;
 var fade;
+var spread;
+var infinite;
 var balls = [];
 var infiniteLoop;
 var noGravity = false;
@@ -24,6 +26,8 @@ var borderOn = true;
 var lifetime;
 var	uiElement;
 var	drawUiElement = false;
+var forceX = 2;
+var forceY = 2;
 
 
 cv.ctx.canvas.width = cv.width;
@@ -47,17 +51,14 @@ var reset = function(){
 	cv.ctx.moveTo(10,10);
 	cv.ctx.closePath();
 	if(!noGravity){gravity = .04};
-	forceX = 2;
-	forceY = 2;
-	drag = .001;
 	thickness = 1;
 }
 
 var draw = function(){
 	// drawBackground();
 	// console.log(balls.length)
-	reset();
-	getSliderValues();
+	// reset();
+	// getSliderValues();
 
 	if(noGravity){
 	}else{

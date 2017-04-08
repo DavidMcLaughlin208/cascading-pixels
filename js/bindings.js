@@ -26,8 +26,8 @@ $(document).ready(function(){
 
 	getSliderValues();
 	start();
-	var infinite = true;
-	var spread = $("#spread").val();
+	infinite = true;
+	spread = $("#spread").val();
 	infiniteLoop = setInterval(addBall, spread);
 
 
@@ -106,14 +106,11 @@ $(document).ready(function(){
 			uiElement.draw()
 			drawUiElement = true;
 		} else if(placingClusters) {
-			console.log('here')
 			var size = parseInt($(".cluster-size").val());
-			console.log(size)
 			uiElement = new UnplacedCluster(x,y,size);
 			uiElement.draw();
 			drawUiElement = true;
 		}
-		console.log(uiElement)
 	})
 	$("#uicanvas").on("mousemove", function(e){
 		var rect = this.getBoundingClientRect();
@@ -253,6 +250,18 @@ $(document).ready(function(){
 		console.log(preset)
 	})
 
+	$("input[type=range]").on("change", function(){
+		updateSettings();
+	})
+
+	$("#spread").on("change", function(){
+		updateSettings();
+		if(infinite){
+			clearInterval(infiniteLoop);
+			infiniteLoop = setInterval(addBall, spread);
+		}
+	})
+
 
 })
 
@@ -262,30 +271,31 @@ var getSliderValues = function(){
 	forceXModifier = $("#forceX").val();
 	forceYModifier = $("#forceY").val();
 	thicknessModifier = $("#thickness").val();
+	spread = $("#spread").val();
+
 
 	fade = $("#fade").val()  //(Math.abs($("#fade").val()) * .01).toString();
 	dampX = 1 - ($("#dampX").val() * .01);
 	dampY = -1 - ($("#dampY").val() * -.01);
 	variation = $("#variation").val() * .01;
 	lifetime = parseInt($("#lifetime").val());
+	forceX = forceXModifier/12.5;
+	forceY = forceYModifier/12.5;
+	drag = dragModifier/15 * .001;
+	thickness = thicknessModifier;
 
-	drag *= dragModifier/15;
-	forceX *= forceXModifier/25;
-	forceY *= forceYModifier/25;
-	gravity *= gravityModifier/25;
-	thickness *= thicknessModifier;
-
+	gravity = gravityModifier/25 * 0.04;
 }
 
 var updateSettings = function(){
 	clearInterval(fadeLoop);
-	reset();
-	// getSliderValues();
+	// reset();
+	getSliderValues();
 	fadeLoop = setInterval(fadeOut, fade);
 }
 
 var addBall = function(){
-	updateSettings();
+	// updateSettings();
 	var ball = new Ball(forceX, forceY)
 	balls.push(ball);
 }

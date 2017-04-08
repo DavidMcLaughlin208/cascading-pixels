@@ -6,6 +6,7 @@ var clearCanvas = function(){
   $("#forceY").val(0);
   $("#thickness").val(2);
   $("#fade").val(5)
+  $("#spread").val(50)
   $(".border-toggle").prop("checked", true);
   $(".disable-gravity").prop("checked", true)
   
@@ -27,4 +28,10 @@ var clearCanvas = function(){
   //Fade interval
   clearInterval(fadeLoop);
   fadeLoop = setInterval(fadeOut, 5);
+
+  getSliderValues();
+  if(infinite){
+    clearInterval(infiniteLoop);
+    infiniteLoop = setInterval(addBall, spread)
+  }
 }
