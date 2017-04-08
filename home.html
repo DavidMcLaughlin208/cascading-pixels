@@ -35,17 +35,17 @@
     </div>
     <div>
         <label class="slider-labels">Fade</label>
-        <input type="range" name="points" id="fade" value="5" min="1" max="200"><br>
+        <input type="range" name="points" id="fade" value="5" min="1" max="500"><br>
     </div>
     <div>
         <label class="slider-labels">Thickness</label>
         <input type="range" name="points" id="thickness" value="2" min="1" max="20"><br>
     </div>
-    <div>
+    <div class="settings">
         <label class="slider-labels">Horiz Damping</label>
         <input type="range" name="points" id="dampX" value="1" min="10" max="100"><br>
     </div>
-    <div>
+    <div class="settings">
         <label class="slider-labels">Vert Damping</label>
         <input type="range" name="points" id="dampY" value="1" min="25" max="100"><br>
     </div>
@@ -61,14 +61,25 @@
         <label class="slider-labels">Borders</label>
         <input type="checkbox" checked="checked" class="border-toggle"><br>
     </div>
+    <div>
+        <label class="slider-labels">Gravity</label>
+        <input type="checkbox" checked="checked" class="disable-gravity"><br>
+    </div>
 
     <!-- <label>Variation</label>
     <input type="range" name="points" id="variation" value="50" min="0" max="100"><br>-->
     </form>
     </div>
+    <div class="presets">
+        <span class="presets-label">Presets:</span>
+        <select class="preset-select">
+            <option value="1">Preset 1</option>
+        </select>
+        <button class="preset-launch">Set</button>
+    </div>
 
   <div class="buttons-holder">
-    <button class="update-settings">Update Settings</button>
+    <!-- <button class="update-settings">Update Settings</button> -->
     <div class="quick-add-holder">
         <h4 class="quick-add-label">Add Balls</h4>
         <!-- <button balls="1" class="quick-add" >1</button>
@@ -80,9 +91,21 @@
         <button class="clear">Clear All Balls</button>
     </div>
 
-    <div class="cluster-holder">
+    <div class="tool-bar">
+    <h3>Tool Bar</h3>
+        <span class="tool active-tool" id="spawn-settings">Place Spawn Point</span>
+        <span class="tool" id="cluster-holder">Place Clusters</span>
+        <span class="tool" id="gravity-settings">Place Gravity Wells</span>
+        <span class="tool" id="color-schema">Color Schema</span>
+    </div>
+
+    <div class="spawn-settings settings visible">
+        <p>Click on the canvas to set the new spawn points for the balls</p>
+    </div>
+
+    <div class="cluster-holder settings">
         <h3>Place clusters</h3>
-        <button class="place-clusters">Place Clusters</button>
+        <!-- <button class="place-clusters">Place Clusters</button> -->
         <div>
             <span>Size</span>
             <input class="cluster-size" type="range" name="cluster-size" id="cluster-size" value="5" min="1" max="10"><br>
@@ -91,18 +114,18 @@
         </div>
     </div>
 
-    <div class="gravity-settings">
+    <div class="gravity-settings settings">
         <h3>Gravity Settings</h3>
-        <button class="gravity-buttons place-gravity-wells">Place Gravity Wells</button>
+        <!-- <button class="gravity-buttons place-gravity-wells">Place Gravity Wells</button> -->
         <div>
         <span>Size</span><input class="gravity-well-strength" type="range" value="5" min="1" max="10"></div>
         <div><span>Static?</span><input type="checkbox" checked="checked" class="gravity-well-static"></div><br>
        <!--  <div><span>Absorb Mass?</span><input type="checkbox" class="gravity-well-absorb"></div><br> -->
         <button class="gravity-buttons clear-gravity-wells">Clear Gravity Wells</button>
         <button class="gravity-buttons hide-gravs">Hide Gravity Wells</button>
-        <button class="gravity-buttons disable-gravity">Disable Gravity</button>
+        <!-- <button class="gravity-buttons disable-gravity">Disable Gravity</button> -->
     </div>
-    <div class="color-schema">
+    <div class="color-schema settings">
         <h4 class="color-scheme-label">Color Scheme</h4>
         <div>
             <label class="color-picker-labels">Background Color: </label>
@@ -119,14 +142,15 @@
     </div>
   </div>
 </div>
-    <div class="instructions">
+    <!-- <div class="instructions">
         <p>This is an interactive physics simulation using the JavaScript canvas. Feel free to adjust the controls on the right side of the screen for dynamic changes. Click buttons and make things happen.</p>
         <p>View the source code and image gallery on <a href="https://github.com/DavidMcLaughlin208/canvas-practice">Github</a></p>
-    </div>
+    </div> -->
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
 <script src="js/bindings.js"></script>
+<script src="js/presets.js"></script>
 <script src="js/clusters.js"></script>
 <script src="js/colorBlend.js"></script>
 <script src="js/gravityCenter.js"></script>

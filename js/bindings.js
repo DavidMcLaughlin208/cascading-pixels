@@ -26,8 +26,8 @@ $(document).ready(function(){
 
 	getSliderValues();
 	start();
-	var infinite = true;
-	var spread = $("#spread").val();
+	infinite = true;
+	spread = $("#spread").val();
 	infiniteLoop = setInterval(addBall, spread);
 
 
@@ -87,10 +87,12 @@ $(document).ready(function(){
 		} else if(placingClusters){
 			var density = 10 - parseInt($(".cluster-density").val());
 			uiElement.execute(density);
-		}else{
+		}else if(placingSpawn){
 	    startX = x;
 	    startY = y;
 	    // applyImpulse(x, y);
+	  }else if(placingObstacles){
+
 	  }
 	})
 
@@ -104,14 +106,11 @@ $(document).ready(function(){
 			uiElement.draw()
 			drawUiElement = true;
 		} else if(placingClusters) {
-			console.log('here')
 			var size = parseInt($(".cluster-size").val());
-			console.log(size)
 			uiElement = new UnplacedCluster(x,y,size);
 			uiElement.draw();
 			drawUiElement = true;
 		}
-		console.log(uiElement)
 	})
 	$("#uicanvas").on("mousemove", function(e){
 		var rect = this.getBoundingClientRect();
@@ -148,10 +147,13 @@ $(document).ready(function(){
 		}
 	})
 
-	$(".place-gravity-wells").on("click", function(event){
+	$("#gravity-settings").on("click", function(event){
 		event.preventDefault();
 		clearTools();
+		hideAllSettings();
+		$(".gravity-settings").addClass("visible")
 		placingGravs = true;
+
 	})
 
 	$(".clear-gravity-wells").on("click", function(event){
@@ -169,17 +171,19 @@ $(document).ready(function(){
 		}
 	})
 
-	$(".disable-gravity").on("click", function(event){
+	$(".disable-gravity").on("change", function(event){
 		event.preventDefault();
-		if(gravity > 0){
-			noGravity = true;
-			gravity = 0;
-			$(this).html("Enable Gravity");
-		}else{
-			noGravity = false;
-			updateSettings();
-			$(this).html("Disable Gravity");
-		}
+		gravity = 0;
+		noGravity = !noGravity;
+		// if(gravity > 0){
+		// 	noGravity = true;
+		// 	gravity = 0;
+		// 	$(this).html("Enable Gravity");
+		// }else{
+		// 	noGravity = false;
+		// 	updateSettings();
+		// 	$(this).html("Disable Gravity");
+		// }
 	})
 
 	$(".border-toggle").change(function(){
@@ -207,15 +211,55 @@ $(document).ready(function(){
 		resizeCanvas();
 	})
 
-	$(".gravity-well-strength").on('input propertychange paste', function() {
-  	if(parseInt($(this).val()) > 10){ $(this).val(10) }  
-  	if(parseInt($(this).val()) < 1 ){ $(this).val(1) }  
-	});
+	// $(".gravity-well-strength").on('input propertychange paste', function() {
+ //  	if(parseInt($(this).val()) > 10){ $(this).val(10) }  
+ //  	if(parseInt($(this).val()) < 1 ){ $(this).val(1) }  
+	// });
 
-	$(".place-clusters").on("click", function(event){
+	$("#cluster-holder").on("click", function(event){
 		event.preventDefault();
 		clearTools();
+		hideAllSettings();
+		$(".cluster-holder").addClass("visible")
 		placingClusters = true;
+	})
+
+	$(".tool").on("click", function(){
+		$(".tool").removeClass("active-tool")
+		$(this).addClass("active-tool")
+	})
+
+	$("#spawn-settings").on("click", function(event){
+		event.preventDefault();
+		clearTools();
+		hideAllSettings();
+		$(".spawn-settings").addClass("visible")
+		placingSpawn = true;
+	})
+
+	$("#color-schema").on("click", function(){
+		event.preventDefault();
+		clearTools();
+		hideAllSettings();
+		$(".color-schema").addClass("visible")
+	})
+
+	$(".preset-launch").on("click", function(){
+		clearCanvas();
+		var preset = $(".preset-select").val();
+		console.log(preset)
+	})
+
+	$("input[type=range]").on("change", function(){
+		updateSettings();
+	})
+
+	$("#spread").on("change", function(){
+		updateSettings();
+		if(infinite){
+			clearInterval(infiniteLoop);
+			infiniteLoop = setInterval(addBall, spread);
+		}
 	})
 
 
@@ -227,45 +271,43 @@ var getSliderValues = function(){
 	forceXModifier = $("#forceX").val();
 	forceYModifier = $("#forceY").val();
 	thicknessModifier = $("#thickness").val();
+	spread = $("#spread").val();
+
 
 	fade = $("#fade").val()  //(Math.abs($("#fade").val()) * .01).toString();
 	dampX = 1 - ($("#dampX").val() * .01);
 	dampY = -1 - ($("#dampY").val() * -.01);
 	variation = $("#variation").val() * .01;
 	lifetime = parseInt($("#lifetime").val());
+	forceX = forceXModifier/12.5;
+	forceY = forceYModifier/12.5;
+	drag = dragModifier/15 * .001;
+	thickness = thicknessModifier;
 
-	drag *= dragModifier/15;
-	forceX *= forceXModifier/25;
-	forceY *= forceYModifier/25;
-	gravity *= gravityModifier/25;
-	thickness *= thicknessModifier;
-
+	gravity = gravityModifier/25 * 0.04;
 }
 
 var updateSettings = function(){
 	clearInterval(fadeLoop);
-	reset();
+	// reset();
 	getSliderValues();
 	fadeLoop = setInterval(fadeOut, fade);
 }
 
 var addBall = function(){
-	updateSettings();
+	// updateSettings();
 	var ball = new Ball(forceX, forceY)
 	balls.push(ball);
-	// setTimeout(function(){
-	// 	killBall(ball)
-	// }, lifetime)
 }
 
-// var killBall = function(ball){
-// 	if(ball){
-// 		ball.die();
-// 	}
-// }
 
 
 var clearTools = function(){
+	placingSpawn = false;
 	placingClusters = false;
 	placingGravs = false;
+}
+
+var hideAllSettings = function(){
+	$(".settings").removeClass("visible")
 }

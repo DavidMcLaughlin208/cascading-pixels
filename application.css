@@ -186,6 +186,43 @@ canvas {
   text-align: center;
 }
 
+.tool-bar{
+  width: 100%;
+  text-align: center;
+}
+
+.tool{
+  width: 15%;
+  height: 40px;
+  border: 1px solid black;
+  display: inline-block;
+  font-size: 10px;
+  text-align: center;
+  vertical-align: top;
+  padding: 3px;
+}
+
+.active-tool{
+  background-color: black;
+  color: white;
+}
+
+.settings{
+  display: none;
+}
+
+.visible{
+  display: block;
+}
+
+.hidden{
+  display: none;
+}
+
+.presets{
+  width:100%;
+  text-align: center;
+}
 
 
 /**{border: 1px solid black;}*/

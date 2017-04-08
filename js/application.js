@@ -2,6 +2,8 @@ var gravity;
 var gameLoop;
 var fadeLoop;
 var fade;
+var spread;
+var infinite;
 var balls = [];
 var infiniteLoop;
 var noGravity = false;
@@ -15,6 +17,8 @@ var centersOfGravity = [];
 var placingGravs = false;
 var showGravs = true;
 var placingClusters = false;
+var placingSpawn = true;
+var placingObstacles = false;
 var maxColor = "#ff0000";
 var minColor = "#0000ff";
 var backgroundColor = "rgba(214,214,214,0.1)"; // ["rgba(", "214,", "214,", "214,", "0.1",")"] 
@@ -22,6 +26,8 @@ var borderOn = true;
 var lifetime;
 var	uiElement;
 var	drawUiElement = false;
+var forceX = 2;
+var forceY = 2;
 
 
 cv.ctx.canvas.width = cv.width;
@@ -45,15 +51,15 @@ var reset = function(){
 	cv.ctx.moveTo(10,10);
 	cv.ctx.closePath();
 	if(!noGravity){gravity = .04};
-	forceX = 2;
-	forceY = 2;
-	drag = .001;
 	thickness = 1;
 }
 
 var draw = function(){
 	// drawBackground();
 	// console.log(balls.length)
+	// reset();
+	// getSliderValues();
+
 	if(noGravity){
 	}else{
 		gravity = .04;
