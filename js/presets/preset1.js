@@ -9,12 +9,15 @@ var preset1 = function(){
   $("#background-color-picker").spectrum("set", "#000000");
   $("ball-max-color").spectrum("set", "#ffffff");
   $("ball-min-color").spectrum("set", "#ffffff");
+
+
   
   maxColor = "#ffffff"
   minColor = "#ffffff"
   backgroundColor = parseBackgroundColor($("#background-color-picker").spectrum("get"));
 
-  cv.ctx.fillRect(0,0,cv.height,cv.width)
+  cv.ctx.fillStyle = backgroundColor;
+  cv.ctx.fillRect(0,0,cv.width,cv.height)
 
   var x1 = (cv.width/2) - (525/2)
   var y1 = (cv.height/2)
