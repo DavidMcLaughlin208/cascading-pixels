@@ -19,3 +19,10 @@ var mixColor = function(hex1, hex2, factor) {
   var colorInt = (nr << 16 | ng << 8 | nb)
   return '#'+ ('000000' + (colorInt & 0xFFFFFF).toString(16)).slice(-6).toUpperCase();
 }
+
+var parseBackgroundColor = function(color){
+  var backgroundChoice = color.toRgbString().split("");
+  backgroundChoice.splice(3,0,"a")
+  backgroundChoice.splice(-1,1,", 0.1)")
+  return backgroundChoice.join("");
+}

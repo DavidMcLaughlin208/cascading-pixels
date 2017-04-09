@@ -30,8 +30,11 @@ var clearCanvas = function(){
   fadeLoop = setInterval(fadeOut, 5);
 
   getSliderValues();
+  
+  //Infinite interval
   if(infinite){
     clearInterval(infiniteLoop);
     infiniteLoop = setInterval(addBall, spread)
   }
+  cv.ctx.clearRect(0, 0, cv.width, cv.height)
 }

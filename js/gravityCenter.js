@@ -4,6 +4,7 @@ var gravityCenter = function(x,y, strength, absorb){
   this.strength = Math.min(strength, 0.5)
   this.color = 'black';
   this.absorb = absorb || false;
+  console.log(this.x)
 }
 
 gravityCenter.prototype.draw = function(){

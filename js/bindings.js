@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	reset();
+	// reset();
 	clearInterval(gameLoop);
 	clearInterval(fadeLoop);
 
@@ -44,7 +44,6 @@ $(document).ready(function(){
 
 	$(".clear").on('click', function(event){
 		event.preventDefault();
-		reset();
 		balls = [];
 	})
 
@@ -86,7 +85,7 @@ $(document).ready(function(){
 			}
 		} else if(placingClusters){
 			var density = 10 - parseInt($(".cluster-density").val());
-			uiElement.execute(density);
+			uiElement.execute(density, 5, 5);
 		}else if(placingSpawn){
 	    startX = x;
 	    startY = y;
@@ -191,10 +190,11 @@ $(document).ready(function(){
 	})
 
 	backgroundPicker.on("move.spectrum", function(e, color) {
-		var backgroundChoice = color.toRgbString().split("");
-		backgroundChoice.splice(3,0,"a")
-		backgroundChoice.splice(-1,1,", 0.1)")
-		backgroundColor = backgroundChoice.join("");
+		backgroundColor = parseBackgroundColor(color)
+		// var backgroundChoice = color.toRgbString().split("");
+		// backgroundChoice.splice(3,0,"a")
+		// backgroundChoice.splice(-1,1,", 0.1)")
+		// backgroundColor = backgroundChoice.join("");
 		// backgroundColor = ["rgba(", color._r.toFixed() + ", ", + color._g.toFixed() + ", ", + color._b.toFixed() + ", ", + "0.1", ")"]
 	})
 
@@ -246,6 +246,7 @@ $(document).ready(function(){
 
 	$(".preset-launch").on("click", function(){
 		clearCanvas();
+		preset1()
 		var preset = $(".preset-select").val();
 		console.log(preset)
 	})
@@ -284,7 +285,7 @@ var getSliderValues = function(){
 	drag = dragModifier/15 * .001;
 	thickness = thicknessModifier;
 
-	gravity = gravityModifier/25 * 0.04;
+	if(!noGravity){gravity = gravityModifier/25 * 0.04};
 }
 
 var updateSettings = function(){
