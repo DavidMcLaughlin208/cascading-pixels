@@ -2,13 +2,15 @@ var preset1 = function(){
   infinite = false;
   clearInterval(infiniteLoop)
 
+  showGravs = false;
+
   noGravity = true;
   gravity = 0;
   $(".disable-gravity").prop("checked", false)
   
-  $("#background-color-picker").spectrum("set", "#000000");
-  $("ball-max-color").spectrum("set", "#ffffff");
-  $("ball-min-color").spectrum("set", "#ffffff");
+  $("#background-color-picker").spectrum("set", "rgb(0,0,0)");
+  $("ball-max-color").spectrum("set", "rgb(255,255,255)");
+  $("ball-min-color").spectrum("set", "rgb(255,255,255)");
 
 
   
