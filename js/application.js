@@ -30,20 +30,20 @@ var forceX = 2;
 var forceY = 2;
 
 
-cv.ctx.canvas.width = cv.width;
-cv.ctx.canvas.height = cv.height;
-cv.ctx.lineWidth = 5;
-cv.ctx.fillStyle = 'lightgrey';
-cv.ctx.fillRect(0,0,cv.width,cv.height);
-cv.ctx.fillStyle = 'black';
+// cv.ctx.canvas.width = cv.width;
+// cv.ctx.canvas.height = cv.height;
+// cv.ctx.lineWidth = 5;
+// cv.ctx.fillStyle = 'lightgrey';
+// cv.ctx.fillRect(0,0,cv.width,cv.height);
+// cv.ctx.fillStyle = 'black';
 
-ui.mycanvas.width = ui.width;
-ui.mycanvas.height = ui.height;
-ui.ctx.fillStyle = 'lightgrey';
-ui.ctx.fillRect(0,0,ui.width,ui.height);
+// ui.mycanvas.width = ui.width;
+// ui.mycanvas.height = ui.height;
+// ui.ctx.fillStyle = 'lightgrey';
+// ui.ctx.fillRect(0,0,ui.width,ui.height);
 
-gc.mycanvas.width = gc.width;
-gc.mycanvas.height = gc.height;
+// gc.mycanvas.width = gc.width;
+// gc.mycanvas.height = gc.height;
 
 
 // var reset = function(){
@@ -96,19 +96,21 @@ function fadeOut() {
 }
 
 var start = function(){
-	cv.ctx.clearRect(0, 0, cv.width, cv.height);
-	cv.ctx.fillStyle = 'lightgrey';
-	cv.ctx.fillRect(0, 0, cv.width, cv.height);
-	cv.ctx.fillStyle = 'black';
+	// cv.ctx.clearRect(0, 0, cv.width, cv.height);
+	// cv.ctx.fillStyle = 'lightgrey';
+	// cv.ctx.fillRect(0, 0, cv.width, cv.height);
+	// cv.ctx.fillStyle = 'black';
 
-	cv.ctx.beginPath();
-	cv.ctx.moveTo(10,10);
-	cv.ctx.closePath();
+	// cv.ctx.beginPath();
+	// cv.ctx.moveTo(10,10);
+	// cv.ctx.closePath();
 
-	ui.mycanvas.width = ui.width;
-	ui.mycanvas.height = ui.height;
-	ui.ctx.fillStyle = "rgba(0,0,0,0)";
-	ui.ctx.fillRect(0,0,ui.width,ui.height);
+	// ui.mycanvas.width = ui.width;
+	// ui.mycanvas.height = ui.height;
+	// ui.ctx.fillStyle = "rgba(0,0,0,0)";
+	// ui.ctx.fillRect(0,0,ui.width,ui.height);
+
+	resizeCanvas();
 
 	fadeLoop = setInterval(fadeOut, fade);
 	gameLoop = setInterval(draw, 1);
