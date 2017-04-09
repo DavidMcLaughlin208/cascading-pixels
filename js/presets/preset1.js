@@ -2,8 +2,6 @@ var preset1 = function(){
   infinite = false;
   clearInterval(infiniteLoop)
 
-  showGravs = false;
-
   noGravity = true;
   gravity = 0;
   $(".disable-gravity").prop("checked", false)
