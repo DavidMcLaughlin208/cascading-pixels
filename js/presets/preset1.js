@@ -16,7 +16,7 @@ var preset1 = function(){
   minColor = "#ffffff"
   backgroundColor = parseBackgroundColor($("#background-color-picker").spectrum("get"));
 
-  cv.ctx.fillStyle = backgroundColor;
+  cv.ctx.fillStyle = '#000000';
   cv.ctx.fillRect(0,0,cv.width,cv.height)
 
   var x1 = (cv.width/2) - (525/2)
