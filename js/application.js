@@ -110,6 +110,8 @@ var start = function(){
 	ui.ctx.fillStyle = "rgba(0,0,0,0)";
 	ui.ctx.fillRect(0,0,ui.width,ui.height);
 
+	resizeCanvas();
+
 	fadeLoop = setInterval(fadeOut, fade);
 	gameLoop = setInterval(draw, 1);
 }

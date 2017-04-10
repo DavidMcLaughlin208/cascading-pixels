@@ -6,15 +6,18 @@ var preset1 = function(){
   gravity = 0;
   $(".disable-gravity").prop("checked", false)
   
-  $("#background-color-picker").spectrum("set", "#000000");
-  $("ball-max-color").spectrum("set", "#ffffff");
-  $("ball-min-color").spectrum("set", "#ffffff");
+  $("#background-color-picker").spectrum("set", "rgb(0,0,0)");
+  $("ball-max-color").spectrum("set", "rgb(255,255,255)");
+  $("ball-min-color").spectrum("set", "rgb(255,255,255)");
+
+
   
   maxColor = "#ffffff"
   minColor = "#ffffff"
   backgroundColor = parseBackgroundColor($("#background-color-picker").spectrum("get"));
 
-  cv.ctx.fillRect(0,0,cv.height,cv.width)
+  cv.ctx.fillStyle = '#000000';
+  cv.ctx.fillRect(0,0,cv.width,cv.height)
 
   var x1 = (cv.width/2) - (525/2)
   var y1 = (cv.height/2)

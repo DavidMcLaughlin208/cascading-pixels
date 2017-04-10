@@ -2,7 +2,7 @@ var gravityCenter = function(x,y, strength, absorb){
   this.x = x || cv.width/2;
   this.y = y || cv.height/2;
   this.strength = Math.min(strength, 0.5)
-  this.color = 'black';
+  this.color = '#000000';
   this.absorb = absorb || false;
   console.log(this.x)
 }
