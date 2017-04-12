@@ -42,3 +42,9 @@ UnplacedGrav.prototype.draw = function(){
   ui.ctx.fill();
   ui.ctx.closePath();
 }
+
+var logGravLocations = function(){
+  for(var i in centersOfGravity){
+    console.log("x: " + centersOfGravity[i].x + "   y: " + centersOfGravity[i].y)
+  }
+}

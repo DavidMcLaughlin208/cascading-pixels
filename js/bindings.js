@@ -91,7 +91,8 @@ $(document).ready(function(){
 	    startY = y;
 	    // applyImpulse(x, y);
 	  }else if(placingObstacles){
-
+	  	var size = parseInt($(".obstacle-size").val());
+	  	obstaclesCircles.push(new ObstacleCircle(x,y,size))
 	  }
 	})
 
@@ -109,6 +110,11 @@ $(document).ready(function(){
 			uiElement = new UnplacedCluster(x,y,size);
 			uiElement.draw();
 			drawUiElement = true;
+		} else if(placingObstacles) {
+			var size = parseInt($(".obstacle-size").val());
+			uiElement = new UnplacedObstacleCircle(x,y,size)
+			uiElement.draw()
+			drawUiElement = true;
 		}
 	})
 	$("#uicanvas").on("mousemove", function(e){
@@ -122,6 +128,11 @@ $(document).ready(function(){
 			uiElement.strength = strength;
 		} else if(placingClusters) {
 			var size = (parseInt($(".cluster-size").val()));
+			uiElement.x = x;
+			uiElement.y = y;
+			uiElement.size = size;
+		} else if(placingObstacles) {
+			var size = parseInt($(".obstacle-size").val());
 			uiElement.x = x;
 			uiElement.y = y;
 			uiElement.size = size;
@@ -174,15 +185,6 @@ $(document).ready(function(){
 		event.preventDefault();
 		gravity = 0;
 		noGravity = !noGravity;
-		// if(gravity > 0){
-		// 	noGravity = true;
-		// 	gravity = 0;
-		// 	$(this).html("Enable Gravity");
-		// }else{
-		// 	noGravity = false;
-		// 	updateSettings();
-		// 	$(this).html("Disable Gravity");
-		// }
 	})
 
 	$(".border-toggle").change(function(){
@@ -263,6 +265,17 @@ $(document).ready(function(){
 		}
 	})
 
+	$("#obstacles-holder").on("click", function(){
+		clearTools();
+		hideAllSettings();
+		$(".obstacle-holder").addClass("visible");
+		placingObstacles = true;
+	})
+
+	$(".clear-obstacle-circles").on("click", function(){
+		obstaclesCircles = []
+	})
+
 
 })
 
@@ -307,6 +320,7 @@ var clearTools = function(){
 	placingSpawn = false;
 	placingClusters = false;
 	placingGravs = false;
+	placingObstacles = false;
 }
 
 var hideAllSettings = function(){

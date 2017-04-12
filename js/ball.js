@@ -37,6 +37,16 @@ Ball.prototype.draw = function(){
     this.speedX += drag;
   }
 
+  for(var i in obstaclesCircles){
+    var x = Math.floor(obstaclesCircles[i].x) - this.x
+    var y = Math.floor(obstaclesCircles[i].y) - this.y
+    var distance = Math.max(Math.floor(Math.sqrt( x*x + y*y )), 1);
+    if(distance < 50 * obstaclesCircles[i].size){
+      this.speedX *= -1
+      this.speedY *= -1
+    }
+  }
+
   //Apply Gravity
   for(var i in centersOfGravity){
     var x = Math.floor(centersOfGravity[i].x) - this.x
@@ -102,7 +112,6 @@ Ball.prototype.draw = function(){
   cv.ctx.beginPath();
   cv.ctx.moveTo(this.lastX, this.lastY);
   cv.ctx.lineTo(this.x, this.y);
-  cv.ctx.lineWidth = thickness;
   cv.ctx.stroke();
   cv.ctx.closePath();
 
