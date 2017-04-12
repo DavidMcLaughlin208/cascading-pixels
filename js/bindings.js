@@ -92,7 +92,7 @@ $(document).ready(function(){
 	    // applyImpulse(x, y);
 	  }else if(placingObstacles){
 	  	var size = parseInt($(".obstacle-size").val());
-	  	obstaclesCircles.push(new UnplacedObstacleCircle(x,y,size))
+	  	obstaclesCircles.push(new ObstacleCircle(x,y,size))
 	  }
 	})
 
@@ -270,6 +270,10 @@ $(document).ready(function(){
 		hideAllSettings();
 		$(".obstacle-holder").addClass("visible");
 		placingObstacles = true;
+	})
+
+	$(".clear-obstacle-circles").on("click", function(){
+		obstaclesCircles = []
 	})
 
 
