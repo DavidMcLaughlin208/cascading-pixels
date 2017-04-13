@@ -58,8 +58,8 @@ Ball.prototype.draw = function(){
       var xFactor = this.x - obs.x
       var yFactor = this.y - obs.y
 
-      this.speedX += (xFactor/15)
-      this.speedY += (yFactor/15)
+      this.speedX += (xFactor*(speed / 35  ) )
+      this.speedY += (yFactor*(speed / 35  ) )
     }
   }
 
