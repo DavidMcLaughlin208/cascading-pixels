@@ -2,9 +2,8 @@
 
 This project began by experimenting with the JavaScript canvas and has turned into an experiment in basic physics simulation.
 
-The aim is to provide the user with a wide array of settings and functionality to let them play in the physics sandbox. 
+The aim is to provide the user with a meaningful set of tools to interact with the physics sandbox.
 
-Endless patterns can be formed and mesmerizing art can be created.
 
 ![image](/images/lightbluenodes.png)
 
@@ -21,6 +20,8 @@ Endless patterns can be formed and mesmerizing art can be created.
 ![image](/images/gravitymasses.png)
 
 ![image](/images/deeprednodes.png)
+
+![image](/images/circles.png)
 
 ![image](/images/lava.png)
 
