@@ -38,12 +38,28 @@ Ball.prototype.draw = function(){
   }
 
   for(var i in obstaclesCircles){
-    var x = Math.floor(obstaclesCircles[i].x) - this.x
-    var y = Math.floor(obstaclesCircles[i].y) - this.y
-    var distance = Math.max(Math.floor(Math.sqrt( x*x + y*y )), 1);
-    if(distance < 50 * obstaclesCircles[i].size){
-      this.speedX *= -1
-      this.speedY *= -1
+    var obs = obstaclesCircles[i]
+    var x = obs.x - this.x
+    var y = obs.y - this.y
+    var distance = Math.floor(Math.sqrt( x*x + y*y ))
+
+    if(distance < 50 * obs.size){
+      var normalizeFactor = Math.max(Math.abs(this.speedX), Math.abs(this.speedY))
+      var noramlizedX = (this.speedX / normalizeFactor)
+      var noramlizedY = (this.speedY / normalizeFactor)
+      while(distance < 50 * obs.size){
+        this.x -= noramlizedX
+        this.y -= noramlizedY
+        x = obs.x - this.x
+        y = obs.y - this.y
+        distance = Math.floor(Math.sqrt( x*x + y*y ))
+      }
+
+      var xFactor = (this.x - obs.x)/obs.size
+      var yFactor = (this.y - obs.y)/obs.size
+
+      this.speedX += (xFactor*(speed / 35 ) )
+      this.speedY += (yFactor*(speed / 35 ) )
     }
   }
 
@@ -65,9 +81,7 @@ Ball.prototype.draw = function(){
   this.speedY += this.gravity;
 
 
-  //Apply speeds to coordinates
-  this.x += this.speedX;
-  this.y += this.speedY;
+
 
   //Bounce Off Walls
   if(borderOn){
@@ -94,6 +108,10 @@ Ball.prototype.draw = function(){
       this.die()
     }
   }
+
+  //Apply speeds to coordinates
+  this.x += this.speedX;
+  this.y += this.speedY;
 
   // Color based on speed
   var colorFactor = Math.min(speed, 8) / 8;
