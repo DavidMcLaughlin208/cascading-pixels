@@ -256,6 +256,10 @@ $(document).ready(function(){
 	$("input[type=range]").on("change", function(){
 		updateSettings();
 	})
+	
+	$("input[type=checkbox]").on("change", function(){
+		updateSettings()
+	})
 
 	$("#spread").on("change", function(){
 		updateSettings();
@@ -274,6 +278,12 @@ $(document).ready(function(){
 
 	$(".clear-obstacle-circles").on("click", function(){
 		obstaclesCircles = []
+	})
+	
+	$(".disable-fade").on("change", function(event){
+		event.preventDefault();
+		noFade = !noFade;
+		if(noFade){clearInterval(fadeLoop)}
 	})
 
 
