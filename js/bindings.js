@@ -248,13 +248,16 @@ $(document).ready(function(){
 
 	$(".preset-launch").on("click", function(){
 		clearCanvas();
-		preset1()
-		var preset = $(".preset-select").val();
-		console.log(preset)
+		var presetNum = $(".preset-select").val();
+		window['preset' + presetNum]()
 	})
 
-	$("input[type=range]").on("change", function(){
+	$("input[type=range], input[type=checkbox]").on("change", function(){
 		updateSettings();
+	})
+	
+	$("input[type=checkbox]").on("change", function(){
+		updateSettings()
 	})
 
 	$("#spread").on("change", function(){
@@ -268,12 +271,23 @@ $(document).ready(function(){
 	$("#obstacles-holder").on("click", function(){
 		clearTools();
 		hideAllSettings();
-		$(".obstacle-holder").addClass("visible");
+		$(".obstacles-holder").addClass("visible");
 		placingObstacles = true;
 	})
 
 	$(".clear-obstacle-circles").on("click", function(){
 		obstaclesCircles = []
+	})
+	
+	$(".disable-fade").on("change", function(event){
+		event.preventDefault();
+		noFade = !noFade;
+		if(noFade){clearInterval(fadeLoop)}
+	})
+
+	$(".reset").on("click", function(event){
+		event.preventDefault();
+		clearCanvas();
 	})
 
 

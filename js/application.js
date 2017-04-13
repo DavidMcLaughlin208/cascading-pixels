@@ -29,6 +29,7 @@ var forceX = 2;
 var forceY = 2;
 var obstaclesCircles = [];
 var placingObstacles = false;
+var noFade = false;
 
 cv.ctx.lineWidth = 5;
 cv.ctx.fillStyle = 'lightgrey';
