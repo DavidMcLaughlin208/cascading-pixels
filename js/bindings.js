@@ -276,6 +276,11 @@ $(document).ready(function(){
 		obstaclesCircles = []
 	})
 
+	$(".reset").on("click", function(event){
+		event.preventDefault();
+		clearCanvas();
+	})
+
 
 })
 
