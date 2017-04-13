@@ -268,7 +268,7 @@ $(document).ready(function(){
 	$("#obstacles-holder").on("click", function(){
 		clearTools();
 		hideAllSettings();
-		$(".obstacle-holder").addClass("visible");
+		$(".obstacles-holder").addClass("visible");
 		placingObstacles = true;
 	})
 

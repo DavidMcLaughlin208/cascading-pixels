@@ -38,12 +38,16 @@ Ball.prototype.draw = function(){
   }
 
   for(var i in obstaclesCircles){
-    var x = Math.floor(obstaclesCircles[i].x) - this.x
-    var y = Math.floor(obstaclesCircles[i].y) - this.y
+    var obs = obstaclesCircles[i]
+    var x = Math.floor(obs.x) - this.x
+    var y = Math.floor(obs.y) - this.y
     var distance = Math.max(Math.floor(Math.sqrt( x*x + y*y )), 1);
-    if(distance < 50 * obstaclesCircles[i].size){
-      this.speedX *= -1
-      this.speedY *= -1
+    if(distance < 60 * obs.size){
+      var xFactor = this.x - obs.x
+      var yFactor = this.y - obs.y
+
+      this.speedX += (xFactor/100)
+      this.speedY += (yFactor/100)
     }
   }
 
