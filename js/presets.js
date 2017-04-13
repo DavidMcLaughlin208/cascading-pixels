@@ -13,9 +13,15 @@ var clearCanvas = function(){
   //Checkbox settings
   borderOn = true;
   noGravity = false;
+
+  //Canvas Objects
   balls = [];
   centersOfGravity = [];
   obstaclesCircles = [];
+
+  //Variables
+  startX = 10
+  startY = 10
 
   //Color schema
   $("#background-color-picker").spectrum("set", "rgb(214,214,214)");

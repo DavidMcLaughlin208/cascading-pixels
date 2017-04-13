@@ -248,12 +248,11 @@ $(document).ready(function(){
 
 	$(".preset-launch").on("click", function(){
 		clearCanvas();
-		preset1()
-		var preset = $(".preset-select").val();
-		console.log(preset)
+		var presetNum = $(".preset-select").val();
+		window['preset' + presetNum]()
 	})
 
-	$("input[type=range]").on("change", function(){
+	$("input[type=range], input[type=checkbox]").on("change", function(){
 		updateSettings();
 	})
 

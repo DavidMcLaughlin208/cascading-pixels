@@ -55,11 +55,11 @@ Ball.prototype.draw = function(){
         distance = Math.floor(Math.sqrt( x*x + y*y ))
       }
 
-      var xFactor = this.x - obs.x
-      var yFactor = this.y - obs.y
+      var xFactor = (this.x - obs.x)/obs.size
+      var yFactor = (this.y - obs.y)/obs.size
 
-      this.speedX += (xFactor*(speed / 35  ) )
-      this.speedY += (yFactor*(speed / 35  ) )
+      this.speedX += (xFactor*(speed / 35 ) )
+      this.speedY += (yFactor*(speed / 35 ) )
     }
   }
 
