@@ -21,7 +21,7 @@ The aim is to provide the user with a meaningful set of tools to interact with t
 
 ![image](/images/deeprednodes.png)
 
-![image](/images/circles.png)
+![image](/images/Circles.png)
 
 ![image](/images/lava.png)
 
