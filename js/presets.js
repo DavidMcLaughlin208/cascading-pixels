@@ -15,6 +15,7 @@ var clearCanvas = function(){
   noGravity = false;
   balls = [];
   centersOfGravity = [];
+  obstaclesCircles = [];
 
   //Color schema
   $("#background-color-picker").spectrum("set", "rgb(214,214,214)");
