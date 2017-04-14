@@ -18,21 +18,21 @@ var placingGravs = false;
 var showGravs = true;
 var placingClusters = false;
 var placingSpawn = true;
-var maxColor = "#ff0000";
-var minColor = "#0000ff";
-var backgroundColor = "rgba(214,214,214,0.1)"; // ["rgba(", "214,", "214,", "214,", "0.1",")"] 
+var maxColor = "#000000";
+var minColor = "#000000";
+var backgroundColor = "rgba(255,255,255,0.1)"; // ["rgba(", "214,", "214,", "214,", "0.1",")"] 
 var borderOn = true;
 var lifetime;
 var	uiElement;
 var	drawUiElement = false;
 var forceX = 2;
 var forceY = 2;
-var obstaclesCircles = [];
+var obstaclesCircles = [new ObstacleCircle(70, cv.height/4, 1), new ObstacleCircle(cv.width, cv.height, 2)];
 var placingObstacles = false;
 var noFade = false;
 
 cv.ctx.lineWidth = 5;
-cv.ctx.fillStyle = 'lightgrey';
+cv.ctx.fillStyle = '#ffffff';
 cv.ctx.fillRect(0,0,cv.width,cv.height);
 cv.ctx.fillStyle = 'black';
 

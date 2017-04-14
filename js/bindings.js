@@ -283,6 +283,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		noFade = !noFade;
 		if(noFade){clearInterval(fadeLoop)}
+		updateSettings()
 	})
 
 	$(".reset").on("click", function(event){
@@ -319,7 +320,7 @@ var updateSettings = function(){
 	clearInterval(fadeLoop);
 	// reset();
 	getSliderValues();
-	fadeLoop = setInterval(fadeOut, fade);
+	if(!noFade){fadeLoop = setInterval(fadeOut, fade)};
 }
 
 var addBall = function(){
