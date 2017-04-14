@@ -17,20 +17,20 @@ var clearCanvas = function(){
   //Canvas Objects
   balls = [];
   centersOfGravity = [];
-  obstaclesCircles = [];
+  var obstaclesCircles = [new ObstacleCircle(50, cv.height/4, 1), new ObstacleCircle(cv.width, cv.height, 2)];
 
   //Variables
   startX = 10
   startY = 10
 
   //Color schema
-  $("#background-color-picker").spectrum("set", "rgb(214,214,214)");
-  $("ball-max-color").spectrum("set", "#ff0000");
-  $("ball-min-color").spectrum("set", "#0000ff");
+  $("#background-color-picker").spectrum("set", "rgb(255,255,255)");
+  $("ball-max-color").spectrum("set", "#000000");
+  $("ball-min-color").spectrum("set", "#000000");
 
-  maxColor = "#ff0000";
-  minColor = "#0000ff";
-  backgroundColor = "rgba(214,214,214,0.1)";
+  maxColor = "#000000";
+  minColor = "#000000";
+  backgroundColor = "rgba(255,255,255,0.1)";
 
   //Fade interval
   clearInterval(fadeLoop);

@@ -283,6 +283,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		noFade = !noFade;
 		if(noFade){clearInterval(fadeLoop)}
+		updateSettings()
 	})
 
 	$(".reset").on("click", function(event){
@@ -302,7 +303,7 @@ var getSliderValues = function(){
 	spread = $("#spread").val();
 
 
-	fade = $("#fade").val()  //(Math.abs($("#fade").val()) * .01).toString();
+	fade = (Math.abs($("#fade").val()) * .01).toString();
 	dampX = 1 - ($("#dampX").val() * .01);
 	dampY = -1 - ($("#dampY").val() * -.01);
 	variation = $("#variation").val() * .01;
@@ -319,7 +320,7 @@ var updateSettings = function(){
 	clearInterval(fadeLoop);
 	// reset();
 	getSliderValues();
-	fadeLoop = setInterval(fadeOut, fade);
+	// if(!noFade){fadeLoop = setInterval(fadeOut, fade)};
 }
 
 var addBall = function(){
