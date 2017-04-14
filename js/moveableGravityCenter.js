@@ -12,7 +12,7 @@ var MoveableGravityCenter = function(x,y,strength){
 }
 
 MoveableGravityCenter.prototype.draw = function(){
-  var speed = Math.sqrt(this.speedX**2 + this.speedY**2);
+  var speed = Math.sqrt(Math.pow(this.speedX,2) + Math.pow(this.speedY,2));
 
   this.gravity = gravity * Math.random();
   //Initial Force
