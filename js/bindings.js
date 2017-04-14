@@ -239,7 +239,7 @@ $(document).ready(function(){
 		placingSpawn = true;
 	})
 
-	$("#color-schema").on("click", function(){
+	$("#color-schema").on("click", function(event){
 		event.preventDefault();
 		clearTools();
 		hideAllSettings();
