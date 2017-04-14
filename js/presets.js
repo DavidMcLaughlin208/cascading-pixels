@@ -17,7 +17,7 @@ var clearCanvas = function(){
   //Canvas Objects
   balls = [];
   centersOfGravity = [];
-  obstaclesCircles = [];
+  var obstaclesCircles = [new ObstacleCircle(50, cv.height/4, 1), new ObstacleCircle(cv.width, cv.height, 2)];
 
   //Variables
   startX = 10

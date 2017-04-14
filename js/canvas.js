@@ -22,8 +22,6 @@ var gc = {
   height: canvasHeight
 }
 
-console.log(gc.ctx === ui.ctx)
-
 
 var resizeCanvas = function(){
   var canvasWidth = $(window).width() * .77
