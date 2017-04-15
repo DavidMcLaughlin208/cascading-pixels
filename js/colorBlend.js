@@ -21,8 +21,11 @@ var mixColor = function(hex1, hex2, factor) {
 }
 
 var parseBackgroundColor = function(color){
+  // var backgroundChoice = color.toRgbString().split("");
+  // backgroundChoice.splice(3,0,"a")
+  // backgroundChoice.splice(-1,1,", 0.1)")
+  // return backgroundChoice.join("");
+
   var backgroundChoice = color.toRgbString().split("");
-  backgroundChoice.splice(3,0,"a")
-  backgroundChoice.splice(-1,1,", 0.1)")
-  return backgroundChoice.join("");
+  return ["rgba(", color._r.toFixed() + ", ", + color._g.toFixed() + ", ", + color._b.toFixed() + ", ", + "0.1", ")"]
 }
