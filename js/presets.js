@@ -5,7 +5,7 @@ var clearCanvas = function(){
   $("#forceX").val(10);
   $("#forceY").val(0);
   $("#thickness").val(2);
-  $("#fade").val(5)
+  $("#fade").val(15)
   $("#spread").val(50)
   $(".border-toggle").prop("checked", true);
   $(".disable-gravity").prop("checked", true)
@@ -17,7 +17,7 @@ var clearCanvas = function(){
   //Canvas Objects
   balls = [];
   centersOfGravity = [];
-  var obstaclesCircles = [new ObstacleCircle(50, cv.height/4, 1), new ObstacleCircle(cv.width, cv.height, 2)];
+  obstaclesCircles = [];
 
   //Variables
   startX = 10
