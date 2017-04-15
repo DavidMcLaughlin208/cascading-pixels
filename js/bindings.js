@@ -30,7 +30,6 @@ $(document).ready(function(){
 	spread = $("#spread").val();
 	infiniteLoop = setInterval(addBall, spread);
 
-
 	$(".add-ball").on("click", function(event){
 		event.preventDefault();
 		updateSettings();

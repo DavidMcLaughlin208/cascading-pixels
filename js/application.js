@@ -20,7 +20,7 @@ var placingClusters = false;
 var placingSpawn = true;
 var maxColor = "#000000";
 var minColor = "#000000";
-var backgroundColor = ["rgba(", "214,", "214,", "214,", "0.1",")"] //"rgba(255,255,255,0.1)"; 
+var backgroundColor = ["rgba(", "255,", "255,", "255,", "0.1",")"] //"rgba(255,255,255,0.1)"; 
 var borderOn = true;
 var lifetime;
 var	uiElement;
@@ -30,6 +30,9 @@ var forceY = 2;
 var obstaclesCircles = [new ObstacleCircle(50, cv.height/4, 1), new ObstacleCircle(cv.width, cv.height, 2)];
 var placingObstacles = false;
 var noFade = false;
+
+var deltaTime = 1
+var lastFrame = new Date()
 
 cv.ctx.lineWidth = 5;
 cv.ctx.fillStyle = '#ffffff';
@@ -48,6 +51,10 @@ var draw = function(){
 	// 	// gravityModifier = $("#gravity").val();
 	// 	// gravity *= gravityModifier/25;
 	// }
+	
+	// deltaTime = new Date() - lastFrame
+	// lastFrame = new Date()
+	// console.log(deltaTime)
 
 
 
@@ -83,8 +90,8 @@ function drawBackground(){
 
 function fadeOut() {
 	// backgroundColor[4] = fade;
-  cv.ctx.fillStyle = backgroundColor//.join("");
-  cv.ctx.fillRect(0, 0, cv.width, cv.height);
+  // cv.ctx.fillStyle = backgroundColor//.join("");
+  // cv.ctx.fillRect(0, 0, cv.width, cv.height);
 }
 
 var start = function(){
@@ -104,6 +111,6 @@ var start = function(){
 
 	resizeCanvas();
 
-	fadeLoop = setInterval(fadeOut, fade);
-	gameLoop = setInterval(draw, 1);
+	//fadeLoop = setInterval(fadeOut, fade);
+	gameLoop = setInterval(draw, 5);
 }
