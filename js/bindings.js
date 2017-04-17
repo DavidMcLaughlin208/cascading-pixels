@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	// reset();
-	clearInterval(gameLoop);
-	clearInterval(fadeLoop);
+	// clearInterval(cm.gameLoop);
+	// clearInterval(cm.fadeLoop);
 
 	var backgroundPicker = $("#background-color-picker").spectrum({
 														preferredFormat: "rgb",
@@ -24,11 +24,11 @@ $(document).ready(function(){
 														color: "#000000"
 													})
 
-	getSliderValues();
-	start();
-	infinite = true;
-	spread = $("#spread").val();
-	infiniteLoop = setInterval(addBall, spread);
+	// getSliderValues();
+	// cm.start();
+	// cm.infinite = true;
+	// cm.spread = $("#spread").val();
+	// cm.infiniteLoop = setInterval(addBall, spread);
 
 	$(".add-ball").on("click", function(event){
 		event.preventDefault();
@@ -43,7 +43,7 @@ $(document).ready(function(){
 
 	$(".clear").on('click', function(event){
 		event.preventDefault();
-		balls = [];
+		cm.balls = [];
 	})
 
 	$(".quick-add").on("click", function(event){
@@ -52,18 +52,18 @@ $(document).ready(function(){
 		var times = parseInt($(this).attr("balls"));
 		var spread = $("#spread").val();
 		for(var i = 0; i < times;i++){
-			setTimeout(function(){balls.push(new Ball(forceX, forceY))}, spread*i);
+			setTimeout(function(){cm.balls.push(new Ball(cm.forceX, cm.forceY))}, spread*i);
 		}
 	})
 
 	$(".infinite").on("click", function(event){
 		event.preventDefault();
-		infinite = !infinite;
+		cm.infinite = !cm.infinite;
 		updateSettings();
-		clearInterval(infiniteLoop);
-		if(infinite){
+		clearInterval(cm.infiniteLoop);
+		if(cm.infinite){
 			var spread = $("#spread").val();
-			infiniteLoop = setInterval(addBall, spread);
+			cm.infiniteLoop = setInterval(addBall, cm.spread);
 			$(".infinite").html("Infinite Flow (on)")
 		} else {
 			$(".infinite").html("Infinite Flow (off)")
@@ -74,24 +74,24 @@ $(document).ready(function(){
 		var rect = this.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
-		if(placingGravs === true){
+		if(cm.placingGravs === true){
 			var strength = ($(".gravity-well-strength").val() * .05);
 			if($(".gravity-well-static").is(":checked")){
 				// var absorb = $(".gravity-well-absorb").is(":checked");
-				centersOfGravity.push(new gravityCenter(x,y, strength))
+				cm.centersOfGravity.push(new gravityCenter(x,y, strength))
 			}else{
-				centersOfGravity.push(new MoveableGravityCenter(x,y,strength))	
+				cm.centersOfGravity.push(new MoveableGravityCenter(x,y,strength))	
 			}
-		} else if(placingClusters){
+		} else if(cm.placingClusters){
 			var density = 10 - parseInt($(".cluster-density").val());
-			uiElement.execute(density, 5, 5);
+			cm.uiElement.execute(density, 5, 5);
 		}else if(placingSpawn){
-	    startX = x;
-	    startY = y;
+	    cm.startX = x;
+	    cm.startY = y;
 	    // applyImpulse(x, y);
-	  }else if(placingObstacles){
+	  }else if(cm.placingObstacles){
 	  	var size = parseInt($(".obstacle-size").val());
-	  	obstaclesCircles.push(new ObstacleCircle(x,y,size))
+	  	cm.obstaclesCircles.push(new ObstacleCircle(x,y,size))
 	  }
 	})
 
@@ -99,49 +99,49 @@ $(document).ready(function(){
 		var rect = this.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
-		if(placingGravs){
+		if(cm.placingGravs){
 	    var strength = ($(".gravity-well-strength").val() * .05);
-			uiElement = new UnplacedGrav(x,y, strength);
-			uiElement.draw()
-			drawUiElement = true;
-		} else if(placingClusters) {
+			cm.uiElement = new UnplacedGrav(x,y, strength);
+			cm.uiElement.draw()
+			cm.drawUiElement = true;
+		} else if(cm.placingClusters) {
 			var size = parseInt($(".cluster-size").val());
-			uiElement = new UnplacedCluster(x,y,size);
-			uiElement.draw();
-			drawUiElement = true;
-		} else if(placingObstacles) {
+			cm.uiElement = new UnplacedCluster(x,y,size);
+			cm.uiElement.draw();
+			cm.drawUiElement = true;
+		} else if(cm.placingObstacles) {
 			var size = parseInt($(".obstacle-size").val());
-			uiElement = new UnplacedObstacleCircle(x,y,size)
-			uiElement.draw()
-			drawUiElement = true;
+			cm.uiElement = new UnplacedObstacleCircle(x,y,size)
+			cm.uiElement.draw()
+			cm.drawUiElement = true;
 		}
 	})
 	$("#uicanvas").on("mousemove", function(e){
 		var rect = this.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
-		if(placingGravs){
+		if(cm.placingGravs){
 	    var strength = ($(".gravity-well-strength").val() * .05);
-			uiElement.x = x;
-			uiElement.y = y;
-			uiElement.strength = strength;
-		} else if(placingClusters) {
+			cm.uiElement.x = x;
+			cm.uiElement.y = y;
+			cm.uiElement.strength = strength;
+		} else if(cm.placingClusters) {
 			var size = (parseInt($(".cluster-size").val()));
-			uiElement.x = x;
-			uiElement.y = y;
-			uiElement.size = size;
-		} else if(placingObstacles) {
+			cm.uiElement.x = x;
+			cm.uiElement.y = y;
+			cm.uiElement.size = size;
+		} else if(cm.placingObstacles) {
 			var size = parseInt($(".obstacle-size").val());
-			uiElement.x = x;
-			uiElement.y = y;
-			uiElement.size = size;
+			cm.uiElement.x = x;
+			cm.uiElement.y = y;
+			cm.uiElement.size = size;
 		}
 	})
 
 	$("#uicanvas").on("mouseleave", function(e){
-		ui.ctx.clearRect(0,0,ui.width, ui.height)
-		drawUiElement = false;
-		uiElement = null;
+		cm.ui.ctx.clearRect(0,0,cm.canvasWidth, cm.canvasHeight)
+		cm.drawUiElement = false;
+		cm.uiElement = null;
 	})
 
 
@@ -150,7 +150,7 @@ $(document).ready(function(){
 	$(window).on("scroll", function(event){
 		// event.preventDefault()
 		console.log("SCROLLING")
-		if(placingGravs){
+		if(cm.placingGravs){
 			var currentVal = $(".gravity-well-strength").val();
 			$(".gravity-well-strength").val(currentVal + 1)
 		}
@@ -161,18 +161,18 @@ $(document).ready(function(){
 		clearTools();
 		hideAllSettings();
 		$(".gravity-settings").addClass("visible")
-		placingGravs = true;
+		cm.placingGravs = true;
 
 	})
 
 	$(".clear-gravity-wells").on("click", function(event){
 		event.preventDefault();
-		centersOfGravity = [];
+		cm.centersOfGravity = [];
 	})
 
 	$(".hide-gravs").on("click", function(event){
 		event.preventDefault();
-		showGravs = !showGravs
+		cm.showGravs = !cm.showGravs
 		if($(this).html() === "Hide Gravity Wells"){
 			$(this).html("Show Gravity Wells")
 		}else{
@@ -182,16 +182,16 @@ $(document).ready(function(){
 
 	$(".disable-gravity").on("change", function(event){
 		event.preventDefault();
-		gravity = 0;
-		noGravity = !noGravity;
+		cm.gravity = 0;
+		cm.noGravity = !cm.noGravity;
 	})
 
 	$(".border-toggle").change(function(){
-		borderOn = !borderOn;
+		cm.borderOn = !cm.borderOn;
 	})
 
 	backgroundPicker.on("move.spectrum", function(e, color) {
-		backgroundColor = parseBackgroundColor(color)
+		cm.backgroundColor = parseBackgroundColor(color)
 		// var backgroundChoice = color.toRgbString().split("");
 		// backgroundChoice.splice(3,0,"a")
 		// backgroundChoice.splice(-1,1,", 0.1)")
@@ -200,16 +200,16 @@ $(document).ready(function(){
 	})
 
 	ballMinPicker.on("move.spectrum", function(e, color) {
-		minColor = "#" + color.toHex()
+		cm.minColor = "#" + color.toHex()
 	})
 
 	ballMaxPicker.on("move.spectrum", function(e, color) {
-		maxColor = "#" + color.toHex()
+		cm.maxColor = "#" + color.toHex()
 	})
 
 
 	$(window).on("resize", function(){
-		resizeCanvas();
+		cm.resizeCanvas();
 	})
 
 	// $(".gravity-well-strength").on('input propertychange paste', function() {
@@ -222,7 +222,7 @@ $(document).ready(function(){
 		clearTools();
 		hideAllSettings();
 		$(".cluster-holder").addClass("visible")
-		placingClusters = true;
+		cm.placingClusters = true;
 	})
 
 	$(".tool").on("click", function(){
@@ -235,7 +235,7 @@ $(document).ready(function(){
 		clearTools();
 		hideAllSettings();
 		$(".spawn-settings").addClass("visible")
-		placingSpawn = true;
+		cm.placingSpawn = true;
 	})
 
 	$("#color-schema").on("click", function(event){
@@ -261,9 +261,9 @@ $(document).ready(function(){
 
 	$("#spread").on("change", function(){
 		updateSettings();
-		if(infinite){
-			clearInterval(infiniteLoop);
-			infiniteLoop = setInterval(addBall, spread);
+		if(cm.infinite){
+			clearInterval(cm.infiniteLoop);
+			cm.infiniteLoop = setInterval(addBall, spread);
 		}
 	})
 
@@ -271,17 +271,17 @@ $(document).ready(function(){
 		clearTools();
 		hideAllSettings();
 		$(".obstacles-holder").addClass("visible");
-		placingObstacles = true;
+		cm.placingObstacles = true;
 	})
 
 	$(".clear-obstacle-circles").on("click", function(){
-		obstaclesCircles = []
+		cm.obstaclesCircles = []
 	})
 	
 	$(".disable-fade").on("change", function(event){
 		event.preventDefault();
-		noFade = !noFade;
-		if(noFade){clearInterval(fadeLoop)}
+		cm.noFade = !cm.noFade;
+		if(cm.noFade){clearInterval(cm.fadeLoop)}
 		updateSettings()
 	})
 
@@ -294,29 +294,29 @@ $(document).ready(function(){
 })
 
 var getSliderValues = function(){
-	gravityModifier = $("#gravity").val();
-	dragModifier = $("#drag").val();
-	forceXModifier = $("#forceX").val();
-	forceYModifier = $("#forceY").val();
-	thicknessModifier = $("#thickness").val();
-	spread = $("#spread").val();
+	var gravityModifier = $("#gravity").val();
+	var dragModifier = $("#drag").val();
+	var forceXModifier = $("#forceX").val();
+	var forceYModifier = $("#forceY").val();
+	var thicknessModifier = $("#thickness").val();
+	cm.spread = $("#spread").val();
 
 
-	fade = (Math.abs($("#fade").val()) * .01).toString();
-	dampX = 1 - ($("#dampX").val() * .01);
-	dampY = -1 - ($("#dampY").val() * -.01);
-	variation = $("#variation").val() * .01;
-	lifetime = parseInt($("#lifetime").val());
-	forceX = forceXModifier/12.5;
-	forceY = forceYModifier/12.5;
-	drag = dragModifier/15 * .001;
-	thickness = thicknessModifier;
+	cm.fade = (Math.abs($("#fade").val()) * .01).toString();
+	cm.dampX = 1 - ($("#dampX").val() * .01);
+	cm.dampY = -1 - ($("#dampY").val() * -.01);
+	cm.variation = $("#variation").val() * .01;
+	cm.lifetime = parseInt($("#lifetime").val());
+	cm.forceX = forceXModifier/12.5;
+	cm.forceY = forceYModifier/12.5;
+	cm.drag = dragModifier/15 * .001;
+	cm.thickness = thicknessModifier;
 
-	if(!noGravity){gravity = gravityModifier/25 * 0.04};
+	if(!cm.noGravity){cm.gravity = gravityModifier/25 * 0.04;}
 }
 
 var updateSettings = function(){
-	clearInterval(fadeLoop);
+	clearInterval(cm.fadeLoop);
 	// reset();
 	getSliderValues();
 	// if(!noFade){fadeLoop = setInterval(fadeOut, fade)};
@@ -324,17 +324,17 @@ var updateSettings = function(){
 
 var addBall = function(){
 	// updateSettings();
-	var ball = new Ball(forceX, forceY)
-	balls.push(ball);
+	var ball = new Ball(cm.forceX, cm.forceY)
+	cm.balls.push(ball);
 }
 
 
 
 var clearTools = function(){
-	placingSpawn = false;
-	placingClusters = false;
-	placingGravs = false;
-	placingObstacles = false;
+	cm.placingSpawn = false;
+	cm.placingClusters = false;
+	cm.placingGravs = false;
+	cm.placingObstacles = false;
 }
 
 var hideAllSettings = function(){

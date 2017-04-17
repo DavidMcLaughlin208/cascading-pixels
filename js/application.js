@@ -1,4 +1,4 @@
-var canvasManager = function(){
+var CanvasManager = function(){
 	this.gravity;
 	this.gameLoop;
 	this.fadeLoop;
@@ -28,7 +28,7 @@ var canvasManager = function(){
 	this.drawUiElement = false;
 	this.forceX = 2;
 	this.forceY = 2;
-	this.obstaclesCircles = [new ObstacleCircle(50, cv.height/4, 1), new ObstacleCircle(cv.width, cv.height, 2)];
+	this.obstaclesCircles = [new ObstacleCircle(50, 100, 1)];
 	this.placingObstacles = false;
 	this.noFade = false;
 
@@ -41,8 +41,9 @@ var canvasManager = function(){
 	this.cv = new Canvas('mycanvas', this.canvasWidth, this.canvasHeight);
 	this.ui = new Canvas('uicanvas', this.canvasWidth, this.canvasHeight);
 	this.gc = new Canvas('gravitycanvas', this.canvasWidth, this.canvasHeight);
+}
 
-	this.resizeCanvas = function(){
+CanvasManager.prototype.resizeCanvas = function(){
   this.canvasWidth = $(window).width() * .77
   this.canvasHeight = $(window).height() * 1
 
@@ -54,56 +55,59 @@ var canvasManager = function(){
 
   this.gc.mycanvas.width = this.canvasWidth;
   this.gc.mycanvas.height = this.canvasHeight;
+}
+
+CanvasManager.prototype.drawBackground = function(){
+	this.backgroundColor[4] = this.fade;
+	this.cv.ctx.fillStyle = this.backgroundColor.join("");
+  this.cv.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
+}
+
+CanvasManager.prototype.draw = function(){
+	if(!this.noFade){drawBackground()};
+	// console.log(balls.length)
+	// reset();
+	// getSliderValues();
+
+	// if(noGravity){
+	// }else{
+	// 	// gravity = .04;
+	// 	// gravityModifier = $("#gravity").val();
+	// 	// gravity *= gravityModifier/25;
+	// }
+	
+	// deltaTime = new Date() - lastFrame
+	// lastFrame = new Date()
+	// console.log(deltaTime)
 
 
-	this.draw = function(){
-		if(!noFade){drawBackground()};
-		// console.log(balls.length)
-		// reset();
-		// getSliderValues();
 
-		// if(noGravity){
-		// }else{
-		// 	// gravity = .04;
-		// 	// gravityModifier = $("#gravity").val();
-		// 	// gravity *= gravityModifier/25;
-		// }
-		
-		// deltaTime = new Date() - lastFrame
-		// lastFrame = new Date()
-		// console.log(deltaTime)
+	this.cv.ctx.lineWidth = this.thickness;
+
+	for(var i in this.balls){
+		this.balls[i].draw();
+	}
 
 
+	this.gc.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
 
-		cv.ctx.lineWidth = thickness;
-		for(var i in balls){
-			balls[i].draw();
-		}
-
-
-		gc.ctx.clearRect(0, 0, gc.width, gc.height)
-
-		if(showGravs){
-			for(var i in centersOfGravity){
-				centersOfGravity[i].draw();
-			}
-		}
-
-		if(drawUiElement){
-			ui.ctx.clearRect(0,0,ui.width, ui.height)
-			uiElement.draw()
-		}
-		
-		for(var i in obstaclesCircles){
-			obstaclesCircles[i].draw()
+	if(this.showGravs){
+		for(var i in this.centersOfGravity){
+			this.centersOfGravity[i].draw();
 		}
 	}
 
-	this.drawBackground = function(){
-		backgroundColor[4] = fade;
-		cv.ctx.fillStyle = backgroundColor.join("");
-	  cv.ctx.fillRect(0, 0, cv.width, cv.height);
+	if(this.drawUiElement){
+		this.ui.ctx.clearRect(0,0,this.canvasWidth, this.canvasHeight)
+		this.uiElement.draw()
 	}
+	
+	for(var i in this.obstaclesCircles){
+		this.obstaclesCircles[i].draw()
+	}
+}
+
+	
 
 	// function fadeOut() {
 		// backgroundColor[4] = fade;
@@ -111,29 +115,43 @@ var canvasManager = function(){
 	  // cv.ctx.fillRect(0, 0, cv.width, cv.height);
 	// }
 
-	this.start = function(){
-		cv.ctx.lineWidth = 5;
-		cv.ctx.fillStyle = '#ffffff';
-		cv.ctx.fillRect(0,0,cv.width,cv.height);
-		cv.ctx.fillStyle = 'black';
+CanvasManager.prototype.start = function(){
+	getSliderValues();
 
-		cv.ctx.clearRect(0, 0, cv.width, cv.height);
-		cv.ctx.fillStyle = '#ffffff';
-		cv.ctx.fillRect(0, 0, cv.width, cv.height);
-		cv.ctx.fillStyle = 'black';
+	this.cv.ctx.lineWidth = 5;
+	this.cv.ctx.fillStyle = '#ffffff';
+	this.cv.ctx.fillRect(0,0,this.canvasWidth, this.canvasHeight)
+	this.cv.ctx.fillStyle = 'black';
 
-		cv.ctx.beginPath();
-		cv.ctx.moveTo(10,10);
-		cv.ctx.closePath();
+	this.cv.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
+	this.cv.ctx.fillStyle = '#ffffff';
+	this.cv.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
+	this.cv.ctx.fillStyle = 'black';
 
-		ui.mycanvas.width = ui.width;
-		ui.mycanvas.height = ui.height;
-		ui.ctx.fillStyle = "rgba(0,0,0,0)";
-		ui.ctx.fillRect(0,0,ui.width,ui.height);
+	this.cv.ctx.beginPath();
+	this.cv.ctx.moveTo(10,10);
+	this.cv.ctx.closePath();
 
-		resizeCanvas();
+	// this.ui.mycanvas.width = ui.width;
+	// this.ui.mycanvas.height = ui.height;
+	this.ui.ctx.fillStyle = "rgba(0,0,0,0)";
+	this.ui.ctx.fillRect(0,0,this.canvasWidth, this.canvasHeight)
 
-		//fadeLoop = setInterval(fadeOut, fade);
-		gameLoop = setInterval(draw, 5);
-	}
+	this.resizeCanvas();
+
+	//fadeLoop = setInterval(fadeOut, fade);
+	this.gameLoop = setInterval(this.draw.bind(this), 5);
 }
+
+
+var drawBackground = function(){
+		cm.backgroundColor[4] = cm.fade;
+		cm.cv.ctx.fillStyle = cm.backgroundColor.join("");
+	  cm.cv.ctx.fillRect(0, 0, cm.canvasWidth, cm.canvasHeight)
+}
+
+cm = new CanvasManager();
+cm.start();
+cm.infinite = true;
+cm.spread = $("#spread").val();
+cm.infiniteLoop = setInterval(addBall, spread);
