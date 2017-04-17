@@ -1,10 +1,10 @@
 var preset2 = function(){
-  infinite = true;
-  clearInterval(infiniteLoop)
-  infiniteLoop = setInterval(addBall, spread);
+  cm.infinite = true;
+  clearInterval(cm.infiniteLoop)
+  cm.infiniteLoop = setInterval(addBall, cm.spread);
 
-  noGravity = true;
-  gravity = 0;
+  cm.noGravity = true;
+  cm.gravity = 0;
 
   $(".disable-gravity").prop("checked", false)
 
@@ -15,20 +15,20 @@ var preset2 = function(){
   $("#fade").val(0)
   getSliderValues()
 
-  maxColor = "#ffffff"
-  minColor = "#ffffff"
-  backgroundColor = parseBackgroundColor($("#background-color-picker").spectrum("get"));
+  cm.maxColor = "#ffffff"
+  cm.minColor = "#ffffff"
+  cm.backgroundColor = parseBackgroundColor($("#background-color-picker").spectrum("get"));
 
-  cv.ctx.fillStyle = '#000000';
-  cv.ctx.fillRect(0,0,cv.width,cv.height)
+  cm.cv.ctx.fillStyle = '#000000';
+  cm.cv.ctx.fillRect(0,0,cm.canvasWidth, cm.canvasHeight)
 
-  centersOfGravity.push(new gravityCenter(cv.width/2, cv.height/2, 10));
-  obstaclesCircles.push(new ObstacleCircle(cv.width/2, cv.height/2, 4))
+  cm.centersOfGravity.push(new gravityCenter(cm.canvasWidth/2, cm.canvasHeight/2, 10));
+  cm.obstaclesCircles.push(new ObstacleCircle(cm.canvasWidth/2, cm.canvasHeight/2, 4))
 
-  startX = cv.width/2;
-  startY = cv.height/2 - 300;
+  cm.startX = cm.canvasWidth/2;
+  cm.startY = cm.canvasHeight/2 - 300;
 
-  setTimeout(function(){obstaclesCircles = [];}, 7000)
-  setTimeout(function(){infinite = false;
-                        clearInterval(infiniteLoop)}, 16000)
+  setTimeout(function(){cm.obstaclesCircles = [];}, 7000)
+  setTimeout(function(){cm.infinite = false;
+                        clearInterval(cm.infiniteLoop)}, 16000)
 }

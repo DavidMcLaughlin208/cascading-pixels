@@ -63,7 +63,7 @@ $(document).ready(function(){
 		clearInterval(cm.infiniteLoop);
 		if(cm.infinite){
 			var spread = $("#spread").val();
-			cm.infiniteLoop = setInterval(addBall, cm.spread);
+			cm.infiniteLoop = setInterval(addBall, spread);
 			$(".infinite").html("Infinite Flow (on)")
 		} else {
 			$(".infinite").html("Infinite Flow (off)")
@@ -85,7 +85,7 @@ $(document).ready(function(){
 		} else if(cm.placingClusters){
 			var density = 10 - parseInt($(".cluster-density").val());
 			cm.uiElement.execute(density, 5, 5);
-		}else if(placingSpawn){
+		}else if(cm.placingSpawn){
 	    cm.startX = x;
 	    cm.startY = y;
 	    // applyImpulse(x, y);
@@ -263,7 +263,8 @@ $(document).ready(function(){
 		updateSettings();
 		if(cm.infinite){
 			clearInterval(cm.infiniteLoop);
-			cm.infiniteLoop = setInterval(addBall, spread);
+			cm.infiniteLoop = setInterval(addBall, cm.spread);
+			console.log(cm.spread)
 		}
 	})
 

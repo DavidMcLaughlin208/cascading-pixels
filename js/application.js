@@ -154,4 +154,4 @@ cm = new CanvasManager();
 cm.start();
 cm.infinite = true;
 cm.spread = $("#spread").val();
-cm.infiniteLoop = setInterval(addBall, spread);
+cm.infiniteLoop = setInterval(addBall, cm.spread);

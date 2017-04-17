@@ -1,11 +1,11 @@
 var MoveableGravityCenter = function(x,y,strength){
-  this.x = x || startX;
-  this.y = y || startY;
-  this.gravity = gravity * Math.random();
+  this.x = x || cm.startX;
+  this.y = y || cm.startY;
+  this.gravity = cm.gravity * Math.random();
   this.speedX = 0;
   this.speedY = 0;
-  this.forceX = forceX + Math.random() * .05;
-  this.forceY = forceY + Math.random() * .05;
+  this.forceX = cm.forceX + Math.random() * .05;
+  this.forceY = cm.forceY + Math.random() * .05;
   this.lastX = this.x;
   this.lastY = this.y;
   this.strength = strength;
@@ -40,7 +40,7 @@ MoveableGravityCenter.prototype.draw = function(){
       var y = Math.floor(cm.centersOfGravity[i].y) - this.y
       var distance = Math.max(Math.floor(Math.sqrt( x*x + y*y )), 1);
       if(distance < 1000 * cm.centersOfGravity[i].strength){
-        if(distance < 50 * cm.centersOfGravity[i].strength && centersOfGravity[i].absorb){
+        if(distance < 50 * cm.centersOfGravity[i].strength && cm.centersOfGravity[i].absorb){
           cm.centersOfGravity[i].strength += .001;
           this.die();
         }else{
