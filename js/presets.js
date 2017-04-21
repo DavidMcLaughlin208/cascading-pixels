@@ -40,6 +40,7 @@ var clearCanvas = function(){
   for(var i in cm.timeoutArray){
     clearTimeout(cm.timeoutArray[i])
   }
+  cm.timeoutArray = [];
 
   getSliderValues();
   
