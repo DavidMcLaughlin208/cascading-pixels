@@ -28,7 +28,9 @@ var preset2 = function(){
   cm.startX = cm.canvasWidth/2;
   cm.startY = cm.canvasHeight/2 - 300;
 
-  setTimeout(function(){cm.obstaclesCircles = [];}, 7000)
-  setTimeout(function(){cm.infinite = false;
+  var func1 = setTimeout(function(){cm.obstaclesCircles = [];}, 7000)
+  var funct2 = setTimeout(function(){cm.infinite = false;
                         clearInterval(cm.infiniteLoop)}, 16000)
+  cm.timeoutArray.push(func1)
+  cm.timeoutArray.push(func2)
 }

@@ -31,6 +31,7 @@ var CanvasManager = function(){
 	this.obstaclesCircles = [new ObstacleCircle(50, 100, 1)];
 	this.placingObstacles = false;
 	this.noFade = false;
+	this.timeoutArray = [];
 
 	this.deltaTime = 1
 	this.lastFrame = new Date()

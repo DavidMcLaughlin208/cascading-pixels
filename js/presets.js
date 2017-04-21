@@ -36,6 +36,11 @@ var clearCanvas = function(){
   clearInterval(cm.fadeLoop);
   // fadeLoop = setInterval(fadeOut, 5);
 
+  //Cancel all setTimeout functions
+  for(var i in cm.timeoutArray){
+    clearTimeout(cm.timeoutArray[i])
+  }
+
   getSliderValues();
   
   //Infinite interval

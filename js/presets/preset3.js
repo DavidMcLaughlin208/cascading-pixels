@@ -39,11 +39,12 @@ var preset3 = function(){
   x = cm.canvasWidth/2
   y = 7*(cm.canvasHeight/8)
   cm.obstaclesCircles.push(new ObstacleCircle(x,y, 1))
-  for(var i = 0; i < 10; i ++){
-    setTimeout(function(){
+  for(var i = 0; i < 10; i++){
+    var place = setTimeout(function(){
       var unplaced = new UnplacedCluster((cm.canvasWidth * Math.random()), -100, 10)
       unplaced.execute(5, 5, 5);
     }, 4000*i)
+    cm.timeoutArray.push(place);
   }
 
 }
