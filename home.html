@@ -79,6 +79,7 @@
         <select class="preset-select">
             <option value="1">Preset 1</option>
             <option value="2">Preset 2</option>
+            <option value="3">Preset 3</option>
         </select>
         <button class="preset-launch">Set</button>
         <button class="gravity-buttons reset">Reset Defaults</button>
@@ -126,7 +127,7 @@
         <!-- <button class="gravity-buttons place-gravity-wells">Place Gravity Wells</button> -->
         <div>
         <span>Size</span><input class="gravity-well-strength" type="range" value="5" min="1" max="10"></div>
-        <div><span>Static?</span><input type="checkbox" checked="checked" class="gravity-well-static"></div><br>
+        <div class="hidden"><span>Static?</span><input type="checkbox" checked="checked" class="gravity-well-static"></div><br>
        <!--  <div><span>Absorb Mass?</span><input type="checkbox" class="gravity-well-absorb"></div><br> -->
         <button class="gravity-buttons clear-gravity-wells">Clear Gravity Wells</button>
         <button class="gravity-buttons hide-gravs">Hide Gravity Wells</button>
@@ -160,11 +161,13 @@
 </div>
 
 <script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/math.min.js"></script>
 <script src="js/spectrum.js"></script>
 <script src="js/bindings.js"></script>
 <script src="js/presets.js"></script>
 <script src="js/presets/preset1.js"></script>
 <script src="js/presets/preset2.js"></script>
+<script src="js/presets/preset3.js"></script>
 <script src="js/clusters.js"></script>
 <script src="js/colorBlend.js"></script>
 <script src="js/gravityCenter.js"></script>
@@ -173,5 +176,6 @@
 <script src="js/ball.js"></script>
 <script src="js/canvas.js"></script>
 <script src="js/application.js"></script>
+<script src="js/initialize.js"></script>
 </body>
 </html>
