@@ -18,27 +18,30 @@ var preset3 = function(){
 
   var x = 0
   var y = (cm.canvasHeight)
-  cm.obstaclesCircles.push(new ObstacleCircle(x,y, 7))
+  var size = cm.canvasWidth/140;
+  cm.obstaclesCircles.push(new ObstacleCircle(x,y, size))
   
   x = cm.canvasWidth
   y = cm.canvasHeight
-  cm.obstaclesCircles.push(new ObstacleCircle(x,y, 7))
+  cm.obstaclesCircles.push(new ObstacleCircle(x,y, size))
   
   x = cm.canvasWidth/2
   y = cm.canvasHeight/2 - 100
-  cm.obstaclesCircles.push(new ObstacleCircle(x,y, 2))
+  size = cm.canvasWidth/400;
+  cm.obstaclesCircles.push(new ObstacleCircle(x,y, size))
 
   x = cm.canvasWidth/8
   y = cm.canvasHeight/4
-  cm.obstaclesCircles.push(new ObstacleCircle(x,y, 1))
+  size = cm.canvasWidth/1000;
+  cm.obstaclesCircles.push(new ObstacleCircle(x,y, size))
 
   x = 7*(cm.canvasWidth/8)
   y = cm.canvasHeight/4
-  cm.obstaclesCircles.push(new ObstacleCircle(x,y, 1))
+  cm.obstaclesCircles.push(new ObstacleCircle(x,y, size))
 
   x = cm.canvasWidth/2
   y = 7*(cm.canvasHeight/8)
-  cm.obstaclesCircles.push(new ObstacleCircle(x,y, 1))
+  cm.obstaclesCircles.push(new ObstacleCircle(x,y, size))
   for(var i = 0; i < 10; i++){
     var place = setTimeout(function(){
       var unplaced = new UnplacedCluster((cm.canvasWidth * Math.random()), -100, 10)
