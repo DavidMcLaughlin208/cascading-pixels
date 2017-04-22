@@ -8,7 +8,10 @@ var Ball = function(forceX, forceY, x, y){
   this.forceY = forceY + Math.random() * .05;
   this.lastX = this.x;
   this.lastY = this.y;
-  // this.lifetime = lifetime;
+  this.normalizeFactor = 1
+  this.noramlizedX = 1;
+  this.noramlizedY = 1;
+  this.speed = 1;
 }
 
 Ball.prototype.draw = function(){
@@ -16,7 +19,10 @@ Ball.prototype.draw = function(){
     this.die();
   }
 
-  var speed = Math.sqrt(Math.pow(this.speedX,2) + Math.pow(this.speedY,2));
+  this.speed = Math.sqrt(Math.pow(this.speedX,2) + Math.pow(this.speedY,2));
+  this.normalizeFactor = Math.max(Math.abs(this.speedX), Math.abs(this.speedY));
+  this.noramlizedX = this.speedX/this.normalizeFactor;
+  this.noramlizedY = this.speedY/this.normalizeFactor;
 
   this.gravity = cm.gravity * Math.random();
   //Initial Force
@@ -37,6 +43,17 @@ Ball.prototype.draw = function(){
     this.speedX += cm.drag;
   }
 
+  // for(var i in cm.balls2){
+  //   var other = cm.obstaclesCircles[i]
+  //   var x = obs.x - this.x
+  //   var y = obs.y - this.y
+  //   var distance = Math.floor(Math.sqrt( x*x + y*y ));
+
+  //   if(distance < 10){
+
+  //   }
+  // }
+
   for(var i in cm.obstaclesCircles){
     var obs = cm.obstaclesCircles[i]
     var x = obs.x - this.x
@@ -44,12 +61,9 @@ Ball.prototype.draw = function(){
     var distance = Math.floor(Math.sqrt( x*x + y*y ))
 
     if(distance < 50 * obs.size){
-      var normalizeFactor = Math.max(Math.abs(this.speedX), Math.abs(this.speedY))
-      var noramlizedX = (this.speedX / normalizeFactor)
-      var noramlizedY = (this.speedY / normalizeFactor)
       while(distance < 50 * obs.size){
-        this.x -= noramlizedX
-        this.y -= noramlizedY
+        this.x -= this.noramlizedX
+        this.y -= this.noramlizedY
         x = obs.x - this.x
         y = obs.y - this.y
         distance = Math.floor(Math.sqrt( x*x + y*y ))
@@ -115,17 +129,17 @@ Ball.prototype.draw = function(){
   this.y += this.speedY;
 
   // Color based on speed
-  var colorFactor = (Math.min(speed, 8) / 8) * cm.threshold;
+  var colorFactor = (Math.min(this.speed, 8) / 8) * cm.threshold;
   // console.log(colorFactor)
   // console.log(Math.min(speed, 8) / 8)
   var color = mixColor(cm.minColor, cm.maxColor, colorFactor);
   cm.cv.ctx.strokeStyle = color;
 
   // Circular front - Looks good but is resource intensive
-  // cv.ctx.beginPath();
-  // cv.ctx.arc(this.x, this.y, thickness/2, 0, 2 * Math.PI, false);
-  // cv.ctx.fillStyle = color;
-  // cv.ctx.fill();
+  cm.cv.ctx.beginPath();
+  cm.cv.ctx.arc(this.x, this.y, cm.thickness/2, 0, 2 * Math.PI, false);
+  cm.cv.ctx.fillStyle = color;
+  cm.cv.ctx.fill();
 
 
 

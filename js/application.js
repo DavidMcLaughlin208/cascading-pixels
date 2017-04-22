@@ -33,6 +33,7 @@ var CanvasManager = function(){
 	this.noFade = false;
 	this.timeoutArray = [];
 	this.threshold = 0.5;
+	this.balls2 = [];
 
 	this.deltaTime = 1
 	this.lastFrame = new Date()
@@ -67,6 +68,7 @@ CanvasManager.prototype.drawBackground = function(){
 
 CanvasManager.prototype.draw = function(){
 	if(!this.noFade){drawBackground()};
+	this.balls2 = this.balls.slice(0, this.balls.length)
 	// console.log(balls.length)
 	// reset();
 	// getSliderValues();
@@ -89,7 +91,6 @@ CanvasManager.prototype.draw = function(){
 	for(var i in this.balls){
 		this.balls[i].draw();
 	}
-
 
 	this.gc.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
 
