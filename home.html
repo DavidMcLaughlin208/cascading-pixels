@@ -136,16 +136,20 @@
     <div class="color-schema settings">
         <h4 class="color-scheme-label">Color Scheme</h4>
         <div>
-            <label class="color-picker-labels">Background Color: </label>
-            <input type='text' name='color' value="black" class="picker" id="background-color-picker" />
+            <label class="color-picker-labels">Background:</label>
+            <span class="picker-holder"><input type='text' name='color' value="black" class="picker" id="background-color-picker" /></span>
         </div>
         <div>
-            <label class="color-picker-labels">Ball Max Speed Color:</label>
-            <input type='text' name='color' value="black" class="picker" id="ball-max-color" />
+            <label class="color-picker-labels">Max Speed:</label>
+            <span class="picker-holder"><input type='text' name='color' value="black" class="picker" id="ball-max-color" /></span>
         </div>
         <div>
-            <label class="color-picker-labels">Ball Min Speed Color:</label>
-            <input type='text' name='color' value="black" class="picker" id="ball-min-color" />
+            <label class="color-picker-labels">Min Speed:</label>
+            <span class="picker-holder"><input type='text' name='color' value="black" class="picker" id="ball-min-color" /></span>
+        </div>
+        <div>
+            <label class="slider-labels">Threshold:</label>
+            <input type="range" name="points" id="threshold" value="10" min="1" max="20">
         </div>
     </div>
     <div class="obstacles-holder settings">

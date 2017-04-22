@@ -301,6 +301,7 @@ var getSliderValues = function(){
 	var forceYModifier = $("#forceY").val();
 	var thicknessModifier = $("#thickness").val();
 	cm.spread = $("#spread").val();
+	cm.threshold = $("#threshold").val() / 10;
 
 
 	cm.fade = (Math.abs($("#fade").val()) * .01).toString();

@@ -58,7 +58,7 @@ Ball.prototype.draw = function(){
       var xFactor = (this.x - obs.x)/obs.size
       var yFactor = (this.y - obs.y)/obs.size
 
-      var dot = -math.dot([this.speedX, this.speedY], [xFactor, yFactor])/40
+      var dot = -math.dot([this.speedX, this.speedY], [xFactor, yFactor])/42
       this.speedX += (xFactor*(dot / 35 ) )
       this.speedY += (yFactor*(dot / 35 ) )
     }
@@ -115,7 +115,9 @@ Ball.prototype.draw = function(){
   this.y += this.speedY;
 
   // Color based on speed
-  var colorFactor = Math.min(speed, 8) / 8;
+  var colorFactor = (Math.min(speed, 8) / 8) * cm.threshold;
+  // console.log(colorFactor)
+  // console.log(Math.min(speed, 8) / 8)
   var color = mixColor(cm.minColor, cm.maxColor, colorFactor);
   cm.cv.ctx.strokeStyle = color;
 

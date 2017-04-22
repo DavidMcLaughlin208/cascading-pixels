@@ -25,7 +25,7 @@ canvas {
   display: block;
 }
 
-.sliders div{
+.sliders div, .color-schema div{
   white-space: nowrap;
 }
 
@@ -133,8 +133,10 @@ canvas {
   width: 100%;
 }
 
-.picker{
-  display: block;
+.picker-holder{
+  display: inline-block;
+  vertical-align: center;
+  width: 45%;
 }
 
 .set-background-color{
@@ -147,9 +149,10 @@ canvas {
 }
 
 .color-picker-labels{
-  width: 150px;
+  width: 45%;
   display: inline-block;
   text-align: right;
+  vertical-align: center;
 }
 
 .gravity-settings{

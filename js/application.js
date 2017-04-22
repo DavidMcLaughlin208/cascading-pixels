@@ -32,6 +32,7 @@ var CanvasManager = function(){
 	this.placingObstacles = false;
 	this.noFade = false;
 	this.timeoutArray = [];
+	this.threshold = 0.5;
 
 	this.deltaTime = 1
 	this.lastFrame = new Date()
