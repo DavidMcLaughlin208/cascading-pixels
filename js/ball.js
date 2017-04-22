@@ -2,8 +2,8 @@ var Ball = function(forceX, forceY, x, y){
   this.x = x || cm.startX;
   this.y = y || cm.startY;
   this.gravity = cm.gravity * Math.random();
-  this.speedX = 0;
-  this.speedY = 0;
+  this.speedX = 1;
+  this.speedY = 1;
   this.forceX = forceX + Math.random() * .05;
   this.forceY = forceY + Math.random() * .05;
   this.lastX = this.x;
@@ -19,10 +19,10 @@ Ball.prototype.draw = function(){
     this.die();
   }
 
-  this.speed = Math.sqrt(Math.pow(this.speedX,2) + Math.pow(this.speedY,2));
-  this.normalizeFactor = Math.max(Math.abs(this.speedX), Math.abs(this.speedY));
-  this.noramlizedX = this.speedX/this.normalizeFactor;
-  this.noramlizedY = this.speedY/this.normalizeFactor;
+  // this.speed = Math.sqrt(Math.pow(this.speedX,2) + Math.pow(this.speedY,2));
+  // this.normalizeFactor = Math.max(Math.abs(this.speedX), Math.abs(this.speedY));
+  // this.noramlizedX = this.speedX/this.normalizeFactor;
+  // this.noramlizedY = this.speedY/this.normalizeFactor;
 
   this.gravity = cm.gravity * Math.random();
   //Initial Force
@@ -44,15 +44,36 @@ Ball.prototype.draw = function(){
   }
 
   // for(var i in cm.balls2){
-  //   var other = cm.obstaclesCircles[i]
-  //   var x = obs.x - this.x
-  //   var y = obs.y - this.y
+  //   var other = cm.balls2[i];
+  //   var x = other.x - this.x;
+  //   var y = other.y - this.y;
   //   var distance = Math.floor(Math.sqrt( x*x + y*y ));
+  //   var speed = Math.sqrt(Math.pow(this.speedX,2) + Math.pow(this.speedY,2));
+  //   var normalizeFactor = Math.max(Math.abs(this.speedX), Math.abs(this.speedY));
+  //   var noramlizedX = this.speedX/normalizeFactor;
+  //   var noramlizedY = this.speedY/normalizeFactor;
+  //   if(distance < 2){
+  //     while(distance < 2){
+  //       this.x -= this.noramlizedX;
+  //       this.y -= this.noramlizedY;
+  //       other.x -= other.normalizedX;
+  //       other.y -= other.normalizedY;
+  //       x = other.x - this.x;
+  //       y = other.y - this.y;
+  //       distance = Math.floor(Math.sqrt( x*x + y*y ));
+  //     }
+  //     var xFactor = this.x - other.x;
+  //     var yFactor = this.y - other.y;
+  //     var dot = math.dot([this.speedX, this.speedY], [other.speedX, other.speedY])
 
-  //   if(distance < 10){
-
+  //     this.speedX += xFactor*(dot);
+  //     this.speedY += yFactor*(dot);
+      
+  //     other.speedX += xFactor*(-dot);
+  //     other.speedY += yFactor*(-dot);
   //   }
   // }
+  cm.balls2.splice(cm.balls2.indexOf(this), 1);
 
   for(var i in cm.obstaclesCircles){
     var obs = cm.obstaclesCircles[i]
@@ -60,10 +81,14 @@ Ball.prototype.draw = function(){
     var y = obs.y - this.y
     var distance = Math.floor(Math.sqrt( x*x + y*y ))
 
+    var normalizeFactor = Math.max(Math.abs(this.speedX), Math.abs(this.speedY));
+    var noramlizedX = this.speedX/normalizeFactor;
+    var noramlizedY = this.speedY/normalizeFactor;
+
     if(distance < 50 * obs.size){
       while(distance < 50 * obs.size){
-        this.x -= this.noramlizedX
-        this.y -= this.noramlizedY
+        this.x -= noramlizedX
+        this.y -= noramlizedY
         x = obs.x - this.x
         y = obs.y - this.y
         distance = Math.floor(Math.sqrt( x*x + y*y ))
