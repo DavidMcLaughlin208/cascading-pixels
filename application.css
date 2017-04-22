@@ -25,7 +25,7 @@ canvas {
   display: block;
 }
 
-.sliders div{
+.sliders div, .color-schema div{
   white-space: nowrap;
 }
 

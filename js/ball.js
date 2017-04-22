@@ -115,7 +115,9 @@ Ball.prototype.draw = function(){
   this.y += this.speedY;
 
   // Color based on speed
-  var colorFactor = Math.min(speed, 8) / 8;
+  var colorFactor = (Math.min(speed, 8) / 8) * cm.threshold;
+  // console.log(colorFactor)
+  // console.log(Math.min(speed, 8) / 8)
   var color = mixColor(cm.minColor, cm.maxColor, colorFactor);
   cm.cv.ctx.strokeStyle = color;
 
