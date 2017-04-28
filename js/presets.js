@@ -8,11 +8,13 @@ var clearCanvas = function(){
   $("#fade").val(15)
   $("#spread").val(50)
   $(".border-toggle").prop("checked", true);
-  $(".disable-gravity").prop("checked", true)
+  $(".disable-gravity").prop("checked", true);
+  $(".disable-fade").prop("checked", true);
   
   //Checkbox settings
   cm.borderOn = true;
   cm.noGravity = false;
+  cm.noFade = false;
 
   //Canvas Objects
   cm.balls = [];
